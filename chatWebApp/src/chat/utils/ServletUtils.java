@@ -1,7 +1,7 @@
 package chat.utils;
 
-import engine.chat.ChatManager;
-import engine.users.UserManager;
+import Engine.chat.ChatManager;
+import Engine.users.UserManager;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;

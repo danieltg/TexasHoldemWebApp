@@ -1,4 +1,4 @@
-package engine.chat;
+package Engine.chat;
 
 public class SingleChatEntry {
     private final String chatString;

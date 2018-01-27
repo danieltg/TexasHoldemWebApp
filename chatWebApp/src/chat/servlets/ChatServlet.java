@@ -4,8 +4,8 @@ import chat.constants.Constants;
 import chat.utils.SessionUtils;
 import chat.utils.ServletUtils;
 import com.google.gson.Gson;
-import engine.chat.ChatManager;
-import engine.chat.SingleChatEntry;
+import Engine.chat.ChatManager;
+import Engine.chat.SingleChatEntry;
 
 import java.io.IOException;
 import java.io.PrintWriter;

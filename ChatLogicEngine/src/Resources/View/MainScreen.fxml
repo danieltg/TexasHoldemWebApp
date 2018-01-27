@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+<ScrollPane style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MainScreenController">
+
+<BorderPane>
+    <top>
+    <fx:include fx:id="mainMenu" source="MainMenu.fxml" BorderPane.alignment="CENTER" />
+    </top>
+    <bottom>
+        <fx:include fx:id="playersTable" source="PlayersTable.fxml" BorderPane.alignment="CENTER" />
+    </bottom>
+    <center>
+        <fx:include fx:id="gameTable" source="GameTable.fxml" BorderPane.alignment="CENTER" />
+    </center>
+    <right>
+        <fx:include fx:id="gameInfoAndActions" source="GameInfoAndActions.fxml" BorderPane.alignment="CENTER" />
+    </right>
+</BorderPane>
+</ScrollPane>
