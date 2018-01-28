@@ -2,6 +2,9 @@ package fileupload;
 
 //taken from: http://www.servletworld.com/servlet-tutorials/servlet3/multipartconfig-file-upload-example.html
 // and http://docs.oracle.com/javaee/6/tutorial/doc/glraq.html
+import Engine.GameDescriptor.ReadGameDescriptorFile;
+import com.google.gson.Gson;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
@@ -71,9 +74,29 @@ public class FileUploadServlet extends HttpServlet {
     }
 
     private void printFileContent(String content, PrintWriter out) {
-        out.println("<h2>File content:</h2>");
-        out.println("<textarea style=\"width:100%;height:400px\">");
-        out.println(content);
-        out.println("</textarea>");
+        ReadGameDescriptorFile fileReader= new ReadGameDescriptorFile();
+
+        out.println("<h2>Result:</h2>");
+        out.println("<p>");
+        try {
+            fileReader.readFileContent(content);
+            out.println("Valid file");
+            Gson gson = new Gson();
+            String jsonResponse = gson.toJson(fileReader.getGameDescriptor());
+            logServerMessage(jsonResponse);
+            out.print(jsonResponse);
+            out.flush();
+        }
+        catch (Exception e)
+        {
+            out.println(e.getMessage());
+
+        }
+        out.println("</p>");
     }
+
+    private void logServerMessage(String message){
+        System.out.println(message);
+    }
+
 }

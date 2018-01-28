@@ -14,9 +14,10 @@ import javafx.concurrent.Task;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.StringReader;
 import java.util.stream.Collectors;
 
-public class ReadGameDescriptorFile extends Task<Boolean>{
+public class ReadGameDescriptorFile{
 
     private  PokerGameDescriptor pokerGameDescriptor;
     private  String filePath=null;
@@ -24,18 +25,6 @@ public class ReadGameDescriptorFile extends Task<Boolean>{
 
     public void readFile(String filePath) throws FileNotFoundException, JAXBException, StructureException, BlindesException {
 
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        updateMessage("Loading");
-        this.updateProgress(20, 100);
-        try {
-            Thread.sleep(700);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         File file = new File(filePath);
         if (!EngineUtils.getFileExtension(file).equals("xml"))
             throw new FileNotFoundException("Invalid file extension");
@@ -44,25 +33,24 @@ public class ReadGameDescriptorFile extends Task<Boolean>{
 
         Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
         GameDescriptor gameDescriptor = (GameDescriptor) jaxbUnmarshaller.unmarshal(file);
-        this.updateProgress(50, 100);
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
         pokerGameDescriptor = new PokerGameDescriptor(gameDescriptor);
         validatePokerGameDescriptor(pokerGameDescriptor);
-        this.updateProgress(80, 100);
-        updateMessage("Check file");
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        this.updateProgress(100, 100);
 
     }
 
+    public void readFileContent(String content) throws JAXBException, StructureException, BlindesException {
+
+
+        JAXBContext jaxbContext = JAXBContext.newInstance(GameDescriptor.class);
+
+        Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+        GameDescriptor gameDescriptor = (GameDescriptor) jaxbUnmarshaller.unmarshal(new StringReader(content));
+
+        pokerGameDescriptor = new PokerGameDescriptor(gameDescriptor);
+        validatePokerGameDescriptor(pokerGameDescriptor);
+
+    }
 
     private void validatePokerGameDescriptor(PokerGameDescriptor game) throws StructureException, BlindesException {
 
@@ -136,21 +124,6 @@ public class ReadGameDescriptorFile extends Task<Boolean>{
         return (a<=b? a:b);
     }
 
-    @Override
-    protected Boolean call() throws Exception {
-        try {
-            readFile(filePath);
-            updateMessage("Configuration file was loaded successfully");
-            isValid=true;
-            return true;
-        }
-        catch (Exception e)
-        {
-            updateMessage(e.getMessage());
-            isValid=false;
-            return false;
-        }
-    }
     public void setFilePath(String filePath) {
         this.filePath = filePath;
     }
@@ -166,5 +139,10 @@ public class ReadGameDescriptorFile extends Task<Boolean>{
 
     public String getPath() {
         return filePath;
+    }
+
+    public PokerGameDescriptor getPokerGameDescriptor()
+    {
+        return pokerGameDescriptor;
     }
 }

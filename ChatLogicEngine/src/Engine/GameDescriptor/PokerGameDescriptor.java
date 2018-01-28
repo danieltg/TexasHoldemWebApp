@@ -31,7 +31,14 @@ public class PokerGameDescriptor implements Serializable {
         players= new ArrayList<>();
 
         type= GameType.valueOf(g.getGameType());
-        setPlayers(g.getPlayers());
+        if (type==GameType.DynamicMultiPlayer) {
+            numberOfPlayers=g.getDynamicPlayers().getTotalPlayers();
+        }
+        else
+        {
+            setPlayers(g.getPlayers());
+
+        }
         structure=new PokerStructure((g.getStructure()));
     }
 
