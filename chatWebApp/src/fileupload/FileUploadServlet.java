@@ -35,21 +35,16 @@ public class FileUploadServlet extends HttpServlet {
 
         Collection<Part> parts = request.getParts();
 
-        out.println("<h2> Total parts : " + parts.size() + "</h2>");
-
         StringBuilder fileContent = new StringBuilder();
 
         for (Part part : parts) {
-            printPart(part, out);
-
-            //to write the content of the file to an actual file in the system (will be created at c:\samplefile)
             part.write("samplefile");
-
-            //to write the content of the file to a string
             fileContent.append(readFromInputStream(part.getInputStream()));
         }
 
-        printFileContent(fileContent.toString(), out);
+        String res=validateFileContent(fileContent.toString(), out);
+        out.print(res);
+        out.flush();
     }
 
     private void printPart(Part part, PrintWriter out) {
@@ -97,6 +92,23 @@ public class FileUploadServlet extends HttpServlet {
 
     private void logServerMessage(String message){
         System.out.println(message);
+    }
+
+
+    private String validateFileContent(String content,PrintWriter out)
+    {
+        ReadGameDescriptorFile fileReader= new ReadGameDescriptorFile();
+        try {
+            fileReader.readFileContent(content);
+            Gson gson = new Gson();
+            String jsonResponse = gson.toJson(fileReader.getGameDescriptor());
+            logServerMessage(jsonResponse);
+            return jsonResponse;
+        }
+        catch (Exception e)
+        {
+            return e.getMessage();
+        }
     }
 
 }
