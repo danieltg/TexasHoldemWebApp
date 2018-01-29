@@ -2,12 +2,41 @@
 <html>
     <head>
         <title>File Upload</title>
+
+        <script type="text/javascript" src="../jquery-2.0.3.min.js"></script></head>
+        <script type='text/javascript'>
+            /* attach a submit handler to the form */
+            $("#uploadFile").submit(function(event) {
+
+                /* stop form from submitting normally */
+                event.preventDefault();
+                var vcfData = new FormData($('#uploadFile')[0].files[0]);
+
+                $.ajax({
+                    url : this.action,
+                    type : "post",
+                    data : vcfData,
+                    processData: false,
+                    contentType: false,
+                    cache : false,
+                    success : function(r) {
+                        $("#showResult").text(r);
+                    },
+                    error : function () {
+                        $("#showResult").text("Failed to get result from server");
+                    }
+                });
+            });
+        </script>
+
     </head>
     <body>
         <h3>Select a File:</h3>
-        <form action="../upload" enctype="multipart/form-data" method="POST">
+        <form id="uploadFile" action="../upload" enctype="multipart/form-data" method="POST">
             <input type="file" name="file1" accept=".xml"><br>
             <input type="Submit" value="Upload File"><br>
         </form>
+
+        <h1>Result: <span style="color:red" id="showResult"></span></h1>
     </body>
 </html>
