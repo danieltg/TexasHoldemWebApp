@@ -2,7 +2,9 @@ package fileupload;
 
 //taken from: http://www.servletworld.com/servlet-tutorials/servlet3/multipartconfig-file-upload-example.html
 // and http://docs.oracle.com/javaee/6/tutorial/doc/glraq.html
+import Engine.GameDescriptor.PokerGameDescriptor;
 import Engine.GameDescriptor.ReadGameDescriptorFile;
+import Engine.GamesDescriptorManager;
 import Engine.users.UserManager;
 import chat.utils.ServletUtils;
 import chat.utils.SessionUtils;
@@ -47,7 +49,7 @@ public class FileUploadServlet extends HttpServlet {
         }
         else
         {
-
+            GamesDescriptorManager gamesManager = ServletUtils.getGamesDescriptorManager(getServletContext());
             System.out.println("Username: "+usernameFromSession);
 
             PrintWriter out = response.getWriter();
@@ -61,9 +63,9 @@ public class FileUploadServlet extends HttpServlet {
 
             try
             {
-                String res=validateFileContent(fileContent.toString(), out,usernameFromSession);
-                out.print(res);
-                out.flush();
+                gamesManager.addGameDescriptor(validateFileContent(fileContent.toString(), out,usernameFromSession));
+                //out.print(res);
+                //out.flush();
             }
             catch (Exception e)
             {
@@ -86,14 +88,14 @@ public class FileUploadServlet extends HttpServlet {
     }
 
 
-    private String validateFileContent(String content,PrintWriter out,String username) throws Exception
+    private PokerGameDescriptor validateFileContent(String content,PrintWriter out,String username) throws Exception
     {
         ReadGameDescriptorFile fileReader= new ReadGameDescriptorFile();
-            fileReader.readFileContent(content,username);
-            Gson gson = new Gson();
-            String jsonResponse = gson.toJson(fileReader.getGameDescriptor());
-            logServerMessage(jsonResponse);
-            return jsonResponse;
+        PokerGameDescriptor game=fileReader.readFileContent(content,username);
+        Gson gson = new Gson();
+        String jsonResponse = gson.toJson(fileReader.getGameDescriptor());
+        logServerMessage(jsonResponse);
+        return game;
     }
 
 }

@@ -5,6 +5,7 @@
     <title>Texas Holdem Poker Game</title>
     <link rel="stylesheet" href="../../common/CSS/lobbyCss.css">
     <script type="text/javascript" src="../jquery-2.0.3.min.js"></script></head>
+    <script src="../../common/context-path-helper.js"></script>
 <script src="../../common/JS/lobby.js"></script>
 </head>
 <body>
@@ -45,21 +46,9 @@
             </table>
 
         </td>
-        <td align=center width="25%" valign=top><H3> Players List  </H3>
-            <table width=95% align=center border=1>
-                <tr><td>
-                    <table width=95% border=0 align=center>
-                        <tr>
-                            <td align=center>Avital</td>
-                        </tr>
-                        <tr>
-                            <td align=center>Moshe</td>
-                        </tr>
-                        <tr>
-                            <td align=center>Yossi</td>
-                        </tr>
-                    </table>
-                </td></tr></table>
+        <td align=center width="25%" valign=top><H3>Players List</H3>
+            <ul id="userslist" width=95% align=center border=1  style="list-style-type:none">
+            </ul>
 
         </td>
     </tr>

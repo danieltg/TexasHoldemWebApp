@@ -1,8 +1,9 @@
 package chat.servlets;
 
+import Engine.GameDescriptor.PokerGameDescriptor;
+import Engine.GamesDescriptorManager;
 import chat.utils.ServletUtils;
 import com.google.gson.Gson;
-import Engine.users.UserManager;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,17 +14,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/userlist")
-public class UsersListServlet extends HttpServlet {
+@WebServlet("/gamesList")
+public class GamesListServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //returning JSON objects, not HTML
         response.setContentType("application/json");
         try (PrintWriter out = response.getWriter()) {
             Gson gson = new Gson();
-            UserManager userManager = ServletUtils.getUserManager(getServletContext());
-            Set<String> usersList = userManager.getUsers();
+            GamesDescriptorManager gamesDescriptorManager = ServletUtils.getGamesDescriptorManager(getServletContext());
+            Set<PokerGameDescriptor> usersList = gamesDescriptorManager.getGameDescriptors();
             String json = gson.toJson(usersList);
             out.println(json);
             out.flush();

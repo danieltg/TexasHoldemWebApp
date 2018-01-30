@@ -10,7 +10,6 @@ import javax.xml.bind.Unmarshaller;
 import Engine.Players.PokerPlayer;
 import Engine.Utils.EngineUtils;
 import Jaxb.GameDescriptor;
-import javafx.concurrent.Task;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -39,7 +38,7 @@ public class ReadGameDescriptorFile{
 
     }
 
-    public void readFileContent(String content,String username) throws JAXBException, StructureException, BlindesException {
+    public PokerGameDescriptor readFileContent(String content, String username) throws JAXBException, StructureException, BlindesException {
 
 
         JAXBContext jaxbContext = JAXBContext.newInstance(GameDescriptor.class);
@@ -49,7 +48,7 @@ public class ReadGameDescriptorFile{
 
         pokerGameDescriptor = new PokerGameDescriptor(gameDescriptor,username);
         validatePokerGameDescriptor(pokerGameDescriptor);
-
+        return pokerGameDescriptor;
     }
 
     private void validatePokerGameDescriptor(PokerGameDescriptor game) throws StructureException, BlindesException {

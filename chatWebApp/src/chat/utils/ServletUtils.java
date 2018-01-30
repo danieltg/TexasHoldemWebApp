@@ -2,6 +2,7 @@ package chat.utils;
 
 import Engine.chat.ChatManager;
 import Engine.users.UserManager;
+import Engine.GamesDescriptorManager;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -12,12 +13,21 @@ public class ServletUtils {
 
 	private static final String USER_MANAGER_ATTRIBUTE_NAME = "userManager";
 	private static final String CHAT_MANAGER_ATTRIBUTE_NAME = "chatManager";
+	private static final String GAME_DESCRIPTOR_MANAGER_ATTRIBUTE_NAME = "gamesDescriptorManager";
+
 
 	public static UserManager getUserManager(ServletContext servletContext) {
 		if (servletContext.getAttribute(USER_MANAGER_ATTRIBUTE_NAME) == null) {
 			servletContext.setAttribute(USER_MANAGER_ATTRIBUTE_NAME, new UserManager());
 		}
 		return (UserManager) servletContext.getAttribute(USER_MANAGER_ATTRIBUTE_NAME);
+	}
+
+	public static GamesDescriptorManager getGamesDescriptorManager(ServletContext servletContext) {
+		if (servletContext.getAttribute(GAME_DESCRIPTOR_MANAGER_ATTRIBUTE_NAME) == null) {
+			servletContext.setAttribute(GAME_DESCRIPTOR_MANAGER_ATTRIBUTE_NAME, new GamesDescriptorManager());
+		}
+		return (GamesDescriptorManager) servletContext.getAttribute(GAME_DESCRIPTOR_MANAGER_ATTRIBUTE_NAME);
 	}
 
 	public static ChatManager getChatManager(ServletContext servletContext) {
