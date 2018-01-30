@@ -6,31 +6,21 @@ import chat.utils.ServletUtils;
 import Engine.users.UserManager;
 import java.io.IOException;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import static chat.constants.Constants.USERNAME;
+import static chat.constants.Constants.PLAYER_TYPE;
 
+@WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 
-    // urls that starts with forward slash '/' are considered absolute
-    // urls that doesn't start with forward slash '/' are considered relative to the place where this servlet request comes from
-    // you can use absolute paths, but then you need to build them from scratch, starting from the context path
-    // ( can be fetched from request.getContextPath() ) and then the 'absolute' path from it.
-    // Each method with it's pros and cons...
-    private final String CHAT_ROOM_URL = "../chatroom/chatroom.html";
+    private final String LOBBY_ROOM_URL = "../pages/PokerLobby/lobby.html";
     private final String SIGN_UP_URL = "../signup/singup.html";
     private final String LOGIN_ERROR_URL = "/pages/loginerror/login_attempt_after_error.jsp";  // must start with '/' since will be used in request dispatcher...
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -39,9 +29,10 @@ public class LoginServlet extends HttpServlet {
         if (usernameFromSession == null) {
             //user is not logged in yet
             String usernameFromParameter = request.getParameter(USERNAME);
+            String playerTypeFromParameter=request.getParameter(PLAYER_TYPE);
+
             if (usernameFromParameter == null) {
-                //no username in session and no username in parameter -
-                //redirect back to the index page
+                //no username in session and no username in parameter - redirect back to the index page
                 //this return an HTTP code back to the browser telling it to load
                 response.sendRedirect(SIGN_UP_URL);
             } else {
@@ -65,14 +56,14 @@ public class LoginServlet extends HttpServlet {
                     //create a new one
                     request.getSession(true).setAttribute(Constants.USERNAME, usernameFromParameter);
 
-                    //redirect the request to the chat room - in order to actually change the URL
+                    //redirect the request to the lobby room - in order to actually change the URL
                     System.out.println("On login, request URI is: " + request.getRequestURI());
-                    response.sendRedirect(CHAT_ROOM_URL);
+                    response.sendRedirect(LOBBY_ROOM_URL);
                 }
             }
         } else {
             //user is already logged in
-            response.sendRedirect(CHAT_ROOM_URL);
+            response.sendRedirect(LOBBY_ROOM_URL);
         }
     }
 

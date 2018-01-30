@@ -27,6 +27,22 @@ public class PokerGameDescriptor implements Serializable {
     public final static int BASIC_NUM_OF_HUMAN_PLAYERS= 1;
     public final static int BASIC_NUM_OF_COMPUTER_PLAYERS= 3;
 
+    public PokerGameDescriptor (GameDescriptor g,String username)
+    {
+        numberOfHumanPlayers=0;
+        numberOfComputerPlayers=0;
+        registeredPlayers=0;
+        players= new ArrayList<>();
+        uploadedBy=username;
+        type= GameType.valueOf(g.getGameType());
+        if (type==GameType.DynamicMultiPlayer) {
+            numberOfPlayers=g.getDynamicPlayers().getTotalPlayers();
+            gameTitle=g.getDynamicPlayers().getGameTitle();
+        }
+
+        structure=new PokerStructure((g.getStructure()));
+    }
+
     public PokerGameDescriptor (GameDescriptor g)
     {
         numberOfHumanPlayers=0;

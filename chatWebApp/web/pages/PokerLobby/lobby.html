@@ -3,14 +3,15 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Texas Holdem Poker Game</title>
-    <link rel="stylesheet" href="../../common/CSS/mainCss.css">
-
+    <link rel="stylesheet" href="../../common/CSS/lobbyCss.css">
+    <script type="text/javascript" src="../jquery-2.0.3.min.js"></script></head>
+<script src="../../common/JS/lobby.js"></script>
 </head>
 <body>
 <table align=center  >
     <tr>
         <td valign="top" align="center" >
-            <img  src="../../common/images/TexasHoldemPoker.jpg" height="130px" width="300px" align="right">
+            <img src="../../common/images/TexasHoldemPoker.jpg" height="130px" width="300px" align="right">
             <H1> Texas Holdem Poker Game </H1>
             <br>
 
@@ -19,6 +20,8 @@
                 <input type="file" name="file1" accept=".xml">
                 <input id="uploadFileButton" type="Submit" value="Upload File">
             </form>
+            <div id="result">
+            </div>
         </td>
     </tr>
 </table>
@@ -26,21 +29,17 @@
 <table width=95% align=center border=0>
     <tr>
         <td align=center width= 55% valign=top> <H3> Games List </H3>
-            <table width=95% border=1 >
+            <table id="games_table" width=95% border=1 >
                 <tr>
-                    <th align=center><b>GameName</b></th>
-                    <th align=center><b>User Name</b></th>
-                    <th align=center><b>Hands Num</b></th>
+                    <th align=center><b>Game Title</b></th>
+                    <th align=center><b>Uploaded by</b></th>
+                    <th align=center><b>Hands Count</b></th>
+                    <th align=center><b>Total Players</b></th>
+                    <th align=center><b>Registered Players</b></th>
+                    <th align=center><b>Big</b></th>
+                    <th align=center><b>Small</b></th>
                     <th align=center><b>Buy</b></th>
-                    <th align=center><b>Player Num</b></th>
-                </tr>
-
-                <tr>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
+                    <th align=center><b>Fixed Blindes</b></th>
                 </tr>
 
             </table>

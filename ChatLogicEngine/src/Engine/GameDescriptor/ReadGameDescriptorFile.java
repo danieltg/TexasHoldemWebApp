@@ -39,7 +39,7 @@ public class ReadGameDescriptorFile{
 
     }
 
-    public void readFileContent(String content) throws JAXBException, StructureException, BlindesException {
+    public void readFileContent(String content,String username) throws JAXBException, StructureException, BlindesException {
 
 
         JAXBContext jaxbContext = JAXBContext.newInstance(GameDescriptor.class);
@@ -47,7 +47,7 @@ public class ReadGameDescriptorFile{
         Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
         GameDescriptor gameDescriptor = (GameDescriptor) jaxbUnmarshaller.unmarshal(new StringReader(content));
 
-        pokerGameDescriptor = new PokerGameDescriptor(gameDescriptor);
+        pokerGameDescriptor = new PokerGameDescriptor(gameDescriptor,username);
         validatePokerGameDescriptor(pokerGameDescriptor);
 
     }
