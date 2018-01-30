@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 public class GamesDescriptorManager {
-
+Lobby lobby=new Lobby();
     private final Set<PokerGameDescriptor> gamesSet;
 
         public GamesDescriptorManager() {
@@ -15,6 +15,7 @@ public class GamesDescriptorManager {
 
         public void addGameDescriptor(PokerGameDescriptor game) {
             gamesSet.add(game);
+            lobby.createNewRoom("Daniel",game);
         }
 
         public void removeGameDescriptor(PokerGameDescriptor game) {
