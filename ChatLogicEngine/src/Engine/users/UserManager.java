@@ -1,30 +1,28 @@
 package Engine.users;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class UserManager {
 
-    private final Set<String> usersSet;
+    private final Map<String,String> usersSet;
 
     public UserManager() {
-        usersSet = new HashSet<>();
+        usersSet = new HashMap<String, String>();
     }
 
-    public void addUser(String username) {
-        usersSet.add(username);
+    public void addUser(String username,String type) {
+        usersSet.put(username,type);
     }
 
     public void removeUser(String username) {
         usersSet.remove(username);
     }
 
-    public Set<String> getUsers() {
-        return Collections.unmodifiableSet(usersSet);
+    public Map<String,String> getUsers() {
+        return  usersSet;
     }
 
     public boolean isUserExists(String username) {
-        return usersSet.contains(username);
+        return usersSet.containsKey(username);
     }
 }
