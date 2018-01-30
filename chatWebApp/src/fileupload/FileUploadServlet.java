@@ -47,47 +47,9 @@ public class FileUploadServlet extends HttpServlet {
         out.flush();
     }
 
-    private void printPart(Part part, PrintWriter out) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("<p>")
-        .append("Parameter Name (From html form): ").append(part.getName())
-        .append("<br>")
-        .append("Content Type (of the file): ").append(part.getContentType())
-        .append("<br>")
-        .append("Size (of the file): ").append(part.getSize())
-        .append("<br>");
-        for (String header : part.getHeaderNames()) {
-            sb.append(header).append(" : ").append(part.getHeader(header)).append("<br>");
-        }
-        sb.append("</p>");
-        out.println(sb.toString());
-
-    }
 
     private String readFromInputStream(InputStream inputStream) {
         return new Scanner(inputStream).useDelimiter("\\Z").next();
-    }
-
-    private void printFileContent(String content, PrintWriter out) {
-        ReadGameDescriptorFile fileReader= new ReadGameDescriptorFile();
-
-        out.println("<h2>Result:</h2>");
-        out.println("<p>");
-        try {
-            fileReader.readFileContent(content);
-            out.println("Valid file");
-            Gson gson = new Gson();
-            String jsonResponse = gson.toJson(fileReader.getGameDescriptor());
-            logServerMessage(jsonResponse);
-            out.print(jsonResponse);
-            out.flush();
-        }
-        catch (Exception e)
-        {
-            out.println(e.getMessage());
-
-        }
-        out.println("</p>");
     }
 
     private void logServerMessage(String message){

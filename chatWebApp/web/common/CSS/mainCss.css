@@ -1,0 +1,54 @@
+
+
+th{
+    
+    font-family: "Arial" ;
+    font-size: 15pX;
+     color: #00008B
+}
+
+td{
+    
+    font-family:"Arial";
+    font-size: 14pX;
+   }
+
+h1{
+    font-family: "Arial Black" ;
+    font-size: 28pX;
+     color: #00008B
+
+}
+
+h3{
+   font-family: "Arial Black" ;
+    font-size: 16pX;
+     color: #660000;
+    
+}
+table{
+    width: 100%;
+    border: 0;
+
+}
+
+
+div {
+    font-family:"Arial Black" ;
+    font-size: 14PX;
+}
+
+
+
+#uploadFileButton{
+    cursor:pointer;
+    background-color:#660000;
+    color:white;
+    font-weight:bold;
+    height:25px;
+    border:0px;
+    font-size: 12px
+
+
+}
+
