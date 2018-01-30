@@ -5,6 +5,7 @@ import chat.utils.SessionUtils;
 import chat.utils.ServletUtils;
 import Engine.users.UserManager;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -46,8 +47,10 @@ public class LoginServlet extends HttpServlet {
                     // and is relative to the web app root
                     // see this link for more details:
                     // http://timjansen.github.io/jarfiller/guide/servlet25/requestdispatcher.xhtml
-                    request.setAttribute(Constants.USER_NAME_ERROR, errorMessage);
-                    getServletContext().getRequestDispatcher(LOGIN_ERROR_URL).forward(request, response);
+                    PrintWriter out = response.getWriter();
+                    response.setStatus(400);
+                    out.print(errorMessage);
+
                 } else {
                     //add the new user to the users list
                     userManager.addUser(usernameFromParameter);

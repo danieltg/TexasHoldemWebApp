@@ -3,8 +3,11 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Texas Holdem Poker Game</title>
-    <script src="../../common/JS/signUpJs.js"></script>
     <link rel="stylesheet" href="../../common/CSS/signUpCss.css">
+
+    <script type="text/javascript" src="../jquery-2.0.3.min.js"></script></head>
+    <script src="../../common/context-path-helper.js"></script>
+    <script src="../../common/JS/signUpJs.js"></script>
 
 </head>
 <body>
@@ -14,18 +17,18 @@
             <img  src="../../common/images/TexasHoldemPoker.jpg" height=250>
             <div align="center">
                 <br>
-                <h1> Texas Holdem Poker Game </h1>
+                <h1> Texas Holdem Poker Game </h1></div>
         </td>
     </tr>
 </table>
 
 
-<form name="form1" method="GET" action="/login">
+<form id= "addUser" name="form1" method="GET" action="/login">
     <div class="container">
         <table width="350" align=center  >
             <tr>
                 <td height="43" width="46%" align=center-right>
-                    <div ><b>Name :</font></b></div>
+                    <div ><b>Name:</font></b></div>
                 </td>
                 <td height="43" width="54%">
                     <input type="text" name="username" placeholder="Enter name" class="signup" size=13>
@@ -62,6 +65,8 @@
             </tr>
 
         </table>
+
+        <div id="result"></div>
     </div>
 </form>
 </body>
