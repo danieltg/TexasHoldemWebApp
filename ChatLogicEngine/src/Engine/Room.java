@@ -15,6 +15,7 @@ public class Room {
     private String roomName;
     private GameManager gameManager;
     private Map<String,String> usersInGame= new HashMap<String, String>();
+    int numberPlayers=0;
 
     public Room (String name, PokerGameDescriptor gameDescriptorForGame)
     {
@@ -24,5 +25,14 @@ public class Room {
 
     }
 
+
+    public void addUserToRoom(String userName, String type) {
+        usersInGame.put(userName,type);
+        numberPlayers=usersInGame.size();
+    }
+    public void removeUserFromRoom(String userName) {
+        usersInGame.remove(userName);
+        numberPlayers=usersInGame.size();
+    }
 
 }
