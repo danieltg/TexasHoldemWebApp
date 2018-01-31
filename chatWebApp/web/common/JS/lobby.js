@@ -88,11 +88,26 @@ function refreshGamesList(games) {
             "<td align=center>" + games.structure.blindes.small + "</td>" +
             "<td align=center>" + games.structure.buy + "</td>"+
             "<td align=center>" + games.structure.blindes.fixed +"</td>"+
-            "<td align=center><button class='joinGame' data-key="+games.gameTitle+">Join Game</button></td>")
+            "<td align=center><button class='joinGame' onclick='joinGame(this.value)' value='"+games.gameTitle+"'>Join Game</button></td>")
             .appendTo('#games_table');
     });
 }
 
+function joinGame(val){
+        alert(val);
+    $.ajax({
+        data: "gameTitle=" + val,
+        url: '/joinRoom',
+        timeout: 2000,
+        error: function(){
+            console.log("Failed to send ajax");
+        },
+        success: function(response) {
+            console.info(response);
+            window.location.href = '/pages/gameRoom/room.html';
+        }
+    });
+}
 
 
 //users = a list of usernames, essentially an array of javascript strings:
