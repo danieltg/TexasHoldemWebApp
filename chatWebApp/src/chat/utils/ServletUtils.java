@@ -1,5 +1,6 @@
 package chat.utils;
 
+import Engine.Lobby;
 import Engine.chat.ChatManager;
 import Engine.users.UserManager;
 import Engine.GamesDescriptorManager;
@@ -13,7 +14,16 @@ public class ServletUtils {
 
 	private static final String USER_MANAGER_ATTRIBUTE_NAME = "userManager";
 	private static final String CHAT_MANAGER_ATTRIBUTE_NAME = "chatManager";
+	private static final String LOBBY_ATTRIBUTE_NAME = "lobbyManager";
 	private static final String GAME_DESCRIPTOR_MANAGER_ATTRIBUTE_NAME = "gamesDescriptorManager";
+
+
+	public static Lobby getLobby(ServletContext servletContext) {
+		if (servletContext.getAttribute(LOBBY_ATTRIBUTE_NAME) == null) {
+			servletContext.setAttribute(LOBBY_ATTRIBUTE_NAME, new Lobby());
+		}
+		return (Lobby) servletContext.getAttribute(LOBBY_ATTRIBUTE_NAME);
+	}
 
 
 	public static UserManager getUserManager(ServletContext servletContext) {

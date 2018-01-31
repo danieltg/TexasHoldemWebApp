@@ -21,6 +21,9 @@ public class PokerGameDescriptor implements Serializable {
     private  int numberOfHumanPlayers;
     private  int numberOfComputerPlayers;
     private int registeredPlayers;
+
+
+
     private String gameTitle="game";
     private String uploadedBy="";
 
@@ -59,6 +62,9 @@ public class PokerGameDescriptor implements Serializable {
         structure=new PokerStructure((g.getStructure()));
     }
 
+    public String getGameTitle() {
+        return gameTitle;
+    }
     private void setPlayers(Players players) {
         if (type == GameType.Basic)
         {

@@ -5,6 +5,7 @@ package fileupload;
 import Engine.GameDescriptor.PokerGameDescriptor;
 import Engine.GameDescriptor.ReadGameDescriptorFile;
 import Engine.GamesDescriptorManager;
+import Engine.Lobby;
 import Engine.users.UserManager;
 import chat.utils.ServletUtils;
 import chat.utils.SessionUtils;
@@ -50,6 +51,8 @@ public class FileUploadServlet extends HttpServlet {
         else
         {
             GamesDescriptorManager gamesManager = ServletUtils.getGamesDescriptorManager(getServletContext());
+            Lobby lobby=ServletUtils.getLobby(getServletContext());
+
             System.out.println("Username: "+usernameFromSession);
 
             PrintWriter out = response.getWriter();
@@ -63,7 +66,7 @@ public class FileUploadServlet extends HttpServlet {
 
             try
             {
-                gamesManager.addGameDescriptor(validateFileContent(fileContent.toString(), out,usernameFromSession));
+                gamesManager.addGameDescriptor(validateFileContent(fileContent.toString(), out,usernameFromSession),lobby);
                 //out.print(res);
                 //out.flush();
             }

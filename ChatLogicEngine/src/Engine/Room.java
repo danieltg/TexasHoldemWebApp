@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class Room {
 
-    String roomName;
+    private String roomName;
     private GameManager gameManager;
     private Map<String,String> usersInGame= new HashMap<String, String>();
 
