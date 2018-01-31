@@ -13,8 +13,10 @@ public class GamesDescriptorManager {
             gamesSet = new HashSet<>();
         }
 
-        public void addGameDescriptor(PokerGameDescriptor game) {
+        public void addGameDescriptor(PokerGameDescriptor game, Lobby lobby) {
             gamesSet.add(game);
+            lobby.addRoom(game.getGameTitle(),game);
+
         }
 
         public void removeGameDescriptor(PokerGameDescriptor game) {

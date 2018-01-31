@@ -22,8 +22,6 @@ public class PokerGameDescriptor implements Serializable {
     private  int numberOfComputerPlayers;
     private int registeredPlayers;
 
-
-
     private String gameTitle="game";
     private String uploadedBy="";
 

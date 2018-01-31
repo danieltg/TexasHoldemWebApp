@@ -10,7 +10,16 @@ import java.util.Map;
 
 public class Lobby {
 
-    private Map<String,Room> rooms= new HashMap<String,Room>();
+
+    private Map<String,Room> rooms;
+
+    public Lobby() {
+        rooms = new HashMap<>();
+    }
+
+    public void addRoom(String roomName,PokerGameDescriptor pokerGameDescriptor) {
+        rooms.put(roomName,new Room(roomName,pokerGameDescriptor));
+    }
 
     //need to Sync Messages
     public void createNewRoom(String roomName, PokerGameDescriptor pokerGameDescriptor)
