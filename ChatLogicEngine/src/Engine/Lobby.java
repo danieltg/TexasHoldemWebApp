@@ -21,12 +21,6 @@ public class Lobby {
         rooms.put(roomName,new Room(roomName,pokerGameDescriptor));
     }
 
-    //need to Sync Messages
-    public void createNewRoom(String roomName, PokerGameDescriptor pokerGameDescriptor)
-    {
-        Room room=new Room(roomName,pokerGameDescriptor);
-        rooms.put(roomName,room);
-    }
     public void addPlayerToRoom(String roomName,String userName,String type)
     {
         rooms.get(roomName).addUserToRoom(userName,type);

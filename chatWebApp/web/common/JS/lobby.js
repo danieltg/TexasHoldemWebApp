@@ -67,7 +67,8 @@ function refreshGamesList(games) {
         "<th align=center><b>Small</b></th>" +
         "<th align=center><b>Buy</b></th>" +
         "<th align=center><b>Fixed Blindes</b></th>" +
-        "</tr>")
+        "<th align=center><b>Join Game</b></th>" +
+    "</tr>")
         .appendTo('#games_table');
 
     // rebuild the list of users: scan all users and add them to the list of users
@@ -78,15 +79,16 @@ function refreshGamesList(games) {
         //$('<li>' + username + '</li>').appendTo($("#userslist"));
 
         $('<tr>').html(
-            "<td>" + games.gameTitle + "</td>" +
-            "<td>" + games.uploadedBy + "</td>" +
-            "<td>" + games.structure.handsCount + "</td>" +
-            "<td>" + games.numberOfPlayers + "</td>"+
-            "<td>" + games.registeredPlayers + "</td>" +
-            "<td>" + games.structure.blindes.big + "</td>" +
-            "<td>" + games.structure.blindes.small + "</td>" +
-            "<td>" + games.structure.buy + "</td>"+
-            "<td>" + games.structure.blindes.fixed +"</td>" )
+            "<td align=center>" + games.gameTitle + "</td>" +
+            "<td align=center>" + games.uploadedBy + "</td>" +
+            "<td align=center>" + games.structure.handsCount + "</td>" +
+            "<td align=center>" + games.numberOfPlayers + "</td>"+
+            "<td align=center>" + games.registeredPlayers + "</td>" +
+            "<td align=center>" + games.structure.blindes.big + "</td>" +
+            "<td align=center>" + games.structure.blindes.small + "</td>" +
+            "<td align=center>" + games.structure.buy + "</td>"+
+            "<td align=center>" + games.structure.blindes.fixed +"</td>"+
+            "<td align=center><button class='joinGame' data-key="+games.gameTitle+">Join Game</button></td>")
             .appendTo('#games_table');
     });
 }
