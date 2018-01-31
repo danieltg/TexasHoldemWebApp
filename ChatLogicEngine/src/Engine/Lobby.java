@@ -20,5 +20,8 @@ public class Lobby {
         Room room=new Room(roomName,pokerGameDescriptor);
         rooms.put(roomName,room);
     }
-
+    public void addPlayerToRoom(String roomName,String userName,String type)
+    {
+        rooms.get(roomName).addUserToRoom(userName,type);
+    }
 }

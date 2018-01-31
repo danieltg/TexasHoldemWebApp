@@ -25,4 +25,7 @@ public class Room {
     }
 
 
+    public void addUserToRoom(String userName, String type) {
+        usersInGame.put(userName,type);
+    }
 }
