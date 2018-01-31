@@ -9,9 +9,7 @@ $(function() {
 
             error: function(jqXHR) {
                 console.error("Failed to submit");
-                if(jqXHR.status && jqXHR.status==400) {
                     $("#result").text(jqXHR.responseText);
-                }
             },
 
             success: function(r) {
