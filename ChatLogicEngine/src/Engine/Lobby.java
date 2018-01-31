@@ -24,4 +24,8 @@ public class Lobby {
     {
         rooms.get(roomName).addUserToRoom(userName,type);
     }
+    public void removeUserFromRoom(String roomName,String userName,String type)
+    {
+        rooms.get(roomName).removeUserFromRoom(userName);
+    }
 }
