@@ -29,4 +29,18 @@ public class Lobby {
     {
         rooms.get(roomName).removeUserFromRoom(userName);
     }
+
+    public String getRoomNameByPlayerName(String usernameFromSession) {
+        for (String s: rooms.keySet()) {
+            if (rooms.get(s).isUserInGame(usernameFromSession))
+                return s;
+        }
+
+        return "error";
+    }
+
+    public Room getRoomByName(String gameRoom)
+    {
+        return rooms.get(gameRoom);
+    }
 }

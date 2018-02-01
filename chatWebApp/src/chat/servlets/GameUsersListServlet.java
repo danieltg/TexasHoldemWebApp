@@ -1,14 +1,14 @@
 package chat.servlets;
 
-import Engine.GameDescriptor.PokerGameDescriptor;
-import Engine.GamesDescriptorManager;
 import Engine.Lobby;
 import chat.utils.ServletUtils;
 import chat.utils.SessionUtils;
 import com.google.gson.Gson;
+import Engine.users.UserManager;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Map;
 import java.util.Set;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,23 +18,25 @@ import javax.servlet.http.HttpServletResponse;
 
 import static chat.constants.Constants.GAME_TITLE;
 
-@WebServlet("/joinRoom")
-public class JoinRoomServlet extends HttpServlet {
-
-    private final String LOBBY_ROOM_URL = "../pages/gameRoom/room.html";
+@WebServlet("/gameuserlist")
+public class GameUsersListServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        //returning JSON objects, not HTML
+        response.setContentType("application/json");
+
         String usernameFromSession = SessionUtils.getUsername(request);
-        String roomName = request.getParameter(GAME_TITLE);
         Lobby lobby=ServletUtils.getLobby(getServletContext());
 
-        lobby.addPlayerToRoom(roomName,usernameFromSession,"computer");
-        System.out.println("User: "+ usernameFromSession +" join room: "+roomName);
-        PrintWriter out = response.getWriter();
-        out.print(roomName);
-
+        String roomName= lobby.getRoomNameByPlayerName(usernameFromSession);
+        Map<String,String> users= lobby.getRoomByName(roomName).getUsersInGame();
+        try (PrintWriter out = response.getWriter()) {
+            Gson gson = new Gson();
+            String json = gson.toJson(users);
+            out.println(json);
+            out.flush();
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

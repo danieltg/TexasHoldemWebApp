@@ -35,4 +35,18 @@ public class Room {
         numberPlayers=usersInGame.size();
     }
 
+    public boolean isUserInGame(String username)
+    {
+        for(String name:usersInGame.keySet()) {
+            if (name.equals(username))
+                return true;
+        }
+        return false;
+    }
+
+    public Map<String,String> getUsersInGame()
+    {
+        return usersInGame;
+    }
+
 }
