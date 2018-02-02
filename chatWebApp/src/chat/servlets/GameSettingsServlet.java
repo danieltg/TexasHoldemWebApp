@@ -1,36 +1,38 @@
 package chat.servlets;
 
+import Engine.GameDescriptor.PokerGameDescriptor;
 import Engine.Lobby;
+import Engine.Room;
 import chat.utils.ServletUtils;
 import chat.utils.SessionUtils;
 import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Map;
-import java.util.Set;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/gameuserlist")
-public class GameUsersListServlet extends HttpServlet {
+
+@WebServlet("/gameSettings")
+public class GameSettingsServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //returning JSON objects, not HTML
         response.setContentType("application/json");
+        try (PrintWriter out = response.getWriter())
+        {
+            String usernameFromSession = SessionUtils.getUsername(request);
+            Lobby lobby=ServletUtils.getLobby(getServletContext());
 
-        String usernameFromSession = SessionUtils.getUsername(request);
-        Lobby lobby=ServletUtils.getLobby(getServletContext());
+            String roomName= lobby.getRoomNameByPlayerName(usernameFromSession);
+            Room roomToDisplay=lobby.getRoomByName(roomName);
+            PokerGameDescriptor gameDescriptor= roomToDisplay.getGameManager().getGameDescriptor();
 
-        String roomName= lobby.getRoomNameByPlayerName(usernameFromSession);
-        Map<String,String> users= lobby.getRoomByName(roomName).getUsersInGame();
-        try (PrintWriter out = response.getWriter()) {
             Gson gson = new Gson();
-            String json = gson.toJson(users);
+            String json = gson.toJson(gameDescriptor);
             out.println(json);
             out.flush();
         }

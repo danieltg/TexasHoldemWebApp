@@ -4,11 +4,9 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>Texas Holdem Poker Room</title>
 		<link rel="stylesheet" href="profile_card.css">
-
-		<script type="text/javascript" src="../jquery-2.0.3.min.js"></script></head>
-	<script src="../../common/context-path-helper.js"></script>
-	<script src="../../common/JS/game_room.js"></script>
-
+		<script type="text/javascript" src="../jquery-2.0.3.min.js"></script>
+		<script src="../../common/room-path-helper.js"></script>
+		<script src="../../common/JS/room.js"></script>
 	</head>
 <body>
 <h1>My poker game<h1><!--need to replace with the real name of the game-->
@@ -17,17 +15,12 @@
 
 		<tr>
 			<td valign="top"  width=10%>
-				<h2>Player list<h2>
-					<ul>
-						<li>avital</li>
-						<br>
-						<li>avi</li>
-						<br>
-						<li>daniel</li>
-						<br>
-						<li>adi &nbsp;<image src="myTurn.png"></image><li> <!--בתור של שחקן נשים לידו אייקון שזה תורו-->
-
-					</ul>
+				<h2 id="gameTitle">Player list</h2>
+                <ul id="userslist" width=95% align=center border=1  style="list-style-type:none">
+                </ul>
+                <!--
+                <li>adi &nbsp;<image src="myTurn.png"></image><li> &lt;!&ndash;בתור של שחקן נשים לידו אייקון שזה תורו&ndash;&gt;
+                -->
 
 			</td>
 			<td  valign="top" width=80%>

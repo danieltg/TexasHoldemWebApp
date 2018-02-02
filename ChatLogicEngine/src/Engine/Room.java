@@ -49,4 +49,9 @@ public class Room {
         return usersInGame;
     }
 
+    public GameManager getGameManager()
+    {
+        return this.gameManager;
+    }
+
 }
