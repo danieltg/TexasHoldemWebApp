@@ -3,58 +3,163 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>Texas Holdem Poker Room</title>
-		<link rel="stylesheet" href="profile_card.css">
-		<script type="text/javascript" src="../jquery-2.0.3.min.js"></script>
-		<script src="../../common/room-path-helper.js"></script>
-		<script src="../../common/JS/room.js"></script>
+        <link rel="stylesheet" href="../../common/CSS/roomCss.css">
+
+		<script type="text/javascript" src="../jquery-2.0.3.min.js"></script></head>
+	<script src="../../common/context-path-helper.js"></script>
+	<script src="../../common/JS/game_room.js"></script>
+
 	</head>
 <body>
-<h1>My poker game<h1><!--need to replace with the real name of the game-->
+<h1>My poker game</h1><!--need to replace with the real name of the game-->
 
-	<table align=center width=95% border=1>
+	<table align=center width=50% border=1>
 
-		<tr>
-			<td valign="top"  width=10%>
-				<h2 id="gameTitle">Player list</h2>
-                <ul id="userslist" width=95% align=center border=1  style="list-style-type:none">
-                </ul>
-                <!--
-                <li>adi &nbsp;<image src="myTurn.png"></image><li> &lt;!&ndash;בתור של שחקן נשים לידו אייקון שזה תורו&ndash;&gt;
-                -->
+		<tr >
+			<td valign="top" width=25%>
+				<h2>Player list</h2>
+					<ul>
+						<li>avital</li>
+						<br>
+						<li>avi</li>
+						<br>
+						<li>daniel</li>
+						<br>
+						<li>adi &nbsp;<image src="myTurn.png"></image><li> <!--בתור של שחקן נשים לידו אייקון שזה תורו-->
 
-			</td>
-			<td  valign="top" width=80%>
+					</ul>
+
+                </td>
+
+			<td  valign="top" width=50% >
 
 				<table width=95% align=center>
 					<tr>
 						<td>
 							<!--כאן יכול להיכנס שחקן-->
-							<div class="card"style="width:15%; height:15%" >
-								<h1 style=text-align:center>John Doe</h1>
-								<img src="pokerFace.jpg" alt="John" style="width:20%; height:20%">
+							<div class="card"  style="width:95%; height:18%" >
+								<h3 style=text-align:center>John Doe</h3>
+								<img src="../../common/images/player1.png" style="width:70%; height:15%">
 								<p class="type" ><b>type:</b> H</p> <!--here the user type-->
 								<p class="state"><b>state:</b> D</p><!--here the user state-->
 								<p class="chips"><b>chips:</b> 250</p><!--here the user chips-->
 								<p class="buys"><b>buys:</b> 3</p><!--here the user buys-->
 								<p class="Hand_Won"><b>Hand_Won:</b> 5/10</p><!--here the user Hand_Won-->
 							</div>
+                            <br>
+
 						</td>
-						<td width=70%>&nbsp;</td>
-						<td>
+
+						<td >
+                            <!--כאן יכול להיכנס שחקן-->
+                            <div class="card"style="width:60%; height:18%">
+                                <h3 style=text-align:center>John Doe</h3>
+                                <img src="../../common/images/diller.jpg" style="width:30%; height:15%">
+                                <p class="type" ><b>type:</b> H</p> <!--here the user type-->
+                                <p class="state"><b>state:</b> D</p><!--here the user state-->
+                                <p class="chips"><b>chips:</b> 250</p><!--here the user chips-->
+                                <p class="buys"><b>buys:</b> 3</p><!--here the user buys-->
+                                <p class="Hand_Won"><b>Hand_Won:</b> 5/10</p><!--here the user Hand_Won-->
+                            </div>
+
 						<td>
 							<!--כאן יכול להיכנס שחקן-->
-							<div class="card"style="width:15%; height:15%"  >
-								<h1 style=text-align:center>John Doe</h1>
-								<img src="pokerFace.jpg" alt="John" style="width:20%; height:20%">
+							<div class="card"style="width:95%; height:18%"  >
+								<h3 style=text-align:center>John Doe</h3>
+								<img src="../../common/images/player2.png" style="width:70%; height:15%">
 								<p class="type" ><b>type:</b> H</p> <!--here the user type-->
 								<p class="state"><b>state:</b> D</p><!--here the user state-->
 								<p class="chips"><b>chips:</b> 250</p><!--here the user chips-->
 								<p class="buys"><b>buys:</b> 3</p><!--here the user buys-->
 								<p class="Hand_Won"><b>Hand_Won:</b> 5/10</p><!--here the user Hand_Won-->
 							</div></td>
-					</tr></table>
+
+					</tr>
+                    <tr>
+                        <td>
+                            <!--כאן יכול להיכנס שחקן-->
+                            <div class="card"style="width:95%; height:18%"  >
+                                <h3 style=text-align:center>John Doe</h3>
+                                <img src="../../common/images/player3.png" style="width:70%; height:15%">
+                                <p class="type" ><b>type:</b> H</p> <!--here the user type-->
+                                <p class="state"><b>state:</b> D</p><!--here the user state-->
+                                <p class="chips"><b>chips:</b> 250</p><!--here the user chips-->
+                                <p class="buys"><b>buys:</b> 3</p><!--here the user buys-->
+                                <p class="Hand_Won"><b>Hand_Won:</b> 5/10</p><!--here the user Hand_Won-->
+                            </div>
+
+                        </td>
+
+                        <td>
+
+                            <div class="main">
+                                <div class="table">
+                                    <div class="board">
+                                        <div class="card-small">
+                                            <p class="card-text black">A</p><!--need to change to the real card-->
+                                            <p class="card-img black">&clubs;</p>
+                                        </div>
+                                        <div class="card-small">
+                                            <p class="card-text black">10</p><!--need to change to the real card-->
+                                            <p class="card-img black">&spades;</p>
+                                        </div>
+                                        <div class="card-small">
+                                            <p class="card-text red">K</p><!--need to change to the real card-->
+                                            <p class="card-img red">&hearts;</p>
+                                        </div>
+                                        <div class="card-small">
+                                            <p class="card-text red">Q</p><!--need to change to the real card-->
+                                            <p class="card-img red">&diams;</p>
+                                        </div>
+                                        <div class="card-small">
+                                            <p class="card-text red">2</p><!--need to change to the real card-->
+                                            <p class="card-img red">&diams;</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </td>
+                        <td>
+                            <div class="card"style="width:95%; height:18%"  >
+                                <h3 style=text-align:center>John Doe</h3>
+                                <img src="../../common/images/player4.jpg" style="width:70%; height:15%">
+                                <p class="type" ><b>type:</b> H</p> <!--here the user type-->
+                                <p class="state"><b>state:</b> D</p><!--here the user state-->
+                                <p class="chips"><b>chips:</b> 250</p><!--here the user chips-->
+                                <p class="buys"><b>buys:</b> 3</p><!--here the user buys-->
+                                <p class="Hand_Won"><b>Hand_Won:</b> 5/10</p><!--here the user Hand_Won-->
+                            </div>
+
+
+                        </td>
+
+                    </tr>
+                    <tr>
+                            <td>
+
+                            </td>
+                            <td>
+
+                                <div class="card"style="width:95%; height:18%"  >
+                                    <h3 style=text-align:center>John Doe</h3>
+                                    <img src="../../common/images/player5.jpg" style="width:30%; height:15%">
+                                    <p class="type" ><b>type:</b> H</p> <!--here the user type-->
+                                    <p class="state"><b>state:</b> D</p><!--here the user state-->
+                                    <p class="chips"><b>chips:</b> 250</p><!--here the user chips-->
+                                    <p class="buys"><b>buys:</b> 3</p><!--here the user buys-->
+                                    <p class="Hand_Won"><b>Hand_Won:</b> 5/10</p><!--here the user Hand_Won-->
+                                </div>
+                            </td>
+                        <td>&nbsp;</td>
+
+                    </tr>
+
+                </table>
+
+
 			</td>
-			<td   valign="top" width=10%>
+			<td  rowspan="2" valign="top" width=25%>
 				<h2>Game Details</h2>
 				<table border="1" align=center width=90%>
 					<tr>
@@ -80,6 +185,54 @@
 
 
 		</tr>
+        <!--row 2-->
+
+
+        <tr>
+
+            <td>
+                <table>
+                <tr>
+                    <td><input id="exitGameButton" type="Submit" value="exit Game">&nbsp;</td>
+                </tr>
+
+
+               <tr>
+                   <td><input id="StartGameButton" type="Submit" value="Start Game">&nbsp;</td>
+               </tr>
+                    </table>
+
+            </td>
+
+            <td>
+                <table width="100%">
+                    <tr>
+                        <td align="center">
+                            <button id="RaisButton" type="button">Rais</button>&nbsp;</td>
+
+                        <td  align="center">
+
+                            <button id="CheckButton" type="button" >Check</button>&nbsp;</td>
+                    </tr>
+
+                    <tr>
+                        <td align="center">
+                            <button id="CallButton" type="button">Call</button>&nbsp;</td>
+                        <td  align="center">
+                            <button id="FoldButton" type="button"  >Fold</button>&nbsp;</td>
+
+                    </tr>
+                </table>
+
+
+
+            </td>
+
+
+
+
+        </tr>
+
 
 
 
