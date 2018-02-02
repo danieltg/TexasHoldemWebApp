@@ -23,8 +23,8 @@ public class GamesListServlet extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             Gson gson = new Gson();
             GamesDescriptorManager gamesDescriptorManager = ServletUtils.getGamesDescriptorManager(getServletContext());
-            Set<PokerGameDescriptor> usersList = gamesDescriptorManager.getGameDescriptors();
-            String json = gson.toJson(usersList);
+            Set<PokerGameDescriptor> gameDescriptors = gamesDescriptorManager.getGameDescriptors();
+            String json = gson.toJson(gameDescriptors);
             out.println(json);
             out.flush();
         }

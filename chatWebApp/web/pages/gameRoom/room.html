@@ -7,25 +7,27 @@
 
 		<script type="text/javascript" src="../jquery-2.0.3.min.js"></script></head>
 	<script src="../../common/context-path-helper.js"></script>
-	<script src="../../common/JS/game_room.js"></script>
+	<script src="../../common/JS/room.js"></script>
 
 	</head>
 <body>
-<h1>My poker game</h1><!--need to replace with the real name of the game-->
+<h1 id="gameTitle">My poker game</h1><!--need to replace with the real name of the game-->
 
 	<table align=center width=50% border=1>
 
 		<tr >
 			<td valign="top" width=25%>
 				<h2>Player list</h2>
-					<ul>
+					<ul id="userslist">
+<!--
 						<li>avital</li>
 						<br>
 						<li>avi</li>
 						<br>
 						<li>daniel</li>
 						<br>
-						<li>adi &nbsp;<image src="myTurn.png"></image><li> <!--בתור של שחקן נשים לידו אייקון שזה תורו-->
+						<li>adi &nbsp;<image src="myTurn.png"></image><li> &lt;!&ndash;בתור של שחקן נשים לידו אייקון שזה תורו&ndash;&gt;
+-->
 
 					</ul>
 
@@ -167,16 +169,16 @@
 						<td>150</td>
 					</tr>
 					<tr>
-						<td><b> Hand number</b></td>
+						<td><b>Hand number</b></td>
 						<td>3/5</td>
 					</tr>
 					<tr>
 						<td><b>Big</b></td>
-						<td>50</td>
+						<td id="bigValue">50</td>
 					</tr>
 					<tr>
 						<td><b>Small</b></td>
-						<td>10</td>
+						<td id="smallValue">10</td>
 					</tr>
 
 				</table>

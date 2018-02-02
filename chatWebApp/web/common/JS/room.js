@@ -19,22 +19,17 @@ function ajaxGameSettings() {
 }
 
 function refreshGameSettings(games) {
+    document.getElementById("gameTitle").innerText= games.gameTitle;
+    document.getElementById("bigValue").innerText= games.structure.blindes.big;
+    document.getElementById("smallValue").innerText= games.structure.blindes.small;
 
-    $.each(games || [], function(index, games) {
 
-        $('<tr>').html(
-            "<td align=center>" + games.gameTitle + "</td>" +
-            "<td align=center>" + games.uploadedBy + "</td>" +
-            "<td align=center>" + games.structure.handsCount + "</td>" +
-            "<td align=center>" + games.numberOfPlayers + "</td>"+
-            "<td align=center>" + games.registeredPlayers + "</td>" +
-            "<td align=center>" + games.structure.blindes.big + "</td>" +
-            "<td align=center>" + games.structure.blindes.small + "</td>" +
-            "<td align=center>" + games.structure.buy + "</td>"+
-            "<td align=center>" + games.structure.blindes.fixed +"</td>"+
-            "<td align=center><button class='joinGame' onclick='joinGame(this.value)' value='"+games.gameTitle+"'>Join Game</button></td>")
-            .appendTo('#games_table');
-    });
+    /* games.uploadedBy
+    games.structure.handsCount
+    games.numberOfPlayers
+    games.registeredPlayers
+    games.structure.buy
+    */
 }
 
 function refreshUsersList(users) {
