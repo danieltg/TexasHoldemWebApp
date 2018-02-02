@@ -81,3 +81,28 @@ a {
 .black {
     color: black;
 }
+button{
+    width: 100px;
+    cursor:pointer;
+    background-color:#ac2925;
+    color:white;
+    font-weight:bold;
+    height:25px;
+    border:0px;
+    font-size: 12px
+
+}
+
+input{
+
+    width: 100px;
+    cursor:pointer;
+    background-color:#00008B;
+    color:white;
+    font-weight:bold;
+    height:25px;
+    border:0px;
+    font-size: 12px
+
+
+}
