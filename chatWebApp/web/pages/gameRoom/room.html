@@ -3,7 +3,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>Texas Holdem Poker Room</title>
-		<link rel="stylesheet" href="profile_card.css">
+        <link rel="stylesheet" href="../../common/CSS/roomCss.css">
 
 		<script type="text/javascript" src="../jquery-2.0.3.min.js"></script></head>
 	<script src="../../common/context-path-helper.js"></script>
@@ -11,13 +11,13 @@
 
 	</head>
 <body>
-<h1>My poker game<h1><!--need to replace with the real name of the game-->
+<h1>My poker game</h1><!--need to replace with the real name of the game-->
 
 	<table align=center width=95% border=1>
 
-		<tr>
-			<td valign="top"  width=10%>
-				<h2>Player list<h2>
+		<tr >
+			<td valign="top"  width=25%>
+				<h2>Player list</h2>
 					<ul>
 						<li>avital</li>
 						<br>
@@ -30,14 +30,14 @@
 					</ul>
 
 			</td>
-			<td  valign="top" width=80%>
+			<td  valign="top" width=50%>
 
 				<table width=95% align=center>
 					<tr>
 						<td>
 							<!--כאן יכול להיכנס שחקן-->
-							<div class="card"style="width:15%; height:15%" >
-								<h1 style=text-align:center>John Doe</h1>
+							<div class="card"style="width:95%; height:18%" >
+								<h3 style=text-align:center>John Doe</h3>
 								<img src="pokerFace.jpg" alt="John" style="width:20%; height:20%">
 								<p class="type" ><b>type:</b> H</p> <!--here the user type-->
 								<p class="state"><b>state:</b> D</p><!--here the user state-->
@@ -46,12 +46,23 @@
 								<p class="Hand_Won"><b>Hand_Won:</b> 5/10</p><!--here the user Hand_Won-->
 							</div>
 						</td>
-						<td width=70%>&nbsp;</td>
-						<td>
+
+						<td >
+                            <!--כאן יכול להיכנס שחקן-->
+                            <div class="card"style="width:60%; height:18%">
+                                <h3 style=text-align:center>John Doe</h3>
+                                <img src="pokerFace.jpg" alt="John" style="width:20%; height:20%">
+                                <p class="type" ><b>type:</b> H</p> <!--here the user type-->
+                                <p class="state"><b>state:</b> D</p><!--here the user state-->
+                                <p class="chips"><b>chips:</b> 250</p><!--here the user chips-->
+                                <p class="buys"><b>buys:</b> 3</p><!--here the user buys-->
+                                <p class="Hand_Won"><b>Hand_Won:</b> 5/10</p><!--here the user Hand_Won-->
+                            </div>
+
 						<td>
 							<!--כאן יכול להיכנס שחקן-->
-							<div class="card"style="width:15%; height:15%"  >
-								<h1 style=text-align:center>John Doe</h1>
+							<div class="card"style="width:95%; height:18%"  >
+								<h3 style=text-align:center>John Doe</h3>
 								<img src="pokerFace.jpg" alt="John" style="width:20%; height:20%">
 								<p class="type" ><b>type:</b> H</p> <!--here the user type-->
 								<p class="state"><b>state:</b> D</p><!--here the user state-->
@@ -59,9 +70,93 @@
 								<p class="buys"><b>buys:</b> 3</p><!--here the user buys-->
 								<p class="Hand_Won"><b>Hand_Won:</b> 5/10</p><!--here the user Hand_Won-->
 							</div></td>
-					</tr></table>
+
+					</tr>
+                    <tr>
+                        <td>
+                            <!--כאן יכול להיכנס שחקן-->
+                            <div class="card"style="width:95%; height:18%"  >
+                                <h3 style=text-align:center>John Doe</h3>
+                                <img src="pokerFace.jpg" alt="John" style="width:20%; height:20%">
+                                <p class="type" ><b>type:</b> H</p> <!--here the user type-->
+                                <p class="state"><b>state:</b> D</p><!--here the user state-->
+                                <p class="chips"><b>chips:</b> 250</p><!--here the user chips-->
+                                <p class="buys"><b>buys:</b> 3</p><!--here the user buys-->
+                                <p class="Hand_Won"><b>Hand_Won:</b> 5/10</p><!--here the user Hand_Won-->
+                            </div>
+
+                        </td>
+
+                        <td>
+
+                            <div class="main">
+                                <div class="table">
+                                    <div class="board">
+                                        <div class="card-small">
+                                            <p class="card-text black">A</p><!--need to change to the real card-->
+                                            <p class="card-img black">&clubs;</p>
+                                        </div>
+                                        <div class="card-small">
+                                            <p class="card-text black">10</p><!--need to change to the real card-->
+                                            <p class="card-img black">&spades;</p>
+                                        </div>
+                                        <div class="card-small">
+                                            <p class="card-text red">K</p><!--need to change to the real card-->
+                                            <p class="card-img red">&hearts;</p>
+                                        </div>
+                                        <div class="card-small">
+                                            <p class="card-text red">Q</p><!--need to change to the real card-->
+                                            <p class="card-img red">&diams;</p>
+                                        </div>
+                                        <div class="card-small">
+                                            <p class="card-text red">2</p><!--need to change to the real card-->
+                                            <p class="card-img red">&diams;</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </td>
+                        <td>
+                            <div class="card"style="width:95%; height:18%"  >
+                                <h3 style=text-align:center>John Doe</h3>
+                                <img src="pokerFace.jpg" alt="John" style="width:20%; height:20%">
+                                <p class="type" ><b>type:</b> H</p> <!--here the user type-->
+                                <p class="state"><b>state:</b> D</p><!--here the user state-->
+                                <p class="chips"><b>chips:</b> 250</p><!--here the user chips-->
+                                <p class="buys"><b>buys:</b> 3</p><!--here the user buys-->
+                                <p class="Hand_Won"><b>Hand_Won:</b> 5/10</p><!--here the user Hand_Won-->
+                            </div>
+
+
+                        </td>
+
+                    </tr>
+                    <tr>
+                            <td>
+
+                            </td>
+                            <td>
+
+                                <div class="card"style="width:95%; height:18%"  >
+                                    <h3 style=text-align:center>John Doe</h3>
+                                    <img src="pokerFace.jpg" alt="John" style="width:20%; height:20%">
+                                    <p class="type" ><b>type:</b> H</p> <!--here the user type-->
+                                    <p class="state"><b>state:</b> D</p><!--here the user state-->
+                                    <p class="chips"><b>chips:</b> 250</p><!--here the user chips-->
+                                    <p class="buys"><b>buys:</b> 3</p><!--here the user buys-->
+                                    <p class="Hand_Won"><b>Hand_Won:</b> 5/10</p><!--here the user Hand_Won-->
+                                </div>
+                            </td>
+                        <td>&nbsp;</td>
+
+                    </tr>
+
+                </table>
+
+
 			</td>
-			<td   valign="top" width=10%>
+			<td  rowspan="2" valign="top" width=25%>
 				<h2>Game Details</h2>
 				<table border="1" align=center width=90%>
 					<tr>
@@ -87,6 +182,56 @@
 
 
 		</tr>
+        <!--row 2-->
+
+
+        <tr>
+
+            <td>
+                <table>
+                <tr>
+                    <td><input id="exitGameButton" type="Submit" value="exit Game"></td>
+                </tr>
+
+
+               <tr>
+                   <td><input id="StartGameButton" type="Submit" value="Start Game"></td>
+               </tr>
+                    </table>
+
+            </td>
+
+            <td>
+                <table>
+                    <tr>
+                        <td>
+                            <input id="RaisButton" type="Submit" value="Rais">
+                        </td>
+                        <td>
+                            <input id="CheckButton" type="Submit" value="check">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input id="CallButton" type="Submit" value="call">
+                        </td>
+                        <td>
+                            <input id="FoldButton" type="Submit" value="Fold" >
+
+                        </td>
+
+                    </tr>
+                </table>
+
+
+
+            </td>
+
+
+
+
+        </tr>
+
 
 
 
