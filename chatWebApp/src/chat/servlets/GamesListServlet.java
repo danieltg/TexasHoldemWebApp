@@ -2,6 +2,7 @@ package chat.servlets;
 
 import Engine.GameDescriptor.PokerGameDescriptor;
 import Engine.GamesDescriptorManager;
+import Engine.Lobby;
 import chat.utils.ServletUtils;
 import com.google.gson.Gson;
 
@@ -22,11 +23,18 @@ public class GamesListServlet extends HttpServlet {
         response.setContentType("application/json");
         try (PrintWriter out = response.getWriter()) {
             Gson gson = new Gson();
-            GamesDescriptorManager gamesDescriptorManager = ServletUtils.getGamesDescriptorManager(getServletContext());
-            Set<PokerGameDescriptor> gameDescriptors = gamesDescriptorManager.getGameDescriptors();
+            Lobby lobby=ServletUtils.getLobby(getServletContext());
+            Set<PokerGameDescriptor> gameDescriptors=lobby.getAllRooms();
+
+            //GamesDescriptorManager gamesDescriptorManager = ServletUtils.getGamesDescriptorManager(getServletContext());
+            //Set<PokerGameDescriptor> gameDescriptors = gamesDescriptorManager.getGameDescriptors();
             String json = gson.toJson(gameDescriptors);
             out.println(json);
             out.flush();
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
         }
     }
 

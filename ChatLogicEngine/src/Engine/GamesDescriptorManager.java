@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 public class GamesDescriptorManager {
-// Check - neet to Delete - Lobby lobby=new Lobby();
+
     private final Set<PokerGameDescriptor> gamesSet;
 
         public GamesDescriptorManager() {

@@ -1,20 +1,20 @@
 package Engine;
 
 import Engine.GameDescriptor.PokerGameDescriptor;
-import Engine.Players.PokerPlayer;
-
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class Lobby {
 
 
     private Map<String,Room> rooms;
+    private Map<String, String> users;
 
     public Lobby() {
         rooms = new HashMap<>();
+        users=new HashMap<>();
     }
 
     public void addRoom(String roomName,PokerGameDescriptor pokerGameDescriptor) {
@@ -24,23 +24,31 @@ public class Lobby {
     public void addPlayerToRoom(String roomName,String userName,String type)
     {
         rooms.get(roomName).addUserToRoom(userName,type);
+        users.put(userName,roomName);
     }
     public void removeUserFromRoom(String roomName,String userName,String type)
     {
         rooms.get(roomName).removeUserFromRoom(userName);
     }
 
-    public String getRoomNameByPlayerName(String usernameFromSession) {
-        for (String s: rooms.keySet()) {
-            if (rooms.get(s).isUserInGame(usernameFromSession))
-                return s;
-        }
+    public String getRoomNameByPlayerName(String username) {
 
-        return "error";
+        return users.get(username);
     }
 
     public Room getRoomByName(String gameRoom)
     {
         return rooms.get(gameRoom);
+    }
+
+    public Set<PokerGameDescriptor> getAllRooms() {
+
+        Set<PokerGameDescriptor> roomsSet = new HashSet<>();
+        
+        for (Room room: rooms.values())
+        {
+            roomsSet.add(room.getGameManager().getGameDescriptor());
+        }
+        return roomsSet;
     }
 }

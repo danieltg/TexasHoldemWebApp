@@ -1,9 +1,11 @@
 package Engine.GameDescriptor;
 
+import Engine.CurrGameState;
 import Engine.Players.ComputerPlayer;
 import Engine.Players.HumanPlayer;
 import Engine.Players.PlayerType;
 import Engine.Players.PokerPlayer;
+import Engine.Utils.RoomState;
 import Jaxb.GameDescriptor;
 import Jaxb.Player;
 import Jaxb.Players;
@@ -25,6 +27,8 @@ public class PokerGameDescriptor implements Serializable {
     private String gameTitle="game";
     private String uploadedBy="";
 
+    private RoomState status;
+
     public final static int BASIC_NUM_OF_HUMAN_PLAYERS= 1;
     public final static int BASIC_NUM_OF_COMPUTER_PLAYERS= 3;
 
@@ -42,6 +46,7 @@ public class PokerGameDescriptor implements Serializable {
         }
 
         structure=new PokerStructure((g.getStructure()));
+        status=RoomState.WAITING;
     }
 
     public PokerGameDescriptor (GameDescriptor g)
@@ -135,4 +140,24 @@ public class PokerGameDescriptor implements Serializable {
         return players;
     }
 
+    public int getRegisteredPlayers() {
+        return registeredPlayers;
+    }
+
+    public void incRegisteredPlayers() {
+        registeredPlayers++;
+        if (registeredPlayers== numberOfPlayers)
+        {
+            status=RoomState.RUNNING;
+        }
+    }
+
+    public void decRegisteredPlayers() {
+        registeredPlayers--;
+        status=RoomState.WAITING;
+    }
+
+    public RoomState getStatus() {
+        return status;
+    }
 }

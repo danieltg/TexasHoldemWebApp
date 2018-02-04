@@ -22,6 +22,7 @@ function refreshGameSettings(games) {
     document.getElementById("gameTitle").innerText= games.gameTitle;
     document.getElementById("bigValue").innerText= games.structure.blindes.big;
     document.getElementById("smallValue").innerText= games.structure.blindes.small;
+    document.getElementById("statusValue").innerText= games.status;
 
 
     /* games.uploadedBy

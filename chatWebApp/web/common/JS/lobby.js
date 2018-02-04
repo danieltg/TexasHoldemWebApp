@@ -77,6 +77,7 @@ function refreshGamesList(games) {
         //create a new <option> tag with a value in it and
         //appeand it to the #userslist (div with id=userslist) element
         //$('<li>' + username + '</li>').appendTo($("#userslist"));
+        var btn=games.registeredPlayers>= games.structure.handsCount;
 
         $('<tr>').html(
             "<td align=center>" + games.gameTitle + "</td>" +
@@ -88,8 +89,13 @@ function refreshGamesList(games) {
             "<td align=center>" + games.structure.blindes.small + "</td>" +
             "<td align=center>" + games.structure.buy + "</td>"+
             "<td align=center>" + games.structure.blindes.fixed +"</td>"+
-            "<td align=center><button class='joinGame' onclick='joinGame(this.value)' value='"+games.gameTitle+"'>Join Game</button></td>")
+            "<td align=center><button class='joinGame' onclick='joinGame(this.value)' id='"+games.gameTitle+"' value='"+games.gameTitle+"'>Join Game</button></td>")
             .appendTo('#games_table');
+
+        if (games.registeredPlayers== games.structure.handsCount) {
+            document.getElementById(games.gameTitle).disabled=true;
+        }
+
     });
 }
 
@@ -139,5 +145,6 @@ $(function() {
     setInterval(ajaxUsersList, refreshRate);
 
     setInterval(ajaxGamesList, refreshRate);
+
 
 });
