@@ -94,11 +94,15 @@ a {
 button{
     width: 100px;
     cursor:pointer;
-    background-color:#ac2925;
+    background-color: green;
     color:white;
     font-weight:bold;
     height:25px;
     border:0px;
     font-size: 12px
 
+}
+body{
+
+    background-image: url("../../common/images/background (2).jpg");
 }
