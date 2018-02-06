@@ -30,7 +30,7 @@ public class Lobby {
     {
         rooms.get(roomName).removeUserFromRoom(userName);
     }
-
+// getUserbyplayername?
     public String getRoomNameByPlayerName(String username) {
 
         return users.get(username);
