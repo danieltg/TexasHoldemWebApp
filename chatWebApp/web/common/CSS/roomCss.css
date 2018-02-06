@@ -152,7 +152,13 @@ button {
     left: 0px;
 
 }
+#myCard{
 
+    animation-timing-function: linear;
+    animation-duration: 3s;
+    animation-fill-mode: forwards;
+
+}
 
 
 body{
