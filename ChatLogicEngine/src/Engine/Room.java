@@ -35,24 +35,24 @@ public class Room {
         if (gameManager.getGameDescriptor().getStatus()== RoomState.RUNNING)
         {
 
-            int idHuman=0;
-            int idComp=0;
+            int id=0;
             for (Map.Entry<String, String> entry : usersInGame.entrySet())
             {
 
                 _name = entry.getKey();
                 _type= entry.getValue();
                 if(_type=="Human") {
-                    HumanPlayer humanPlayerInRoom=new HumanPlayer(idHuman,_name);
-                    idHuman++;
+                    HumanPlayer humanPlayerInRoom=new HumanPlayer(id,_name);
+
                     gameManager.getPlayers().add(humanPlayerInRoom);
                 }
                 else
                 {
-                    ComputerPlayer computerPlayerInRoom=new ComputerPlayer(idComp,_name);
-                    idComp++;
+                    ComputerPlayer computerPlayerInRoom=new ComputerPlayer(id,_name);
+
                     gameManager.getPlayers().add(computerPlayerInRoom);
                 }
+                id++;
 
             }
 
