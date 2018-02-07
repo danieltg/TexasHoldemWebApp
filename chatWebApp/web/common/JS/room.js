@@ -40,7 +40,6 @@ function refreshPokerHandSettings(pokerHand) {
         console.info(value);
     });
 
-    //tCard1.setImage(new Image(BASE_PACKAGE + (tableCards[0].equals("??") ? "back" : tableCards[0]) + ".png"));
 
 }
 
