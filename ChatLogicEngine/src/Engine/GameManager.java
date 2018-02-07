@@ -30,6 +30,7 @@ public class GameManager implements Serializable {
     private int moneyFromLastHand;
     private int big;
     private int small;
+    private boolean isFirstTime=true;
 
     public static int handNumber;
 
@@ -210,16 +211,21 @@ public class GameManager implements Serializable {
         return true;
     }
 
-    public PokerHand startNewHand()
+    public void startNewHand()
     {
         handNumber++;
         PokerBlindes blindes=getGameDescriptor().getStructure().getBlindes();
 
-        currHand= new PokerHand(blindes,getPlayers());
-        currHand.addToPot(getMoneyFromLastHand());
-        currHand.setHandState(HandState.GameInit);
-        setTotalRounds(getHandsCount()/numberOfPlayers);
-        return currHand;
+        try {
+            currHand = new PokerHand(blindes, getPlayers());
+            currHand.addToPot(getMoneyFromLastHand());
+            currHand.setHandState(HandState.GameInit);
+            setTotalRounds(getHandsCount() / numberOfPlayers);
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void runHand()
@@ -336,6 +342,61 @@ public class GameManager implements Serializable {
     public void updateBigAndSmall() {
         big=big+gameDescriptor.getStructure().getBlindes().getAdditions();
         small=small+gameDescriptor.getStructure().getBlindes().getAdditions();
+    }
+
+    public void RunOneHand() {
+
+        int nextDeallerIndex = 0;
+        isFirstTime=true;
+
+        if(getHandNumber()>1) {
+            int i = 0;
+            for (PokerPlayer p : getPlayers()) {
+                if (p.getState() == PlayerState.SMALL)
+                    nextDeallerIndex=i;
+                i++;
+            }
+
+            //reset players-- will not reset the State if it's the first round
+            resetPlayerState();
+
+            setRoles(nextDeallerIndex);
+        }
+
+        if (getIsFixed()==false &&
+                ((getHandNumber()%(getNumberOfPlayers()+1))==0))
+        {
+            updateBigAndSmall();
+        }
+
+        //get the hand
+        currHand.setSmall(getSmall());
+        currHand.setBig(getBig());
+
+        clearHandReplay();
+
+        currHand.dealingHoleCards();
+
+        addStepToHandReplay();
+        clearValuesFromCurrHand();
+
+        currHand.updateStateIndex();
+        currHand.betSmall();
+
+        addStepToHandReplay();
+        clearValuesFromCurrHand();
+
+        currHand.betBig();
+
+        addStepToHandReplay();
+        clearValuesFromCurrHand();
+
+        currHand.setNextToPlayForTheFirstTime();
+        currHand.updateMaxBet();
+
+        //playBettingRounds();
+        currHand.dealingFlopCards();
+
     }
 }
 

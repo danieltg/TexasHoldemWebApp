@@ -30,17 +30,13 @@ public class Room {
         if (getRoomState()== RoomState.RUNNING)
         {
             createPlayersList();
-
-            //we should start a new hand
-//            handNumber++;
-//            PokerBlindes blindes=getGameDescriptor().getStructure().getBlindes();
-//
-//            currHand= new PokerHand(blindes,getPlayers());
-//            currHand.addToPot(getMoneyFromLastHand());
-//            currHand.setHandState(HandState.GameInit);
-//            setTotalRounds(getHandsCount()/numberOfPlayers);
-//            return currHand;
+            startNewHand();
+            gameManager.RunOneHand();
         }
+    }
+
+    private void startNewHand() {
+        gameManager.startNewHand();
     }
 
     public void createPlayersList()

@@ -20,6 +20,7 @@ public class PokerHand {
 
     private int pot;    //the amount of money in the pot
     private Card[] tableCards;
+    private String[] stringTableCards;
     private int maxBet;
     private int numberOfPlayers;
     private List<PokerPlayer> players;
@@ -47,10 +48,14 @@ public class PokerHand {
         currentBet = 0;
         round = 0;
         tableCards = new Card[5];
+        stringTableCards = new String[5];
+
         deck = new Deck();
 
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 5; i++) {
             tableCards[i] = new Card();
+            stringTableCards[i]=tableCards[i].toString();
+        }
 
         lastAction = "N";
         lastActionBeforeFold="N";
@@ -80,7 +85,11 @@ public class PokerHand {
             }
         }
 
-        nextToPlay.clearSelection();
+        if (nextToPlay!=null)
+        {
+            nextToPlay.clearSelection();
+        }
+
     }
 
 
@@ -112,6 +121,7 @@ public class PokerHand {
             maxBet = maxBetByPlayers;
 
     }
+
 
     public String[] getCardsAsStringArray() {
         String[] cards = new String[5];
@@ -180,6 +190,7 @@ public class PokerHand {
 
     public void dealingRiverCard() {
         tableCards[4] = deck.drawCard();
+        stringTableCards[4]=tableCards[4].toString();
         lastAction = "CARD";
         lastActionInfo = 0;
         lastPlayerToPlay = -999;
@@ -187,6 +198,7 @@ public class PokerHand {
 
     public void dealingTurnCard() {
         tableCards[3] = deck.drawCard();
+        stringTableCards[3]=tableCards[3].toString();
         lastAction = "CARD";
         lastActionInfo = 0;
         lastPlayerToPlay = -999;
@@ -256,8 +268,10 @@ public class PokerHand {
 
     public void dealingFlopCards() {
 
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 3; i++) {
             tableCards[i] = deck.drawCard();
+            stringTableCards[i]=tableCards[i].toString();
+        }
 
         lastAction = "CARD";
         lastActionInfo = 0;

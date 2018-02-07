@@ -104,7 +104,7 @@ function joinGame(val){
     $.ajax({
         data: "gameTitle=" + val,
         url: '/joinRoom',
-        timeout: 2000,
+        timeout: 7000,
         error: function(){
             console.log("Failed to send ajax");
         },
