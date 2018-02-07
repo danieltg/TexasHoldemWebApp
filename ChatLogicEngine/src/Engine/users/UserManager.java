@@ -7,7 +7,7 @@ public class UserManager {
     private final Map<String,String> usersSet;
 
     public UserManager() {
-        usersSet = new HashMap<String, String>();
+        usersSet = new HashMap<>();
     }
 
     public void addUser(String username,String type) {

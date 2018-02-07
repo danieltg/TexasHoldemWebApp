@@ -1,7 +1,6 @@
 package chat.servlets;
 
 import Engine.GameDescriptor.PokerGameDescriptor;
-import Engine.GamesDescriptorManager;
 import Engine.Lobby;
 import chat.utils.ServletUtils;
 import com.google.gson.Gson;

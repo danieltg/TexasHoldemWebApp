@@ -1,15 +1,11 @@
 package Engine;
 
-import Engine.GameDescriptor.PokerBlindes;
 import Engine.GameDescriptor.PokerGameDescriptor;
 import Engine.Players.ComputerPlayer;
 import Engine.Players.HumanPlayer;
-import Engine.Players.PokerPlayer;
 import Engine.Utils.RoomState;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Room {
@@ -41,7 +37,7 @@ public class Room {
 
                 _name = entry.getKey();
                 _type= entry.getValue();
-                if(_type=="Human") {
+                if(_type.equals("Human")) {
                     HumanPlayer humanPlayerInRoom=new HumanPlayer(id,_name);
 
                     gameManager.getPlayers().add(humanPlayerInRoom);

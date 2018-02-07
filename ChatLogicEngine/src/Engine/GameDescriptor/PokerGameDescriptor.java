@@ -1,6 +1,5 @@
 package Engine.GameDescriptor;
 
-import Engine.CurrGameState;
 import Engine.Players.ComputerPlayer;
 import Engine.Players.HumanPlayer;
 import Engine.Players.PlayerType;
