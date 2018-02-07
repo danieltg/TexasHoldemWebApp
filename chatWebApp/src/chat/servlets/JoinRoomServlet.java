@@ -1,6 +1,7 @@
 package chat.servlets;
 
 import Engine.Lobby;
+import Engine.users.UserManager;
 import chat.utils.ServletUtils;
 import chat.utils.SessionUtils;
 
@@ -23,10 +24,12 @@ public class JoinRoomServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String usernameFromSession = SessionUtils.getUsername(request);
+        UserManager userManager = ServletUtils.getUserManager(getServletContext());
         String roomName = request.getParameter(GAME_TITLE);
         Lobby lobby=ServletUtils.getLobby(getServletContext());
 
-        lobby.addPlayerToRoom(roomName,usernameFromSession,"computer");
+        String playerType=userManager.getUsers().get(usernameFromSession);
+        lobby.addPlayerToRoom(roomName,usernameFromSession,playerType);
         System.out.println("User: "+ usernameFromSession +" join room: "+roomName);
         PrintWriter out = response.getWriter();
         out.print(roomName);

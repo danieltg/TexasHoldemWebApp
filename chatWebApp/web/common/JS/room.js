@@ -41,7 +41,7 @@ function refreshUsersList(users) {
     $.each(users || [], function(username, playerType) {
         //create a new <option> tag with a value in it and
         //appeand it to the #userslist (div with id=userslist) element
-        $('<li>' + username+ ' ('+playerType + '</li>').appendTo($("#userslist"));
+        $('<li>' + username+ ' ('+playerType + ')'+'</li>').appendTo($("#userslist"));
     });
 }
 

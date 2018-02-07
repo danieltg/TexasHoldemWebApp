@@ -26,34 +26,12 @@ public class Room {
         usersInGame.put(userName,type);
         updateRegisteredPlayersOnAdd();
 
-        String _name;
-        String _type;
-        if (gameManager.getGameDescriptor().getStatus()== RoomState.RUNNING)
+
+        if (getRoomState()== RoomState.RUNNING)
         {
-
-            int id=0;
-            for (Map.Entry<String, String> entry : usersInGame.entrySet())
-            {
-
-                _name = entry.getKey();
-                _type= entry.getValue();
-                if(_type.equals("Human")) {
-                    HumanPlayer humanPlayerInRoom=new HumanPlayer(id,_name);
-
-                    gameManager.getPlayers().add(humanPlayerInRoom);
-                }
-                else
-                {
-                    ComputerPlayer computerPlayerInRoom=new ComputerPlayer(id,_name);
-
-                    gameManager.getPlayers().add(computerPlayerInRoom);
-                }
-                id++;
-
-            }
+            createPlayersList();
 
             //we should start a new hand
-            //I copied it from EX2
 //            handNumber++;
 //            PokerBlindes blindes=getGameDescriptor().getStructure().getBlindes();
 //
@@ -62,6 +40,27 @@ public class Room {
 //            currHand.setHandState(HandState.GameInit);
 //            setTotalRounds(getHandsCount()/numberOfPlayers);
 //            return currHand;
+        }
+    }
+
+    public void createPlayersList()
+    {
+        int id=1;
+
+        for (String playerName: usersInGame.keySet())
+        {
+            String playerType= usersInGame.get(playerName);
+            if(playerType.equals("Human"))
+            {
+                gameManager.getPlayers().add(new HumanPlayer(id,playerName));
+            }
+
+            else
+            {
+                gameManager.getPlayers().add(new ComputerPlayer(id,playerName));
+            }
+
+            id++;
         }
     }
     public void removeUserFromRoom(String userName) {
@@ -100,6 +99,11 @@ public class Room {
     }
     public int getNumberOfPlayers() {
         return gameManager.getGameDescriptor().getRegisteredPlayers();
+    }
+
+    public RoomState getRoomState()
+    {
+        return gameManager.getGameDescriptor().getStatus();
     }
 
 }
