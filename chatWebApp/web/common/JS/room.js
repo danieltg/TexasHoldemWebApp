@@ -40,6 +40,17 @@ function refreshPokerHandSettings(pokerHand) {
         console.info(value);
     });
 
+    var players=pokerHand.players;
+    $.each(players||[], function (index,value){
+        var seatID="seat"+(index+1);
+        document.getElementById(seatID).children[0].textContent=value.name;
+        document.getElementById(seatID).children[1].textContent=value.type;
+        document.getElementById(seatID).children[2].textContent=value.state;
+        document.getElementById(seatID).children[3].textContent=value.chips;
+        document.getElementById(seatID).children[4].textContent=value.numbersOfBuy;
+        document.getElementById(seatID).children[5].textContent=value.handWon;
+
+    });
 
 }
 
