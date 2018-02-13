@@ -46,7 +46,7 @@ public class Room {
         for (String playerName: usersInGame.keySet())
         {
             String playerType= usersInGame.get(playerName);
-            if(playerType.equals("Human"))
+            if(playerType.equals("HUMAN"))
             {
                 gameManager.getPlayers().add(new HumanPlayer(id,playerName));
             }

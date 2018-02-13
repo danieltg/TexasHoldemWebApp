@@ -30,7 +30,7 @@ public class JoinRoomServlet extends HttpServlet {
 
         String playerType=userManager.getUsers().get(usernameFromSession);
         lobby.addPlayerToRoom(roomName,usernameFromSession,playerType);
-        System.out.println("User: "+ usernameFromSession +" join room: "+roomName);
+        System.out.println("User: "+ usernameFromSession +" ,<"+playerType+"> joined room: "+roomName);
         PrintWriter out = response.getWriter();
         out.print(roomName);
 
