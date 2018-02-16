@@ -20,7 +20,7 @@ $(function() {
             error: function(jqXHR) {
                 console.error("Failed to submit");
                 if(jqXHR.status && jqXHR.status==400) {
-                    $("#result").text("Failed to get result from server " + jqXHR.responseText);
+                    $("#result").text("Error: " + jqXHR.responseText);
                 }
             },
             success: function(r) {
@@ -137,6 +137,14 @@ function triggerAjaxTableContent() {
 
 //activate the timer calls after the page is loaded
 $(function() {
+
+    $('input:file').change(
+        function(){
+            if ($(this).val()) {
+                $('input:submit').attr('disabled',false);
+            }
+        }
+    );
 
     //prevent IE from caching ajax calls
     $.ajaxSetup({cache: false});

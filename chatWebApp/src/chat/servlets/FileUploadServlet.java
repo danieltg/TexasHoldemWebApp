@@ -1,4 +1,4 @@
-package fileupload;
+package chat.servlets;
 
 //taken from: http://www.servletworld.com/servlet-tutorials/servlet3/multipartconfig-file-upload-example.html
 // and http://docs.oracle.com/javaee/6/tutorial/doc/glraq.html
@@ -67,8 +67,6 @@ public class FileUploadServlet extends HttpServlet {
             try
             {
                 gamesManager.addGameDescriptor(validateFileContent(fileContent.toString(), out,usernameFromSession),lobby);
-                //out.print(res);
-                //out.flush();
             }
             catch (Exception e)
             {

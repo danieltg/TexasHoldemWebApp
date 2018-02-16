@@ -13,7 +13,9 @@ public class GamesDescriptorManager {
             gamesSet = new HashSet<>();
         }
 
-        public void addGameDescriptor(PokerGameDescriptor game, Lobby lobby) {
+        public void addGameDescriptor(PokerGameDescriptor game, Lobby lobby) throws Exception {
+
+
             gamesSet.add(game);
             lobby.addRoom(game.getGameTitle(),game);
 

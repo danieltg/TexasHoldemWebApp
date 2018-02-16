@@ -52,3 +52,11 @@ div {
 
 }
 
+#uploadFileButton:enabled {
+    background: #660000;
+}
+
+#uploadFileButton:disabled {
+    background: #dddddd;
+}
+

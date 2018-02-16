@@ -1,6 +1,8 @@
 package Engine;
 
 import Engine.GameDescriptor.PokerGameDescriptor;
+
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -17,7 +19,10 @@ public class Lobby {
         users=new HashMap<>();
     }
 
-    public void addRoom(String roomName,PokerGameDescriptor pokerGameDescriptor) {
+        public void addRoom(String roomName,PokerGameDescriptor pokerGameDescriptor) throws Exception {
+        if (rooms.containsKey(roomName))
+            throw new Exception("The same game name already exists.");
+
         rooms.put(roomName,new Room(roomName,pokerGameDescriptor));
     }
 
