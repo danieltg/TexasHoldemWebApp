@@ -1,5 +1,6 @@
 package chat.servlets;
 
+import Engine.Lobby;
 import chat.utils.ServletUtils;
 import chat.utils.SessionUtils;
 import Engine.users.UserManager;
@@ -11,30 +12,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "LogoutServlet", urlPatterns = {"/chat/logout"})
+@WebServlet("/logout")
 public class LogoutServlet extends HttpServlet {
-
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String usernameFromSession = SessionUtils.getUsername(request);
         UserManager userManager = ServletUtils.getUserManager(getServletContext());
+        Lobby lobby=ServletUtils.getLobby(getServletContext());
+
 
         if (usernameFromSession != null) {
             System.out.println("Clearing session for " + usernameFromSession);
             userManager.removeUser(usernameFromSession);
+
+            lobby.removeUser(usernameFromSession);
             SessionUtils.clearSession(request);
-
-            /*
-            when sending redirect, tomcat has a shitty logic how to calculate the URL given, weather its relative or not
-            you can read about it here:
-            https://tomcat.apache.org/tomcat-5.5-doc/servletapi/javax/servlet/http/HttpServletResponse.html#sendRedirect(java.lang.String)
-            the best way (IMO) is to fetch the context path dynamically and build the redirection from it and on
-            (from some reason this call works as well; response.sendRedirect("../../../index.html"); not sure why. the request uri is '/pages/chatroom/chat/logout')
-             */
-
-            response.sendRedirect(request.getContextPath() + "/index.html");
-        }
+            }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -99,8 +99,22 @@ function refreshGamesList(games) {
     });
 }
 
+function Logout()
+{
+    $.ajax({
+        url: '/logout',
+        timeout: 7000,
+        error: function(){
+            console.log("Failed to send ajax");
+        },
+        success: function(response) {
+            console.info(response);
+            window.location.href = '/pages/signup/signUpPage.html';
+        }
+    });
+}
+
 function joinGame(val){
-        alert(val);
     $.ajax({
         data: "gameTitle=" + val,
         url: '/joinRoom',

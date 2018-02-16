@@ -31,7 +31,7 @@ public class Lobby {
         rooms.get(roomName).addUserToRoom(userName,type);
         users.put(userName,roomName);
     }
-    public void removeUserFromRoom(String roomName,String userName,String type)
+    public void removeUserFromRoom(String roomName,String userName)
     {
         rooms.get(roomName).removeUserFromRoom(userName);
     }
@@ -55,5 +55,14 @@ public class Lobby {
             roomsSet.add(room.getGameManager().getGameDescriptor());
         }
         return roomsSet;
+    }
+
+    public void removeUser(String username) {
+     if(users.containsKey(username))
+     {
+         String roomName=getRoomNameByPlayerName(username);
+         removeUserFromRoom(roomName,username);
+
+     }
     }
 }
