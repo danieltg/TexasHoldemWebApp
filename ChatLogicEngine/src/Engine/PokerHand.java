@@ -18,6 +18,7 @@ import static Engine.HandState.*;
 
 public class PokerHand {
 
+    private int handNumber;
     private int pot;    //the amount of money in the pot
     private Card[] tableCards;
     private String[] stringTableCards;
@@ -43,13 +44,13 @@ public class PokerHand {
     private int big;
     private int small;
 
-    public PokerHand(PokerBlindes gameBlinde, List<PokerPlayer> playersInHand) {
+    public PokerHand(PokerBlindes gameBlinde, List<PokerPlayer> playersInHand,int _handNumber) {
         pot = 0;
         currentBet = 0;
         round = 0;
         tableCards = new Card[5];
         stringTableCards = new String[5];
-
+        handNumber=_handNumber;
         deck = new Deck();
 
         for (int i = 0; i < 5; i++) {
@@ -72,6 +73,11 @@ public class PokerHand {
         updateStateIndex();
         updateMaxBet();
         setNextToPlayForTheFirstTime();
+    }
+
+    public int getHandNumber()
+    {
+        return handNumber;
     }
 
     public void setNextToPlayForTheFirstTime() {

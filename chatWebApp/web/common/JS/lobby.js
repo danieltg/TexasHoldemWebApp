@@ -92,7 +92,7 @@ function refreshGamesList(games) {
             "<td align=center><button class='joinGame' onclick='joinGame(this.value)' id='"+games.gameTitle+"' value='"+games.gameTitle+"'>Join Game</button></td>")
             .appendTo('#games_table');
 
-        if (games.registeredPlayers== games.structure.handsCount) {
+        if (games.registeredPlayers== games.numberOfPlayers) {
             document.getElementById(games.gameTitle).disabled=true;
         }
 

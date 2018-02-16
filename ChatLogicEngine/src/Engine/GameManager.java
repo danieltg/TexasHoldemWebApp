@@ -217,10 +217,13 @@ public class GameManager implements Serializable {
         PokerBlindes blindes=getGameDescriptor().getStructure().getBlindes();
 
         try {
-            currHand = new PokerHand(blindes, getPlayers());
+            currHand = new PokerHand(blindes, getPlayers(),handNumber);
             currHand.addToPot(getMoneyFromLastHand());
             currHand.setHandState(HandState.GameInit);
             setTotalRounds(getHandsCount() / numberOfPlayers);
+
+            for (PokerPlayer p: players)
+                buy(p);
         }
         catch (Exception e)
         {

@@ -1,5 +1,4 @@
 var refreshRate = 1000; //mili seconds
-var refreshRateForPokerHand = 3000; //mili seconds
 
 function ajaxUsersList() {
     $.ajax({
@@ -15,6 +14,15 @@ function ajaxGameSettings() {
         url: '/gameSettings',
         success: function(games) {
             refreshGameSettings(games);
+        }
+    });
+}
+
+function ajaxGameManagerSettings() {
+    $.ajax({
+        url: '/gameManagerSettings',
+        success: function(games) {
+            refreshGameManagerSettings(games);
         }
     });
 }
@@ -51,7 +59,14 @@ function refreshPokerHandSettings(pokerHand) {
         document.getElementById(seatID).children[5].textContent=value.handWon;
 
     });
+    document.getElementById("handNumber").innerText=pokerHand.handNumber;
 
+
+}
+
+function refreshGameManagerSettings(games)
+{
+    document.getElementById("maxPot").innerText=games.maxPot;
 }
 
 function refreshGameSettings(games) {
@@ -59,6 +74,7 @@ function refreshGameSettings(games) {
     document.getElementById("bigValue").innerText= games.structure.blindes.big;
     document.getElementById("smallValue").innerText= games.structure.blindes.small;
     document.getElementById("statusValue").innerText= games.status;
+    document.getElementById("handsCount").innerText=games.structure.handsCount;
 }
 
 function refreshUsersList(users) {
@@ -87,6 +103,9 @@ $(function() {
     setInterval(ajaxGameSettings, refreshRate);
 
     //The users list is refreshed automatically every second
-    setInterval(ajaxPokerHand, refreshRateForPokerHand);
+    setInterval(ajaxGameManagerSettings, refreshRate);
+
+    //The users list is refreshed automatically every second
+    setInterval(ajaxPokerHand, refreshRate);
 
 });
