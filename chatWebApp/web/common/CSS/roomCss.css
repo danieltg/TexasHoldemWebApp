@@ -9,7 +9,7 @@ p{
 
 td{
 
-    font-family:"Arial Black";
+    font-family:"Arial";
     color:black;
     font-size: 17px;
 
@@ -152,6 +152,13 @@ body{
 h2{
 
     font-size: 22px;
+    color: black;
+    font-family: arial black;
+}
+
+h3{
+
+    font-size: 15px;
     color: black;
     font-family: arial black;
 }
