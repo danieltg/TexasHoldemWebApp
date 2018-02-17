@@ -139,6 +139,8 @@ button {
     animation-timing-function: linear;
     animation-duration: 3s;
     animation-fill-mode: forwards;
+    position: fixed;
+
 
 }
 
