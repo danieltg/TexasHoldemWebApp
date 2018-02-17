@@ -407,7 +407,6 @@ public class GameManager implements Serializable {
         currHand.setNextToPlayForTheFirstTime();
         currHand.updateMaxBet();
 
-        //playBettingRounds();
         currHand.dealingFlopCards();
 
         playBettingRounds();
@@ -526,7 +525,7 @@ public class GameManager implements Serializable {
     public void updateCurrPlayerWithSelection(String action, int info) {
 
         PokerPlayer currPlayer = currHand.getNextToPlay();
-        currPlayer.setAction(action);
+        currPlayer.setAction(action.toUpperCase());
         currPlayer.setAdditionalActionInfo(info);
         playBettingRounds();
     }

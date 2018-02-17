@@ -847,7 +847,7 @@ public class PokerHand {
         //LastPlayerToPlay -999 is only at the
         //beginning of a betting round
 
-        if (lastPlayerToPlay==-999 || lastAction.equals("N")) {
+        if (lastPlayerToPlay==-999 || lastAction.equals("N") || lastAction.equals("CARD")) {
             if (state==HandState.GameInit)
             {
                 options.add("F");
