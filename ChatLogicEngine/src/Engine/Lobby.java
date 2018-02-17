@@ -62,7 +62,6 @@ public class Lobby {
      {
          String roomName=getRoomNameByPlayerName(username);
          removeUserFromRoom(roomName,username);
-
      }
     }
 }

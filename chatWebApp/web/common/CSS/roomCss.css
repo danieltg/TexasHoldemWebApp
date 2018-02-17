@@ -103,54 +103,36 @@ a {
 .black {
     color: black;
 }
+
+#leaveButton {
+    position: fixed;
+    left: 10px;
+    top: 5px;
+}
+
+button:disabled {
+    background: #dddddd;
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+    cursor:default;
+}
+
+
 button {
+    border: 1px solid #465c2e;
+    background-color: #83ad56;
+    color: #ffffff;
+    padding: 5px 10px;
+
     cursor:pointer;
     display: inline-block;
     text-align: center;
     vertical-align: middle;
-    padding: 6px 14px;
-    border: 3px solid #465c2e;
-    border-radius: 9px;
-    background: #83ad56;
-    background: -webkit-gradient(linear, left top, left bottom, from(#83ad56), to(#465c2e));
-    background: -moz-linear-gradient(top, #83ad56, #465c2e);
-    background: linear-gradient(to bottom, #83ad56, #465c2e);
-    -webkit-box-shadow: #9dd067 0px 0px 31px 2px;
-    -moz-box-shadow: #9dd067 0px 0px 31px 2px;
-    box-shadow: #9dd067 0px 0px 31px 2px;
-    text-shadow: #29361b 1px 1px 1px;
     font: normal normal bold 15px trebuchet ms;
     color: #ffffff;
-    text-decoration: none;
 }
 
-.button:focus {
-    border: 3px solid #526c36;
-    background: #9dd067;
-    background: -webkit-gradient(linear, left top, left bottom, from(#9dd067), to(#546e37));
-    background: -moz-linear-gradient(top, #9dd067, #546e37);
-    background: linear-gradient(to bottom, #9dd067, #546e37);
-    color: #ffffff;
-    text-decoration: none;
-}
-.button:active {
-    background: #465c2e;
-    background: -webkit-gradient(linear, left top, left bottom, from(#465c2e), to(#465c2e));
-    background: -moz-linear-gradient(top, #465c2e, #465c2e);
-    background: linear-gradient(to bottom, #465c2e, #465c2e);
-}
-.button:before{
-    content:  "\0000a0";
-    display: inline-block;
-    height: 24px;
-    width: 24px;
-    line-height: 24px;
-    margin: 0 4px -6px -4px;
-    position: relative;
-    top: 0px;
-    left: 0px;
-
-}
 #myCard{
 
     animation-timing-function: linear;
@@ -171,7 +153,4 @@ h2{
     font-size: 22px;
     color: black;
     font-family: arial black;
-
-
-
 }

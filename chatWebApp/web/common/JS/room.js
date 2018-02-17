@@ -1,5 +1,21 @@
 var refreshRate = 1000; //mili seconds
 
+
+function LeaveRoom()
+{
+    $.ajax({
+        url: '/LeaveRoom',
+        timeout: 7000,
+        error: function(){
+            console.log("Failed to send ajax");
+        },
+        success: function(response) {
+            console.info(response);
+            window.location.href = '/pages/PokerLobby/lobby.html'
+        }
+    });
+}
+
 function ajaxUsersList() {
     $.ajax({
         url: '/gameuserlist',
@@ -75,6 +91,32 @@ function refreshGameSettings(games) {
     document.getElementById("smallValue").innerText= games.structure.blindes.small;
     document.getElementById("statusValue").innerText= games.status;
     document.getElementById("handsCount").innerText=games.structure.handsCount;
+
+    if (games.status.toLowerCase()=='waiting')
+    {
+        document.getElementById("callButton").disabled=true;
+        document.getElementById("checkButton").disabled=true;
+        document.getElementById("foldButton").disabled=true;
+        document.getElementById("raiseButton").disabled=true;
+        document.getElementById("raiseInput").disabled=true;
+
+        document.getElementById("betButton").disabled=true;
+        document.getElementById("betInput").disabled=true;
+
+    }
+
+    else
+    {
+        document.getElementById("callButton").disabled=false;
+        document.getElementById("checkButton").disabled=false;
+        document.getElementById("foldButton").disabled=false;
+
+        document.getElementById("raiseButton").disabled=false;
+        document.getElementById("raiseInput").disabled=false;
+
+        document.getElementById("betButton").disabled=false;
+        document.getElementById("betInput").disabled=false;
+    }
 }
 
 function refreshUsersList(users) {

@@ -36,20 +36,21 @@
 					</ul>
 
                 <br><br>
-                <button id=CallButton" type="button">Call</button>
+                <button id="callButton" type="button">Call</button>
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                <button id="CheckButton" type="button">Check</button>
+                <button id="checkButton" type="button">Check</button>
                 <br><br>
-                <button id="FoldButton" type="button">Fold</button>
+                <button id="foldButton" type="button">Fold</button>
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                <button id="LeaveButton" type="button">Leave Game</button>
+                <button id="leaveButton" type="button" onclick=LeaveRoom()>Leave room</button>
                  <br><br>
                 <form name="form1" method="post" action="">
-                <input name="rais" size="6"><button id="RaisButton" type="button" onclick="document.form1.submit()">Rais</button>
+                <input id="raiseInput" size="6">
+                    <button id="raiseButton" type="button" onclick="document.form1.submit()">Raise</button>
 
                 <br><br>
 
-            <input name="bet" size="6"><button id="bet" type="button" onclick="document.form1.submit()">Bet</button>
+            <input id="betInput" size="6"><button id="betButton" type="button" onclick="document.form1.submit()">Bet</button>
             </form>
 
                 </td>
