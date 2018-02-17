@@ -44,14 +44,13 @@
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <button id="leaveButton" type="button" onclick=LeaveRoom()>Leave room</button>
                  <br><br>
-                <form name="form1" method="post" action="">
-                <input id="raiseInput" size="6">
-                    <button id="raiseButton" type="button" disabled onclick=updateSelection('r',1)>Raise</button>
+                <input id="raiseInput" size="6" type="number" name="quantity" min="1" max="5">
+                <button id="raiseButton" type="button" disabled onclick=updateSelection('r',document.getElementById('raiseInput').value)>Raise</button>
 
                 <br><br>
 
-            <input id="betInput" size="6">
-                    <button  id="betButton" disabled type="button" onclick=updateSelection('b',1)>Bet</button>
+                <input id="betInput" size="6" type="number" name="quantity" min="1" max="5">
+                <button  id="betButton" disabled type="button" onclick=updateSelection('b',document.getElementById('betInput').value)>Bet</button>
             </form>
 
                 </td>

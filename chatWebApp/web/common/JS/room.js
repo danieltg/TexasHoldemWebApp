@@ -81,10 +81,21 @@ function refreshPlayerInfo(player)
         disableAllButtons();
         var options=player.options;
         $.each(options||[], function (index,value){
-            if(value=='R') {document.getElementById("raiseButton").disabled=false;}
+            if(value=='R')
+            {
+                document.getElementById("raiseButton").disabled=false;
+                document.getElementById("raiseInput").disabled=false;
+                document.getElementById("raiseInput").max=player.maxBet;
+            }
             else if (value=='F') {document.getElementById("foldButton").disabled=false;}
             else if (value=='C') {document.getElementById("callButton").disabled=false;}
             else if (value=='K') {document.getElementById("checkButton").disabled=false;}
+            else if (value=='B')
+            {
+                document.getElementById("betButton").disabled=false;
+                document.getElementById("betInput").disabled=false;
+                document.getElementById("betInput").max=player.maxBet;
+            }
         });
 
     }
@@ -142,6 +153,8 @@ function updateSelection(action, info)
             console.log("Failed to send ajax");
         },
         success: function(response) {
+            document.getElementById("raiseInput").value="";
+            document.getElementById("betInput").value="";
         }
     });
 
@@ -156,6 +169,7 @@ function disableAllButtons()
 
     document.getElementById("betButton").disabled=true;
     document.getElementById("betInput").disabled=true;
+
 }
 
 function enableAllButtons()
