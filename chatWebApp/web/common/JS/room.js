@@ -52,6 +52,20 @@ function ajaxPokerHand() {
     });
 }
 
+function ajaxPlayerInfo() {
+    $.ajax({
+        url: '/getPlayerInfo',
+        success: function(player) {
+            refreshPlayerInfo(player);
+        }
+    });
+}
+
+function refreshPlayerInfo(player)
+{
+    console.info(player);
+}
+
 function refreshPokerHandSettings(pokerHand) {
     console.info(pokerHand);
     var cards=pokerHand.stringTableCards;
@@ -76,8 +90,6 @@ function refreshPokerHandSettings(pokerHand) {
 
     });
     document.getElementById("handNumber").innerText=pokerHand.handNumber;
-
-
 }
 
 function refreshGameManagerSettings(games)
@@ -149,5 +161,7 @@ $(function() {
 
     //The users list is refreshed automatically every second
     setInterval(ajaxPokerHand, refreshRate);
+
+    setInterval(ajaxPlayerInfo,refreshRate)
 
 });

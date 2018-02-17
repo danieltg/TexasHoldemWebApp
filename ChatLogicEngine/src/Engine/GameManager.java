@@ -5,14 +5,13 @@ import Engine.Exceptions.GameStateException;
 import Engine.GameDescriptor.PokerBlindes;
 import Engine.GameDescriptor.PokerGameDescriptor;
 import Engine.Players.*;
+import javafx.scene.control.Alert;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
+import static Engine.Players.PlayerType.Computer;
 import static Engine.Utils.EngineUtils.saveListToFile;
 
 public class GameManager implements Serializable {
@@ -38,6 +37,17 @@ public class GameManager implements Serializable {
         stateOfGame=CurrGameState.NotInitialized;
         moneyFromLastHand=0;
         numberOfPlayers=0;
+    }
+
+    public PokerPlayer getPlayerByName(String name)
+    {
+        for(PokerPlayer p:players)
+        {
+            if (p.getName().equals(name))
+                return p;
+        }
+
+        return null;
     }
 
     public void setTotalRounds (int val)
@@ -400,6 +410,119 @@ public class GameManager implements Serializable {
         //playBettingRounds();
         currHand.dealingFlopCards();
 
+        playBettingRounds();
+
     }
+
+    private void playBettingRounds()
+    {
+        HandState state= currHand.getHandState();
+
+        switch (state)
+        {
+            case GameInit:
+            case bettingAfterFlop:
+            case bettingAfterTurn:
+            case bettingAfterRiver:
+            {
+                if (currHand.getMaxBet()==0) {
+                    currHand.afterPlayerAction();
+                    playBettingRounds();
+                }
+
+                else
+                    bettingRound();
+
+                break;
+            }
+
+            case TheFlop: {
+                currHand.dealingFlopCards();
+                afterBettingActions();
+
+                currHand.setHandState(HandState.bettingAfterFlop);
+                playBettingRounds();
+                break;
+            }
+            case TheTurn: {
+                currHand.dealingTurnCard();
+                afterBettingActions();
+
+                currHand.setHandState(HandState.bettingAfterTurn);
+                playBettingRounds();
+                break;
+            }
+            case TheRiver: {
+                currHand.dealingRiverCard();
+                afterBettingActions();
+
+                currHand.setHandState(HandState.bettingAfterRiver);
+                playBettingRounds();
+                break;
+            }
+
+            case END:
+            {
+
+                String message=currHand.getWinnersToDisplay();
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setHeaderText("We have some winners!");
+                alert.setContentText(message);
+                alert.showAndWait();
+
+
+                saveHandReplayToFile("handReplay.txt");
+                setMoneyFromLastHand(currHand.getPot()%currHand.getNumberOfWinners());
+
+                alert.setHeaderText("Hand finished");
+                alert.setContentText("We are going to clear the game table... You can use the Replay feature to see the previous hand");
+                alert.showAndWait();
+                break;
+            }
+        }
+    }
+
+    private void afterBettingActions()
+    {
+        currHand.resetPlayersBets();
+        addStepToHandReplay();
+        clearValuesFromCurrHand();
+        currHand.updateNextToPlay();
+    }
+
+    private void bettingRound() {
+        PokerPlayer currPlayer = currHand.getNextToPlay();
+
+        List<String> options= currHand.getPossibleOptions();
+
+        if (currPlayer.getType() == Computer) {
+            String whatToDo=currPlayer.getSelection(options);
+            currPlayer.setAction(whatToDo);
+            int randomNum =  (new Random().nextInt((currHand.getMaxBet())) )+ 1;
+            currPlayer.setAdditionalActionInfo(randomNum);
+            currHand.bettingRoundForAPlayer(false);
+            addStepToHandReplay();
+            playBettingRounds();
+        }
+        else
+        {
+            if (!Objects.equals(currPlayer.getPlayerSelection(), "NOT SELECTED"))
+            {
+                currHand.bettingRoundForAPlayer(false);
+                addStepToHandReplay();
+                playBettingRounds();
+
+            }
+            else
+            {
+                currPlayer.itIsMyTurn();
+                currPlayer.setOptions(options,currHand.getMaxBet());
+                //enableHumanTurnButtons(currPlayer,options,currHand.getMaxBet());
+                System.out.println("Don't know what to do here");
+            }
+        }
+    }
+
 }
 
