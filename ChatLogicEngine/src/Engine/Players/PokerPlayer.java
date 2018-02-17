@@ -23,6 +23,7 @@ public abstract class PokerPlayer implements Serializable,Cloneable {
     private int numbersOfBuy;
 
     private Card[] holeCards ;
+    private String[] stringholeCards;
     private int handsWon;
     private boolean checkOccurred = false;
     private int initialAmount;
@@ -49,6 +50,7 @@ public abstract class PokerPlayer implements Serializable,Cloneable {
         id=playerID;
 
         holeCards= new Card[2];
+        stringholeCards=new String[2];
         for (int i=0; i<2; i++)
             holeCards[i]=new Card();
     }
@@ -68,6 +70,7 @@ public abstract class PokerPlayer implements Serializable,Cloneable {
         name=playerName;
 
         holeCards= new Card[2];
+        stringholeCards=new String[2];
         for (int i=0; i<2; i++)
             holeCards[i]=new Card();
     }
@@ -178,8 +181,10 @@ public abstract class PokerPlayer implements Serializable,Cloneable {
 
     public void setCard(Card c,int index)
     {
-        if (index< 2 && index>=0)
-            holeCards[index]=c;
+        if (index< 2 && index>=0) {
+            holeCards[index] = c;
+            stringholeCards[index]=holeCards[index].toString();
+        }
 
     }
 

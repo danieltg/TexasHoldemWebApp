@@ -42,7 +42,7 @@
                 <br><br>
                 <button id="foldButton" type="button" disabled onclick=updateSelection('f',0)>Fold</button>
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                <button id="leaveButton" type="button" disabled onclick=LeaveRoom()>Leave room</button>
+                <button id="leaveButton" type="button" onclick=LeaveRoom()>Leave room</button>
                  <br><br>
                 <form name="form1" method="post" action="">
                 <input id="raiseInput" size="6">
@@ -238,8 +238,8 @@
 				</table>
                 <br><br>
                 <h3>My cards</h3>
-                <img src="../../common/images/back.png" Height="150.0" Width="100.0" class="myCards">
-                <img src="../../common/images/back.png" Height="150.0" Width="100.0" class="myCards">
+                <img id='player_crad1' src="../../common/images/back.png" Height="150.0" Width="100.0" class="myCards">
+                <img id='player_crad2' src="../../common/images/back.png" Height="150.0" Width="100.0" class="myCards">
             </td>
 
 

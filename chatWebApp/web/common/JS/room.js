@@ -66,6 +66,16 @@ function refreshPlayerInfo(player)
     console.info(player);
     var myTurn=player.isMyTurn;
 
+    var cards=player.stringholeCards;
+    $.each(cards || [], function(index,value) {
+        if (value!='??')
+        {
+            var loc="../../common/images/cards/"+value+".png";
+            document.getElementById("player_crad"+(index+1)).src=loc;
+        }
+    });
+
+
     if (myTurn)
     {
         disableAllButtons();
@@ -93,7 +103,6 @@ function refreshPokerHandSettings(pokerHand) {
             var loc="../../common/images/cards/"+value+".png";
             document.getElementById("crad"+(index+1)).src=loc;
         }
-        console.info(value);
     });
 
     var players=pokerHand.players;
