@@ -115,6 +115,27 @@ function refreshGameManagerSettings(games)
     document.getElementById("maxPot").innerText=games.maxPot;
 }
 
+function updateSelection(action, info)
+{
+    console.info("Selection is: "+action +" ,info: "+info);
+
+    $.ajax({
+        url: '/updatePlayerSelection',
+        data:
+            {
+                actionToDo: action,
+                num: info
+            },
+
+        timeout: 7000,
+        error: function(){
+            console.log("Failed to send ajax");
+        },
+        success: function(response) {
+        }
+    });
+
+}
 function disableAllButtons()
 {
     document.getElementById("callButton").disabled=true;
@@ -143,16 +164,6 @@ function refreshGameSettings(games) {
     document.getElementById("smallValue").innerText= games.structure.blindes.small;
     document.getElementById("statusValue").innerText= games.status;
     document.getElementById("handsCount").innerText=games.structure.handsCount;
-
-    if (games.status.toLowerCase()=='waiting')
-    {
-        disableAllButtons();
-    }
-
-    else
-    {
-        enableAllButtons();
-    }
 }
 
 function refreshUsersList(users) {

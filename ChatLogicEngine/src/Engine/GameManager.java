@@ -518,10 +518,17 @@ public class GameManager implements Serializable {
             {
                 currPlayer.itIsMyTurn();
                 currPlayer.setOptions(options,currHand.getMaxBet());
-                //enableHumanTurnButtons(currPlayer,options,currHand.getMaxBet());
-                System.out.println("Don't know what to do here");
             }
         }
+    }
+
+
+    public void updateCurrPlayerWithSelection(String action, int info) {
+
+        PokerPlayer currPlayer = currHand.getNextToPlay();
+        currPlayer.setAction(action);
+        currPlayer.setAdditionalActionInfo(info);
+        playBettingRounds();
     }
 
 }
