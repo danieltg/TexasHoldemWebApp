@@ -64,6 +64,24 @@ function ajaxPlayerInfo() {
 function refreshPlayerInfo(player)
 {
     console.info(player);
+    var myTurn=player.isMyTurn;
+
+    if (myTurn)
+    {
+        disableAllButtons();
+        var options=player.options;
+        $.each(options||[], function (index,value){
+            if(value=='R') {document.getElementById("raiseButton").disabled=false;}
+            else if (value=='F') {document.getElementById("foldButton").disabled=false;}
+            else if (value=='C') {document.getElementById("callButton").disabled=false;}
+            else if (value=='K') {document.getElementById("checkButton").disabled=false;}
+        });
+
+    }
+    else //it's not my turn- I have to disable all buttons
+    {
+        disableAllButtons();
+    }
 }
 
 function refreshPokerHandSettings(pokerHand) {
@@ -97,6 +115,28 @@ function refreshGameManagerSettings(games)
     document.getElementById("maxPot").innerText=games.maxPot;
 }
 
+function disableAllButtons()
+{
+    document.getElementById("callButton").disabled=true;
+    document.getElementById("checkButton").disabled=true;
+    document.getElementById("foldButton").disabled=true;
+    document.getElementById("raiseButton").disabled=true;
+    document.getElementById("raiseInput").disabled=true;
+
+    document.getElementById("betButton").disabled=true;
+    document.getElementById("betInput").disabled=true;
+}
+
+function enableAllButtons()
+{
+    document.getElementById("callButton").disabled=false;
+    document.getElementById("checkButton").disabled=false;
+    document.getElementById("foldButton").disabled=false;
+    document.getElementById("raiseButton").disabled=false;
+    document.getElementById("raiseInput").disabled=false;
+    document.getElementById("betButton").disabled=false;
+    document.getElementById("betInput").disabled=false;
+}
 function refreshGameSettings(games) {
     document.getElementById("gameTitle").innerText= games.gameTitle;
     document.getElementById("bigValue").innerText= games.structure.blindes.big;
@@ -106,28 +146,12 @@ function refreshGameSettings(games) {
 
     if (games.status.toLowerCase()=='waiting')
     {
-        document.getElementById("callButton").disabled=true;
-        document.getElementById("checkButton").disabled=true;
-        document.getElementById("foldButton").disabled=true;
-        document.getElementById("raiseButton").disabled=true;
-        document.getElementById("raiseInput").disabled=true;
-
-        document.getElementById("betButton").disabled=true;
-        document.getElementById("betInput").disabled=true;
-
+        disableAllButtons();
     }
 
     else
     {
-        document.getElementById("callButton").disabled=false;
-        document.getElementById("checkButton").disabled=false;
-        document.getElementById("foldButton").disabled=false;
-
-        document.getElementById("raiseButton").disabled=false;
-        document.getElementById("raiseInput").disabled=false;
-
-        document.getElementById("betButton").disabled=false;
-        document.getElementById("betInput").disabled=false;
+        enableAllButtons();
     }
 }
 
