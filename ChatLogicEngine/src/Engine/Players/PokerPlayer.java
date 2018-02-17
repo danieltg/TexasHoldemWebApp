@@ -31,9 +31,12 @@ public abstract class PokerPlayer implements Serializable,Cloneable {
     private int actionInfo;
     private int equity;
     private int winnigPrice;
+    private List<String> options;
+    private int maxBet;
 
     PokerPlayer(int playerID){
-
+        options=new ArrayList<>();
+        maxBet=0;
         chips=0;
         bet =0;
         initialAmount=0;
@@ -52,6 +55,7 @@ public abstract class PokerPlayer implements Serializable,Cloneable {
 
     PokerPlayer(int playerID, String playerName){
 
+        options=new ArrayList<>();
         chips=0;
         bet =0;
         initialAmount=0;
@@ -309,5 +313,10 @@ public abstract class PokerPlayer implements Serializable,Cloneable {
     public void setEquity(int newEquity)
     {
         this.equity=newEquity;
+    }
+
+    public void setOptions(List<String> newOptions, int newMaxBet) {
+        options=newOptions;
+        maxBet=newMaxBet;
     }
 }

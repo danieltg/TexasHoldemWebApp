@@ -609,6 +609,7 @@ public class PokerHand {
         if (equity && action.equals("F") )
             updatePlayersWithEquity();
 
+        currPlayer.itIsNotMyTurn();
         incCurrPlayer();
         afterPlayerAction();
     }

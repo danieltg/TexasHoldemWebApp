@@ -36,21 +36,21 @@
 					</ul>
 
                 <br><br>
-                <button id="callButton" type="button">Call</button>
+                <button id="callButton" type="button" disabled onclick=updateSelection('c',0)>Call</button>
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                <button id="checkButton" type="button">Check</button>
+                <button id="checkButton" type="button" disabled onclick=updateSelection('k',0)>Check</button>
                 <br><br>
-                <button id="foldButton" type="button">Fold</button>
+                <button id="foldButton" type="button" disabled onclick=updateSelection('f',0)>Fold</button>
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                <button id="leaveButton" type="button" onclick=LeaveRoom()>Leave room</button>
+                <button id="leaveButton" type="button" disabled onclick=LeaveRoom()>Leave room</button>
                  <br><br>
                 <form name="form1" method="post" action="">
                 <input id="raiseInput" size="6">
-                    <button id="raiseButton" type="button" onclick="document.form1.submit()">Raise</button>
+                    <button id="raiseButton" type="button" disabled onclick=updateSelection('r',1)>Raise</button>
 
                 <br><br>
 
-            <input id="betInput" size="6"><button id="betButton" type="button" onclick="document.form1.submit()">Bet</button>
+            <input id="betInput" size="6"><button id="betButton" disabled type="button" onclick=updateSelection('b',1)>Bet</button>
             </form>
 
                 </td>
