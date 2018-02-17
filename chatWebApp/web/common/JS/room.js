@@ -108,6 +108,7 @@ function refreshPokerHandSettings(pokerHand) {
 
     });
     document.getElementById("handNumber").innerText=pokerHand.handNumber;
+    document.getElementById("Pot").innerText=pokerHand.pot;
 }
 
 function refreshGameManagerSettings(games)
