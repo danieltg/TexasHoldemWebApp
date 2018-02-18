@@ -86,6 +86,8 @@ function refreshPlayerInfo(player)
                 document.getElementById("raiseButton").disabled=false;
                 document.getElementById("raiseInput").disabled=false;
                 document.getElementById("raiseInput").max=player.maxBet;
+                document.getElementById("maxValueLabel").innerText="The max raise is: "+player.maxBet;
+
             }
             else if (value=='F') {document.getElementById("foldButton").disabled=false;}
             else if (value=='C') {document.getElementById("callButton").disabled=false;}
@@ -95,6 +97,7 @@ function refreshPlayerInfo(player)
                 document.getElementById("betButton").disabled=false;
                 document.getElementById("betInput").disabled=false;
                 document.getElementById("betInput").max=player.maxBet;
+                document.getElementById("maxValueLabel").innerText="The max bet is: "+player.maxBet;
             }
         });
 
@@ -155,6 +158,8 @@ function updateSelection(action, info)
         success: function(response) {
             document.getElementById("raiseInput").value="";
             document.getElementById("betInput").value="";
+            document.getElementById("maxValueLabel").innerText="";
+
         }
     });
 
