@@ -128,6 +128,10 @@ function refreshPokerHandSettings(pokerHand) {
         document.getElementById(seatID).children[3].textContent=value.chips;
         document.getElementById(seatID).children[4].textContent=value.numbersOfBuy;
         document.getElementById(seatID).children[5].textContent=value.handWon;
+        if (value.folded)
+        {
+            document.getElementById(seatID).style.backgroundColor = "red";
+        }
 
     });
     document.getElementById("handNumber").innerText=pokerHand.handNumber;
