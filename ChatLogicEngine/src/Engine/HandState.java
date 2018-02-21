@@ -9,7 +9,8 @@ public enum HandState {
     bettingAfterTurn,
     TheRiver,
     bettingAfterRiver,
-    END
+    END,
+    GameOver
 }
 
 

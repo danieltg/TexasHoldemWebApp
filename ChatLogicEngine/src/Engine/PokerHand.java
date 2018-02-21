@@ -949,4 +949,11 @@ public class PokerHand {
         small=newSmall;
     }
 
+    public void resetPlayersMessage() {
+        for (PokerPlayer p:players)
+        {
+            p.gotMessage(false);
+        }
+
+    }
 }

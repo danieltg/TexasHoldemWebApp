@@ -5,12 +5,12 @@ import Engine.Exceptions.GameStateException;
 import Engine.GameDescriptor.PokerBlindes;
 import Engine.GameDescriptor.PokerGameDescriptor;
 import Engine.Players.*;
-import javafx.scene.control.Alert;
 
 import java.io.Serializable;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
+import static Engine.HandState.GameOver;
 import static Engine.Players.PlayerType.Computer;
 import static Engine.Utils.EngineUtils.saveListToFile;
 
@@ -266,6 +266,7 @@ public class GameManager implements Serializable {
         }
         currHand.resetPlayersBets();
         currHand.resetPlayersFold();
+        currHand.resetPlayersMessage();
         currHand.setLastRaise(null);
     }
 
@@ -363,7 +364,7 @@ public class GameManager implements Serializable {
     public void RunOneHand() {
 
         int nextDeallerIndex = 0;
-        isFirstTime=true;
+        isFirstTime = (handNumber==1);
 
         if(getHandNumber()>1) {
             int i = 0;
@@ -480,22 +481,41 @@ public class GameManager implements Serializable {
 
     public void runNewHand()
     {
-        if (currHand.getHandState()==HandState.END) {
-            startNewHand();
-            RunOneHand();
-        }
-        else
+
+        //check if all user got the message
+        if (didAllUserGotTheMessage())
         {
-            System.out.println("New hand already started");
+            if (currHand.getHandState()==HandState.END) {
+                startNewHand();
+                RunOneHand();
+            }
+            else
+            {
+                System.out.println("New hand already started");
+            }
         }
+
     }
+
+    private boolean didAllUserGotTheMessage() {
+
+        for(PokerPlayer p: players)
+        {
+            if (!p.didGotMessage())
+                return false;
+        }
+        return true;
+    }
+
     private void updateHandCount() {
 
         //We need to start a new game
-        if (getHandNumber()>=getHandsCount())
+        if (handNumber>=getHandsCount())
         {
+            System.out.println("handNumber>=getHandsCount--> Game is Over");
             messageToDisplay= "Game is Over/n"+
                     "Start new game for playing";
+            currHand.setHandState(GameOver);
         }
 
     }
@@ -551,6 +571,12 @@ public class GameManager implements Serializable {
 
     public String getMessageToDisplay() {
         return messageToDisplay;
+    }
+
+    public void userGotMessage(String username) {
+
+        System.out.println(username+" got the message");
+        getPlayerByName(username).gotMessage(true);
     }
 }
 

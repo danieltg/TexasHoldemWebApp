@@ -25,6 +25,7 @@ $(function() {
 
 function go()
 {
+
     if (document.getElementsByName("userName").files.length == 0)
     {
         alert ("You must enter a player name. Please try again.");

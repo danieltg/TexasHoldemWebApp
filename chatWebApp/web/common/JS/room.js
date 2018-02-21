@@ -111,23 +111,26 @@ function refreshPlayerInfo(player)
 function refreshPokerHandSettings(pokerHand) {
     console.info(pokerHand);
     var cards=pokerHand.stringTableCards;
-    $.each(cards || [], function(index,value) {
-        if (value!='??')
-        {
-            var loc="../../common/images/cards/"+value+".png";
-            document.getElementById("crad"+(index+1)).src=loc;
-        }
-    });
+    if (pokerHand.state.toLowerCase()!="end" && pokerHand.state.toLowerCase()!="gameover" )
+    {
+        $.each(cards || [], function(index,value) {
+            if (value!='??')
+            {
+                var loc="../../common/images/cards/"+value+".png";
+                document.getElementById("crad"+(index+1)).src=loc;
+            }
+        });
+    }
 
     var players=pokerHand.players;
     $.each(players||[], function (index,value){
         var seatID="seat"+(index+1);
         document.getElementById(seatID).children[0].textContent=value.name;
-        document.getElementById(seatID).children[1].textContent=value.type;
-        document.getElementById(seatID).children[2].textContent=value.state;
-        document.getElementById(seatID).children[3].textContent=value.chips;
-        document.getElementById(seatID).children[4].textContent=value.numbersOfBuy;
-        document.getElementById(seatID).children[5].textContent=value.handWon;
+        document.getElementById(seatID).children[1].textContent="Type: "+value.type;
+        document.getElementById(seatID).children[2].textContent="State: "+value.state;
+        document.getElementById(seatID).children[3].textContent="Chips: "+value.chips;
+        document.getElementById(seatID).children[4].textContent="Buys: "+value.numbersOfBuy;
+        document.getElementById(seatID).children[5].textContent="Hands won: "+value.handsWon;
         document.getElementById(seatID).style.backgroundColor = "beige";
         if (value.folded)
         {
@@ -145,6 +148,34 @@ function refreshPokerHandSettings(pokerHand) {
     {
         updatePageWithHandEnd();
     }
+
+    else if (state.toLowerCase()=="gameover")
+    {
+        updatePageWithGameOver();
+        window.location.href = '/pages/gameRoom/room.html';
+    }
+}
+
+
+function updatePageWithGameOver()
+{
+    $.ajax({
+        url: '/getMessageToDisplay',
+        timeout: 7000,
+        error: function(){
+            console.log("User already got this message");
+        },
+        success: function(response) {
+            console.info(response);
+            var answer= confirm(response);
+            if (answer)
+            {
+                console.log("User confirmed the answer");
+                startNewHand();
+            }
+        }
+    });
+
 }
 
 function updatePageWithHandEnd()
@@ -153,17 +184,50 @@ function updatePageWithHandEnd()
         url: '/getMessageToDisplay',
         timeout: 7000,
         error: function(){
-            console.log("Failed to send ajax");
+            console.log("User already got this message");
         },
         success: function(response) {
             console.info(response);
-            alert(response);
-            startNewHand();
+
+            var win = window.open("", "", "width=200,height=100");
+            win.document.write("<p>"+response+"</p>");
+            win.focus();
+
+
+            var timer = setInterval(function() {
+                if (win.closed) {
+                    clearInterval(timer);
+                    alert("Notification window closed !");
+                    console.log("User confirmed the answer");
+                    clearCards();
+                    var delayInMilliseconds = 6000;
+                    setTimeout(function() {
+                        startNewHand();
+                    }, delayInMilliseconds);
+
+
+
+                }
+            }, 500);
+
         }
     });
 
 }
 
+function clearCards()
+{
+    var loc="../../common/images/back.png";
+    document.getElementById("player_crad1").src=loc;
+    document.getElementById("player_crad2").src=loc;
+
+    document.getElementById("crad1").src=loc;
+    document.getElementById("crad2").src=loc;
+    document.getElementById("crad3").src=loc;
+    document.getElementById("crad4").src=loc;
+    document.getElementById("crad5").src=loc;
+
+}
 function startNewHand()
 {
     $.ajax({

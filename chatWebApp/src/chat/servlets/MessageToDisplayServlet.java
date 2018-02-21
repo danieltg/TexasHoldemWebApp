@@ -28,7 +28,18 @@ public class MessageToDisplayServlet extends HttpServlet {
         Room room=lobby.getRoomByName(roomName);
         String message= room.getGameManager().getMessageToDisplay();
         PrintWriter out = response.getWriter();
-        out.print(message);
+
+        if (message== null || room.getGameManager().getPlayerByName(username).didGotMessage())
+        {
+            //user already got the message so we don't want to show it again
+            response.setStatus(400);
+            out.flush();
+        }
+        else
+        {
+            room.getGameManager().userGotMessage(username);
+            out.print(message);
+        }
 
     }
 
