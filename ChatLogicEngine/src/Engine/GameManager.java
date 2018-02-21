@@ -30,6 +30,7 @@ public class GameManager implements Serializable {
     private int big;
     private int small;
     private boolean isFirstTime=true;
+    private String messageToDisplay;
 
     public static int handNumber;
 
@@ -223,7 +224,9 @@ public class GameManager implements Serializable {
 
     public void startNewHand()
     {
+
         handNumber++;
+        updateHandCount();
         PokerBlindes blindes=getGameDescriptor().getStructure().getBlindes();
 
         try {
@@ -463,24 +466,40 @@ public class GameManager implements Serializable {
             case END:
             {
 
-                String message=currHand.getWinnersToDisplay();
-
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setHeaderText("We have some winners!");
-                alert.setContentText(message);
-                alert.showAndWait();
-
+                messageToDisplay="We have some winners!\n"+
+                        currHand.getWinnersToDisplay();
 
                 saveHandReplayToFile("handReplay.txt");
                 setMoneyFromLastHand(currHand.getPot()%currHand.getNumberOfWinners());
 
-                alert.setHeaderText("Hand finished");
-                alert.setContentText("We are going to clear the game table... You can use the Replay feature to see the previous hand");
-                alert.showAndWait();
+                //alert.setContentText("We are going to clear the game table... You can use the Replay feature to see the previous hand");
                 break;
             }
         }
     }
+
+    public void runNewHand()
+    {
+        if (currHand.getHandState()==HandState.END) {
+            startNewHand();
+            RunOneHand();
+        }
+        else
+        {
+            System.out.println("New hand already started");
+        }
+    }
+    private void updateHandCount() {
+
+        //We need to start a new game
+        if (getHandNumber()>=getHandsCount())
+        {
+            messageToDisplay= "Game is Over/n"+
+                    "Start new game for playing";
+        }
+
+    }
+
 
     private void afterBettingActions()
     {
@@ -530,5 +549,8 @@ public class GameManager implements Serializable {
         playBettingRounds();
     }
 
+    public String getMessageToDisplay() {
+        return messageToDisplay;
+    }
 }
 

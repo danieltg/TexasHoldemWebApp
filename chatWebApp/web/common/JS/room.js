@@ -128,6 +128,7 @@ function refreshPokerHandSettings(pokerHand) {
         document.getElementById(seatID).children[3].textContent=value.chips;
         document.getElementById(seatID).children[4].textContent=value.numbersOfBuy;
         document.getElementById(seatID).children[5].textContent=value.handWon;
+        document.getElementById(seatID).style.backgroundColor = "beige";
         if (value.folded)
         {
             document.getElementById(seatID).style.backgroundColor = "red";
@@ -136,6 +137,45 @@ function refreshPokerHandSettings(pokerHand) {
     });
     document.getElementById("handNumber").innerText=pokerHand.handNumber;
     document.getElementById("Pot").innerText=pokerHand.pot;
+
+
+    var state=pokerHand.state;
+
+    if (state.toLowerCase()=="end")
+    {
+        updatePageWithHandEnd();
+    }
+}
+
+function updatePageWithHandEnd()
+{
+    $.ajax({
+        url: '/getMessageToDisplay',
+        timeout: 7000,
+        error: function(){
+            console.log("Failed to send ajax");
+        },
+        success: function(response) {
+            console.info(response);
+            alert(response);
+            startNewHand();
+        }
+    });
+
+}
+
+function startNewHand()
+{
+    $.ajax({
+        url: '/startNewHand',
+        timeout: 7000,
+        error: function(){
+            console.log("Failed to send ajax");
+        },
+        success: function() {
+            console.info("We started a new game");
+        }
+    });
 }
 
 function refreshGameManagerSettings(games)

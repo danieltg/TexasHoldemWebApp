@@ -35,7 +35,7 @@ li{
     font-family: arial;
     border: 15px solid black;
     border-image: url("../../common/images/cards-poker-border.jpg")12% round;
-
+    background-color: darkgray;
 
 }
 
