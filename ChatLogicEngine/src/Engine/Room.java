@@ -75,7 +75,8 @@ public class Room {
 
     private void updateRegisteredPlayersOnRemove() {
         gameManager.getGameDescriptor().decRegisteredPlayers();
-
+        if (gameManager.getGameDescriptor().getRegisteredPlayers()==0)
+            gameManager.clearGame();
     }
 
     public boolean isUserInGame(String username)

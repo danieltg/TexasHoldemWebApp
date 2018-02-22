@@ -1,6 +1,8 @@
 var refreshRate = 1000; //mili seconds
 
 var flag = true
+var showCards=true
+
 function LeaveRoom()
 {
     $.ajax({
@@ -10,7 +12,6 @@ function LeaveRoom()
             console.log("Failed to send ajax");
         },
         success: function(response) {
-            console.info(response);
             window.location.href = '/pages/PokerLobby/lobby.html'
         }
     });
@@ -67,19 +68,21 @@ function ajaxPlayerInfo() {
     $.ajax({
         url: '/getPlayerInfo',
         success: function(player) {
-            refreshPlayerInfo(player);
+            if (player!=null)
+            {
+                refreshPlayerInfo(player);
+            }
         }
     });
 }
 
 function refreshPlayerInfo(player)
 {
-    console.info(player);
     var myTurn=player.isMyTurn;
 
     var cards=player.stringholeCards;
     $.each(cards || [], function(index,value) {
-        if (value!='??')
+        if (value!='??' && showCards)
         {
             var loc="../../common/images/cards/"+value+".png";
             document.getElementById("player_crad"+(index+1)).src=loc;
@@ -98,6 +101,7 @@ function refreshPlayerInfo(player)
                 document.getElementById("raiseInput").disabled=false;
                 document.getElementById("raiseInput").max=player.maxBet;
                 document.getElementById("maxValueLabel").innerText="The max raise is: "+player.maxBet;
+                document.getElementById("raiseInput").defaultValue = "1";
 
             }
             else if (value=='F') {document.getElementById("foldButton").disabled=false;}
@@ -109,6 +113,7 @@ function refreshPlayerInfo(player)
                 document.getElementById("betInput").disabled=false;
                 document.getElementById("betInput").max=player.maxBet;
                 document.getElementById("maxValueLabel").innerText="The max bet is: "+player.maxBet;
+                document.getElementById("betInput").defaultValue = "1";
             }
         });
 
@@ -120,10 +125,11 @@ function refreshPlayerInfo(player)
 }
 
 function refreshPokerHandSettings(pokerHand) {
-    console.info(pokerHand);
     var cards=pokerHand.stringTableCards;
     if (pokerHand.state.toLowerCase()!="end" && pokerHand.state.toLowerCase()!="gameover" )
     {
+        showCards=true;
+
         $.each(cards || [], function(index,value) {
             if (value!='??')
             {
@@ -189,7 +195,6 @@ function updatePageWithGameOver()
             console.log("User already got this message");
         },
         success: function(response) {
-            console.info(response);
             var answer= confirm(response);
             if (answer)
             {
@@ -218,7 +223,7 @@ function buy() {
 
         success: function(response) {
             alert("Operation successfully completed!");
-            document.getElementById("myPopup").focus();
+            document.getElementById("closePop").focus();
         }
     });
 }
@@ -232,9 +237,6 @@ function updatePageWithHandEnd()
             console.log("User already got this message");
         },
         success: function(response) {
-            console.info(response);
-
-
             var name=(response.split("&&&"))[0];
             var messageTxt=(response.split("&&&"))[1];
 
@@ -250,6 +252,7 @@ function updatePageWithHandEnd()
             popup.appendChild(button);
 
             var closePopUp = document.createElement("button");
+            closePopUp.id="closePop"
             closePopUp.innerHTML = "Close";
             closePopUp.onclick = closePopUP;
 
@@ -272,7 +275,7 @@ function clearCards()
     document.getElementById("crad3").src=loc;
     document.getElementById("crad4").src=loc;
     document.getElementById("crad5").src=loc;
-
+    showCards=false;
 }
 function startNewHand()
 {
@@ -341,6 +344,17 @@ function enableAllButtons()
     document.getElementById("betButton").disabled=false;
     document.getElementById("betInput").disabled=false;
 }
+
+function removeUserFromRoom() {
+
+}
+
+function closePopUPonGameOver() {
+
+    console.log("Game over");
+    LeaveRoom();
+}
+
 function refreshGameSettings(games) {
     document.getElementById("gameTitle").innerText= games.gameTitle;
     document.getElementById("bigValue").innerText= games.structure.blindes.big;
@@ -357,25 +371,19 @@ function refreshGameSettings(games) {
     else if (status.toLowerCase()=="ended" && flag)
     {
         flag=false;
-        var win = window.open("", "", "width=200,height=100");
-        win.document.write("<p>Hand ended...</p>");
-        win.focus();
 
+        var message="<p><b>Hand ended... See you next time</b></p>";
 
-        var timer = setInterval(function() {
-            if (win.closed) {
-                clearInterval(timer);
+        var popup = document.getElementById("myPopup");
+        popup.innerHTML=message;
 
-                console.log("Game over");
+        var closePopUp = document.createElement("button");
+        closePopUp.id="closeIt"
+        closePopUp.innerHTML = "Close";
+        closePopUp.onclick = closePopUPonGameOver;
 
-                var delayInMilliseconds = 6000;
-                setTimeout(function() {
-                    window.location.href = '/pages/PokerLobby/lobby.html';
-                }, delayInMilliseconds);
-            }
-        }, 500);
-
-
+        popup.appendChild(closePopUp);
+        popup.classList.toggle("show");
     }
 }
 

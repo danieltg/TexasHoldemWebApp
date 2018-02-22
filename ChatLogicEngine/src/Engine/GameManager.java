@@ -40,6 +40,18 @@ public class GameManager implements Serializable {
         numberOfPlayers=0;
     }
 
+    public void clearGame()
+    {
+        stateOfGame=CurrGameState.NotInitialized;
+        moneyFromLastHand=0;
+        maxPot=0;
+        handNumber=0;
+        players.clear();
+        messageToDisplay="";
+        handReplay.clear();
+        numberOfPlayers=0;
+    }
+
     public PokerPlayer getPlayerByName(String name)
     {
         for(PokerPlayer p:players)
@@ -233,6 +245,7 @@ public class GameManager implements Serializable {
             currHand = new PokerHand(blindes, getPlayers(),handNumber);
             currHand.addToPot(getMoneyFromLastHand());
             currHand.setHandState(HandState.GameInit);
+            numberOfPlayers=players.size();
             setTotalRounds(getHandsCount() / numberOfPlayers);
 
             if (handNumber==1)

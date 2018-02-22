@@ -67,6 +67,8 @@ public class PokerGameDescriptor implements Serializable {
     public void roomEnded()
     {
         status=RoomState.Ended;
+        registeredPlayers=0;
+
     }
     public String getGameTitle() {
         return gameTitle;
@@ -156,8 +158,11 @@ public class PokerGameDescriptor implements Serializable {
     }
 
     public void decRegisteredPlayers() {
-        registeredPlayers--;
+        if (registeredPlayers>0) {
+            registeredPlayers--;
+        }
         status=RoomState.WAITING;
+
     }
 
     public RoomState getStatus() {
