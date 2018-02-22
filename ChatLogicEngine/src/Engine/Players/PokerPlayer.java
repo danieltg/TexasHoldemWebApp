@@ -35,6 +35,7 @@ public abstract class PokerPlayer implements Serializable,Cloneable {
     private List<String> options;
     private int maxBet;
     private boolean gotMessage;
+    private boolean confirmed;
 
     PokerPlayer(int playerID){
         options=new ArrayList<>();
@@ -333,5 +334,15 @@ public abstract class PokerPlayer implements Serializable,Cloneable {
     public boolean didGotMessage()
     {
         return gotMessage;
+    }
+
+    public boolean didConfirmed() {
+        return confirmed;
+    }
+
+    public void setConfirmed (boolean val)
+    {
+        confirmed=val;
+
     }
 }

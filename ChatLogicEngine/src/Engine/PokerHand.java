@@ -953,6 +953,7 @@ public class PokerHand {
         for (PokerPlayer p:players)
         {
             p.gotMessage(false);
+            p.setConfirmed(false);
         }
 
     }

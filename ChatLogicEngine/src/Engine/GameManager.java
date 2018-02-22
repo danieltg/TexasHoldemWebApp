@@ -483,7 +483,7 @@ public class GameManager implements Serializable {
     {
 
         //check if all user got the message
-        if (didAllUserGotTheMessage())
+        if (didAllUserGotTheMessage() && didAllUserConfirmed())
         {
             if (currHand.getHandState()==HandState.END) {
                 startNewHand();
@@ -495,6 +495,15 @@ public class GameManager implements Serializable {
             }
         }
 
+    }
+
+    private boolean didAllUserConfirmed() {
+        for(PokerPlayer p: players)
+        {
+            if (!p.didConfirmed())
+                return false;
+        }
+        return true;
     }
 
     private boolean didAllUserGotTheMessage() {
@@ -510,9 +519,9 @@ public class GameManager implements Serializable {
     private void updateHandCount() {
 
         //We need to start a new game
-        if (handNumber>=getHandsCount())
+        if (handNumber>getHandsCount())
         {
-            System.out.println("handNumber>=getHandsCount--> Game is Over");
+            System.out.println("handNumber>getHandsCount--> Game is Over");
             messageToDisplay= "Game is Over/n"+
                     "Start new game for playing";
             currHand.setHandState(GameOver);

@@ -201,6 +201,28 @@ function updatePageWithGameOver()
 
 }
 
+function closePopUP()
+{
+    var popup = document.getElementById("myPopup");
+    popup.innerText="";
+    popup.classList.toggle("show");
+
+    clearCards();
+    startNewHand();
+}
+
+function buy() {
+    $.ajax({
+        url: '/buy',
+        timeout: 2000,
+
+        success: function(response) {
+            alert("Operation successfully completed!");
+            document.getElementById("myPopup").focus();
+        }
+    });
+}
+
 function updatePageWithHandEnd()
 {
     $.ajax({
@@ -212,26 +234,27 @@ function updatePageWithHandEnd()
         success: function(response) {
             console.info(response);
 
-            var win = window.open("", "", "width=200,height=100");
-            win.document.write("<p>"+response+"</p>");
-            win.focus();
 
+            var name=(response.split("&&&"))[0];
+            var messageTxt=(response.split("&&&"))[1];
 
-            var timer = setInterval(function() {
-                if (win.closed) {
-                    clearInterval(timer);
-                    alert("Notification window closed !");
-                    console.log("User confirmed the answer");
-                    clearCards();
-                    var delayInMilliseconds = 6000;
-                    setTimeout(function() {
-                        startNewHand();
-                    }, delayInMilliseconds);
+            var message="<p><b>"+name+"</b></p>"+
+            "<p>"+messageTxt+"</p>";
 
+            var popup = document.getElementById("myPopup");
+            popup.innerHTML=message;
+            var button = document.createElement("button");
+            button.innerHTML = "Buy$$$";
+            button.onclick =buy;
 
+            popup.appendChild(button);
 
-                }
-            }, 500);
+            var closePopUp = document.createElement("button");
+            closePopUp.innerHTML = "Close";
+            closePopUp.onclick = closePopUP;
+
+            popup.appendChild(closePopUp);
+            popup.classList.toggle("show");
 
         }
     });
