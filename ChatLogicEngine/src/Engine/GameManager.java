@@ -235,8 +235,12 @@ public class GameManager implements Serializable {
             currHand.setHandState(HandState.GameInit);
             setTotalRounds(getHandsCount() / numberOfPlayers);
 
-            for (PokerPlayer p: players)
-                buy(p);
+            if (handNumber==1)
+            {
+                for (PokerPlayer p: players)
+                    buy(p);
+            }
+
         }
         catch (Exception e)
         {
@@ -410,8 +414,6 @@ public class GameManager implements Serializable {
 
         currHand.setNextToPlayForTheFirstTime();
         currHand.updateMaxBet();
-
-        currHand.dealingFlopCards();
 
         playBettingRounds();
 
