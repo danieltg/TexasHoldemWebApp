@@ -1,6 +1,6 @@
 var refreshRate = 1000; //mili seconds
 
-
+var flag = true
 function LeaveRoom()
 {
     $.ajax({
@@ -12,6 +12,17 @@ function LeaveRoom()
         success: function(response) {
             console.info(response);
             window.location.href = '/pages/PokerLobby/lobby.html'
+        }
+    });
+}
+
+
+function ajaxRoomState()
+{
+    $.ajax({
+        url: '/getRoomState',
+        success: function(users) {
+            refreshUsersList(users);
         }
     });
 }
@@ -123,7 +134,19 @@ function refreshPokerHandSettings(pokerHand) {
     }
 
     var players=pokerHand.players;
+
+    $("#userslist").empty();
     $.each(players||[], function (index,value){
+
+        if (value.isMyTurn)
+        {
+            $('<li><b>' + value.name+ ' ('+value.type + ')'+'</b></li>').appendTo($("#userslist"));
+        }
+        else
+        {
+            $('<li>' + value.name+ ' ('+value.type + ')'+'</li>').appendTo($("#userslist"));
+        }
+
         var seatID="seat"+(index+1);
         document.getElementById(seatID).children[0].textContent=value.name;
         document.getElementById(seatID).children[1].textContent="Type: "+value.type;
@@ -301,7 +324,38 @@ function refreshGameSettings(games) {
     document.getElementById("smallValue").innerText= games.structure.blindes.small;
     document.getElementById("statusValue").innerText= games.status;
     document.getElementById("handsCount").innerText=games.structure.handsCount;
+
+    var status=games.status.toLowerCase();
+
+    if (status.toLowerCase()=="waiting")
+    {
+        ajaxUsersList()
+    }
+    else if (status.toLowerCase()=="ended" && flag)
+    {
+        flag=false;
+        var win = window.open("", "", "width=200,height=100");
+        win.document.write("<p>Hand ended...</p>");
+        win.focus();
+
+
+        var timer = setInterval(function() {
+            if (win.closed) {
+                clearInterval(timer);
+
+                console.log("Game over");
+
+                var delayInMilliseconds = 6000;
+                setTimeout(function() {
+                    window.location.href = '/pages/PokerLobby/lobby.html';
+                }, delayInMilliseconds);
+            }
+        }, 500);
+
+
+    }
 }
+
 
 function refreshUsersList(users) {
     //clear all current users
@@ -323,7 +377,7 @@ $(function() {
     $.ajaxSetup({cache: false});
 
     //The users list is refreshed automatically every second
-    setInterval(ajaxUsersList, refreshRate);
+    //setInterval(ajaxUsersList, refreshRate);
 
     //The users list is refreshed automatically every second
     setInterval(ajaxGameSettings, refreshRate);

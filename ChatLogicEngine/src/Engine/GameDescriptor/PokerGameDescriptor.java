@@ -64,6 +64,10 @@ public class PokerGameDescriptor implements Serializable {
         structure=new PokerStructure((g.getStructure()));
     }
 
+    public void roomEnded()
+    {
+        status=RoomState.Ended;
+    }
     public String getGameTitle() {
         return gameTitle;
     }

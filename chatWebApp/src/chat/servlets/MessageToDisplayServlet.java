@@ -38,7 +38,7 @@ public class MessageToDisplayServlet extends HttpServlet {
         else
         {
             room.getGameManager().userGotMessage(username);
-            out.print(message);
+            out.print("Hey "+username + "/n"+message);
         }
 
     }

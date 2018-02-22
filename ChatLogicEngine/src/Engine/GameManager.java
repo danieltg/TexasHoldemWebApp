@@ -516,6 +516,7 @@ public class GameManager implements Serializable {
             messageToDisplay= "Game is Over/n"+
                     "Start new game for playing";
             currHand.setHandState(GameOver);
+            gameDescriptor.roomEnded();
         }
 
     }
