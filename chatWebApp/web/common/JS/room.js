@@ -1,7 +1,8 @@
 var refreshRate = 1000; //mili seconds
 
-var flag = true
-var showCards=true
+var flag = true;
+var showCards=true;
+var showLeaveAndBuy=true;
 
 function LeaveRoom()
 {
@@ -31,8 +32,8 @@ function ajaxRoomState()
 function ajaxUsersList() {
     $.ajax({
         url: '/gameuserlist',
-        success: function(users) {
-            refreshUsersList(users);
+        success: function(info) {
+            refreshUsersList(info);
         }
     });
 }
@@ -80,6 +81,10 @@ function refreshPlayerInfo(player)
 {
     var myTurn=player.isMyTurn;
 
+    if (player.type.toLowerCase()=="computer")
+    {
+        showLeaveAndBuy=false;
+    }
     var cards=player.stringholeCards;
     $.each(cards || [], function(index,value) {
         if (value!='??' && showCards)
@@ -245,11 +250,14 @@ function updatePageWithHandEnd()
 
             var popup = document.getElementById("myPopup");
             popup.innerHTML=message;
-            var button = document.createElement("button");
-            button.innerHTML = "Buy$$$";
-            button.onclick =buy;
+            if (showLeaveAndBuy)
+            {
+                var button = document.createElement("button");
+                button.innerHTML = "Buy$$$";
+                button.onclick =buy;
 
-            popup.appendChild(button);
+                popup.appendChild(button);
+            }
 
             var closePopUp = document.createElement("button");
             closePopUp.id="closePop"
@@ -388,7 +396,11 @@ function refreshGameSettings(games) {
 }
 
 
-function refreshUsersList(users) {
+function refreshUsersList(info) {
+
+    var users=info.users;
+    var active=info.active;
+
     //clear all current users
     $("#userslist").empty();
 
@@ -396,8 +408,16 @@ function refreshUsersList(users) {
     $.each(users || [], function(username, playerType) {
         //create a new <option> tag with a value in it and
         //appeand it to the #userslist (div with id=userslist) element
+        if (active==username && playerType.toLowerCase()=="computer")
+        {
+            showLeaveAndBuy=false;
+            $("#leaveButton").hide();
+        }
         $('<li>' + username+ ' ('+playerType + ')'+'</li>').appendTo($("#userslist"));
     });
+
+
+
 }
 
 
@@ -419,6 +439,7 @@ $(function() {
     //The users list is refreshed automatically every second
     setInterval(ajaxPokerHand, refreshRate);
 
-    setInterval(ajaxPlayerInfo,refreshRate)
+    setInterval(ajaxPlayerInfo,refreshRate);
+
 
 });

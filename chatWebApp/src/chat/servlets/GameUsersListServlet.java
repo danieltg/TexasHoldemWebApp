@@ -1,12 +1,15 @@
 package chat.servlets;
 
 import Engine.Lobby;
+import Engine.users.Info;
 import chat.utils.ServletUtils;
 import chat.utils.SessionUtils;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.Type;
 import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,9 +30,13 @@ public class GameUsersListServlet extends HttpServlet {
 
         String roomName= lobby.getRoomNameByPlayerName(usernameFromSession);
         Map<String,String> users= lobby.getRoomByName(roomName).getUsersInGame();
+
+        Info foo = new Info(usernameFromSession,users);
+
         try (PrintWriter out = response.getWriter()) {
+
             Gson gson = new Gson();
-            String json = gson.toJson(users);
+            String json = gson.toJson(foo);
             out.println(json);
             out.flush();
         }
@@ -74,3 +81,4 @@ public class GameUsersListServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 }
+
