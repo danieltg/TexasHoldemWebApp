@@ -1,12 +1,14 @@
 package chat.servlets;
 
+import Engine.users.Info;
 import chat.utils.ServletUtils;
+import chat.utils.SessionUtils;
 import com.google.gson.Gson;
 import Engine.users.UserManager;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Set;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,8 +25,12 @@ public class UsersListServlet extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             Gson gson = new Gson();
             UserManager userManager = ServletUtils.getUserManager(getServletContext());
-            Set<String> usersList = userManager.getUsers().keySet();
-            String json = gson.toJson(usersList);
+            Map<String,String> usersList = userManager.getUsers();
+
+            String user = SessionUtils.getUsername(request);
+            Info foo= new Info(user,usersList);
+
+            String json = gson.toJson(foo);
             out.println(json);
             out.flush();
         }

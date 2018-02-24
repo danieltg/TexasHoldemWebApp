@@ -36,8 +36,8 @@ $(function() {
 function ajaxUsersList() {
     $.ajax({
         url: '/userlist',
-        success: function(users) {
-            refreshUsersList(users);
+        success: function(info) {
+            refreshUsersList(info);
         }
     });
 }
@@ -132,17 +132,30 @@ function joinGame(val){
 
 //users = a list of usernames, essentially an array of javascript strings:
 // ["moshe","nachum","nachche"...]
-function refreshUsersList(users) {
+function refreshUsersList(info) {
+
+    var users=info.users;
+    var active=info.active;
+
     //clear all current users
     $("#userslist").empty();
 
     // rebuild the list of users: scan all users and add them to the list of users
-    $.each(users || [], function(index, username) {
-        console.log("Adding user #" + index + ": " + username);
+    $.each(users || [], function(username, playerType) {
         //create a new <option> tag with a value in it and
         //appeand it to the #userslist (div with id=userslist) element
         $('<li>' + username + '</li>').appendTo($("#userslist"));
+
+        if (username==active && playerType.toLowerCase()=="human")
+        {
+            document.getElementById('BuyButton').style.visibility='visible';
+
+        }
+
     });
+
+
+
 }
 
 function triggerAjaxTableContent() {
@@ -151,6 +164,9 @@ function triggerAjaxTableContent() {
 
 //activate the timer calls after the page is loaded
 $(function() {
+
+    document.getElementById('BuyButton').style.visibility='hidden';
+
 
     $('input:file').change(
         function(){

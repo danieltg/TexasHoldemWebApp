@@ -3,6 +3,7 @@ var refreshRate = 1000; //mili seconds
 var flag = true;
 var showCards=true;
 var showLeaveAndBuy=true;
+var chatVersion = 0;
 
 function LeaveRoom()
 {
@@ -420,9 +421,74 @@ function refreshUsersList(info) {
 
 }
 
+function triggerAjaxChatContent() {
+    setTimeout(ajaxChatContent, refreshRate);
+}
+
+function ajaxChatContent() {
+    $.ajax({
+        url: "/chat",
+        data: "chatversion=" + chatVersion,
+        dataType: 'json',
+        success: function(data) {
+
+            if (data.version !== chatVersion) {
+                chatVersion = data.version;
+                appendToChatArea(data.entries);
+            }
+            triggerAjaxChatContent();
+        },
+        error: function(error) {
+            triggerAjaxChatContent();
+        }
+    });
+}
+
+function createChatEntry (entry){
+    entry.chatString = entry.chatString.replace (":)", "<span class='smiley'></span>");
+    return $("<span class=\"success\">").append(entry.username + "> " + entry.chatString);
+}
+
+function appendChatEntry(index, entry){
+    var entryElement = createChatEntry(entry);
+    $("#chatarea").append(entryElement).append("<br>");
+}
+
+//entries = the added chat strings represented as a single string
+function appendToChatArea(entries) {
+//    $("#chatarea").children(".success").removeClass("success");
+
+    // add the relevant entries
+    $.each(entries || [], appendChatEntry);
+
+    // handle the scroller to auto scroll to the end of the chat area
+    var scroller = $("#chatarea");
+    var height = scroller[0].scrollHeight - $(scroller).height();
+    $(scroller).stop().animate({ scrollTop: height }, "slow");
+}
 
 //activate the timer calls after the page is loaded
 $(function() {
+
+    $("#chatform").submit(function() {
+        $.ajax({
+            data: $(this).serialize(),
+            url: this.action,
+            timeout: 2000,
+            error: function() {
+                console.error("Failed to submit");
+            },
+            success: function(r) {
+                //do not add the user string to the chat area
+                //since it's going to be retrieved from the server
+                //$("#result h1").text(r);
+            }
+        });
+
+        $("#userstring").val("");
+        // by default - we'll always return false so it doesn't redirect the user.
+        return false;
+    });
 
     //prevent IE from caching ajax calls
     $.ajaxSetup({cache: false});
@@ -441,5 +507,6 @@ $(function() {
 
     setInterval(ajaxPlayerInfo,refreshRate);
 
+    triggerAjaxChatContent();
 
 });
