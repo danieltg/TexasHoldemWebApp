@@ -1,4 +1,3 @@
-var lobbyVersion = 0;
 var refreshRate = 1000; //mili seconds
 
 
@@ -135,7 +134,6 @@ function joinGame(val){
 function refreshUsersList(info) {
 
     var users=info.users;
-    var active=info.active;
 
     //clear all current users
     $("#userslist").empty();
@@ -145,13 +143,6 @@ function refreshUsersList(info) {
         //create a new <option> tag with a value in it and
         //appeand it to the #userslist (div with id=userslist) element
         $('<li>' + username + '</li>').appendTo($("#userslist"));
-
-        if (username==active && playerType.toLowerCase()=="human")
-        {
-            document.getElementById('BuyButton').style.visibility='visible';
-
-        }
-
     });
 
 
@@ -164,9 +155,6 @@ function triggerAjaxTableContent() {
 
 //activate the timer calls after the page is loaded
 $(function() {
-
-    document.getElementById('BuyButton').style.visibility='hidden';
-
 
     $('input:file').change(
         function(){

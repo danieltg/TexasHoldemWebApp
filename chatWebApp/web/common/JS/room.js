@@ -4,6 +4,7 @@ var flag = true;
 var showCards=true;
 var showLeaveAndBuy=true;
 var chatVersion = 0;
+var showButtons=true;
 
 function LeaveRoom()
 {
@@ -98,31 +99,36 @@ function refreshPlayerInfo(player)
 
     if (myTurn)
     {
-        disableAllButtons();
-        var options=player.options;
-        $.each(options||[], function (index,value){
-            if(value=='R')
-            {
-                document.getElementById("raiseButton").disabled=false;
-                document.getElementById("raiseInput").disabled=false;
-                document.getElementById("raiseInput").max=player.maxBet;
-                document.getElementById("maxValueLabel").innerText="The max raise is: "+player.maxBet;
-                document.getElementById("raiseInput").defaultValue = "1";
+        if (showButtons)
+        {
+            disableAllButtons();
 
-            }
-            else if (value=='F') {document.getElementById("foldButton").disabled=false;}
-            else if (value=='C') {document.getElementById("callButton").disabled=false;}
-            else if (value=='K') {document.getElementById("checkButton").disabled=false;}
-            else if (value=='B')
-            {
-                document.getElementById("betButton").disabled=false;
-                document.getElementById("betInput").disabled=false;
-                document.getElementById("betInput").max=player.maxBet;
-                document.getElementById("maxValueLabel").innerText="The max bet is: "+player.maxBet;
-                document.getElementById("betInput").defaultValue = "1";
-            }
-        });
+            var options=player.options;
+            $.each(options||[], function (index,value){
+                if(value=='R')
+                {
+                    document.getElementById("raiseInput").value="1";
+                    document.getElementById("raiseButton").disabled=false;
+                    document.getElementById("raiseInput").disabled=false;
+                    document.getElementById("raiseInput").max=player.maxBet;
+                    document.getElementById("maxValueLabel").innerText="The max raise is: "+player.maxBet;
 
+                }
+                else if (value=='F') {document.getElementById("foldButton").disabled=false;}
+                else if (value=='C') {document.getElementById("callButton").disabled=false;}
+                else if (value=='K') {document.getElementById("checkButton").disabled=false;}
+                else if (value=='B')
+                {
+                    document.getElementById("betInput").value="1";
+                    document.getElementById("betButton").disabled=false;
+                    document.getElementById("betInput").disabled=false;
+                    document.getElementById("betInput").max=player.maxBet;
+                    document.getElementById("maxValueLabel").innerText="The max bet is: "+player.maxBet;
+                }
+            });
+
+            showButtons=false;
+        }
     }
     else //it's not my turn- I have to disable all buttons
     {
@@ -307,6 +313,8 @@ function refreshGameManagerSettings(games)
 
 function updateSelection(action, info)
 {
+    showButtons=true;
+
     console.info("Selection is: "+action +" ,info: "+info);
 
     $.ajax({
