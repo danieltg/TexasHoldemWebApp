@@ -167,6 +167,10 @@ public class PokerGameDescriptor implements Serializable {
 
             status=RoomState.WAITING;
         }
+        else
+        {
+            registeredPlayers--;
+        }
 
     }
 

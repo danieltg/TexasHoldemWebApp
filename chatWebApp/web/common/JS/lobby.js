@@ -78,7 +78,7 @@ function refreshGamesList(games) {
         //$('<li>' + username + '</li>').appendTo($("#userslist"));
         var btn=games.registeredPlayers>= games.structure.handsCount;
         var color= "#FFFFFF";
-        if (games.registeredPlayers== games.numberOfPlayers) {
+        if (games.registeredPlayers== games.numberOfPlayers || (games.status).toLowerCase()=="running") {
             color="#FF0000";
         }
 
@@ -95,7 +95,7 @@ function refreshGamesList(games) {
             "<td align=center><button class='joinGame' onclick='joinGame(this.value)' id='"+games.gameTitle+"' value='"+games.gameTitle+"'>Join Game</button></td>")
             .appendTo('#games_table');
 
-        if (games.registeredPlayers== games.numberOfPlayers) {
+        if (games.registeredPlayers== games.numberOfPlayers || (games.status).toLowerCase()=="running") {
             document.getElementById(games.gameTitle).disabled=true;
         }
 
