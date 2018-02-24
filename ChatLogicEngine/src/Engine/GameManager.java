@@ -331,21 +331,14 @@ public class GameManager implements Serializable {
     }
 
 
-    public void removeHumanPlayer(int playerIndex) {
-
-        int index=0;
+    public void removeHumanPlayer(String name) {
 
         for (PokerPlayer p: players)
         {
-            if (p.getType()==PlayerType.Human)
+            if (p.getName().equals(name))
             {
-                if (index==playerIndex)
-                {
-                    players.remove(p);
-                    break;
-                }
-                else
-                    index++;
+                players.remove(p);
+                break;
             }
         }
 
@@ -497,6 +490,7 @@ public class GameManager implements Serializable {
     public void runNewHand()
     {
 
+        removeLeavedPlayers();
         //check if all user got the message
         if (didAllUserGotTheMessage() && didAllUserConfirmed())
         {
@@ -510,6 +504,14 @@ public class GameManager implements Serializable {
             }
         }
 
+    }
+
+    private void removeLeavedPlayers() {
+        for (PokerPlayer p: players)
+        {
+            if (p.didLeave())
+                players.remove(p);
+        }
     }
 
     private boolean didAllUserConfirmed() {
@@ -603,5 +605,6 @@ public class GameManager implements Serializable {
         System.out.println(username+" got the message");
         getPlayerByName(username).gotMessage(true);
     }
+
 }
 

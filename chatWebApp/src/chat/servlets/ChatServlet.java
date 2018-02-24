@@ -30,7 +30,6 @@ public class ChatServlet extends HttpServlet {
         }
         
         int chatVersion = ServletUtils.getIntParameter(request, Constants.CHAT_VERSION_PARAMETER);
-        logServerMessage("Server Chat version: " + chatManager.getVersion() + ", User '" + username + "' Chat version: " + chatVersion);
 
         if (chatVersion > Constants.INT_PARAMETER_ERROR) {
             try (PrintWriter out = response.getWriter()) {
@@ -38,16 +37,12 @@ public class ChatServlet extends HttpServlet {
                 ChatAndVersion cav = new ChatAndVersion(chatEntries, chatManager.getVersion());
                 Gson gson = new Gson();
                 String jsonResponse = gson.toJson(cav);
-                logServerMessage(jsonResponse);
                 out.print(jsonResponse);
                 out.flush();
             }
         }
     }
 
-    private void logServerMessage(String message){
-        System.out.println(message);
-    }
     
     class ChatAndVersion {
 

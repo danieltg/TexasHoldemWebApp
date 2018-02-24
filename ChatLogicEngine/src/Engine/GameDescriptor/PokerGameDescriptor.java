@@ -158,10 +158,15 @@ public class PokerGameDescriptor implements Serializable {
     }
 
     public void decRegisteredPlayers() {
-        if (registeredPlayers>0) {
-            registeredPlayers--;
+
+        if (status!=RoomState.RUNNING)
+        {
+            if (registeredPlayers>0) {
+                registeredPlayers--;
+            }
+
+            status=RoomState.WAITING;
         }
-        status=RoomState.WAITING;
 
     }
 

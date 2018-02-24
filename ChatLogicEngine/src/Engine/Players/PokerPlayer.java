@@ -36,8 +36,10 @@ public abstract class PokerPlayer implements Serializable,Cloneable {
     private int maxBet;
     private boolean gotMessage;
     private boolean confirmed;
+    private boolean leave;
 
     PokerPlayer(int playerID){
+        leave=false;
         options=new ArrayList<>();
         maxBet=0;
         chips=0;
@@ -58,7 +60,7 @@ public abstract class PokerPlayer implements Serializable,Cloneable {
     }
 
     PokerPlayer(int playerID, String playerName){
-
+        leave=false;
         options=new ArrayList<>();
         chips=0;
         bet =0;
@@ -344,5 +346,13 @@ public abstract class PokerPlayer implements Serializable,Cloneable {
     {
         confirmed=val;
 
+    }
+
+    public boolean didLeave ()
+    {
+        return leave;
+    }
+    public void setLeave(boolean b) {
+        leave=true;
     }
 }

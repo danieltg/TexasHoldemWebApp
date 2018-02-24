@@ -20,17 +20,6 @@ function LeaveRoom()
     });
 }
 
-
-function ajaxRoomState()
-{
-    $.ajax({
-        url: '/getRoomState',
-        success: function(users) {
-            refreshUsersList(users);
-        }
-    });
-}
-
 function ajaxUsersList() {
     $.ajax({
         url: '/gameuserlist',
@@ -160,7 +149,7 @@ function refreshPokerHandSettings(pokerHand) {
         {
             $('<li><b>' + value.name+ ' ('+value.type + ')'+'</b></li>').appendTo($("#userslist"));
         }
-        else
+        else if (value.leave==false)
         {
             $('<li>' + value.name+ ' ('+value.type + ')'+'</li>').appendTo($("#userslist"));
         }
@@ -226,6 +215,25 @@ function closePopUP()
 
     clearCards();
     startNewHand();
+    clearPlayersCard();
+}
+
+function clearPlayersCard()
+{
+
+    for (index = 1; index<7; index++)
+    {
+        var seatID="seat"+(index);
+        document.getElementById(seatID).children[0].textContent="";
+        document.getElementById(seatID).children[1].textContent="";
+        document.getElementById(seatID).children[2].textContent="";
+        document.getElementById(seatID).children[3].textContent="";
+        document.getElementById(seatID).children[4].textContent="";
+        document.getElementById(seatID).children[5].textContent="";
+        document.getElementById(seatID).style.backgroundColor = "darkgray";
+    }
+
+
 }
 
 function buy() {
@@ -422,6 +430,7 @@ function refreshUsersList(info) {
             showLeaveAndBuy=false;
             $("#leaveButton").hide();
         }
+
         $('<li>' + username+ ' ('+playerType + ')'+'</li>').appendTo($("#userslist"));
     });
 

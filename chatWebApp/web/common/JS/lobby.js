@@ -77,8 +77,12 @@ function refreshGamesList(games) {
         //appeand it to the #userslist (div with id=userslist) element
         //$('<li>' + username + '</li>').appendTo($("#userslist"));
         var btn=games.registeredPlayers>= games.structure.handsCount;
+        var color= "#FFFFFF";
+        if (games.registeredPlayers== games.numberOfPlayers) {
+            color="#FF0000";
+        }
 
-        $('<tr>').html(
+        $('<tr bgcolor='+color+'>').html(
             "<td align=center>" + games.gameTitle + "</td>" +
             "<td align=center>" + games.uploadedBy + "</td>" +
             "<td align=center>" + games.structure.handsCount + "</td>" +

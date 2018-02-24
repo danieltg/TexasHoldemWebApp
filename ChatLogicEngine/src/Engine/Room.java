@@ -71,6 +71,12 @@ public class Room {
     public void removeUserFromRoom(String userName) {
         usersInGame.remove(userName);
         updateRegisteredPlayersOnRemove();
+        if (getRoomState()==RoomState.RUNNING)
+        {
+            getGameManager().getPlayerByName(userName).setAction("F");
+            getGameManager().getPlayerByName(userName).setAdditionalActionInfo(0);
+            getGameManager().getPlayerByName(userName).setLeave(true);
+        }
     }
 
     private void updateRegisteredPlayersOnRemove() {
