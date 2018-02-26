@@ -1,9 +1,23 @@
+
+@media screen and (max-width:900px){
+
+
+        .table
+        {
+            width: 80%;
+        }
+
+}
+
+
+
 p{
 
     text-align: center;
     font-family:"Arial Black";
     color:black;
     font-size: 12px;
+
 
 }
 
@@ -14,6 +28,7 @@ td{
     font-size: 17px;
 
 
+
 }
 
 li{
@@ -22,6 +37,7 @@ li{
     font-family: arial;
     color:black;
     font-size: 15px;
+
 
 
 }
@@ -36,6 +52,10 @@ li{
     border: 15px solid black;
     border-image: url("../../common/images/cards-poker-border.jpg")12% round;
     background-color: darkgray;
+    resize: both;
+    position: relative;
+
+
 
 }
 
@@ -45,15 +65,20 @@ h1{
     font-family: arial black;
     text-align: center;
 
+
+
 }
 
 a {
     text-decoration: none;
     font-size: 22px;
     color: black;
+
 }
 .main {
     width: 380px;
+    resize: both;
+
 }
 
 .table {
@@ -64,12 +89,18 @@ a {
     border-radius: 50%;
     margin: 0 auto;
     border: 1em solid black;
+
+
 }
 
 .board {
     position: relative;
     top: 20%;
     left: 10%;
+    resize: both;
+
+
+
 }
 .card-small {
     border: .2em solid black;
@@ -79,6 +110,9 @@ a {
     margin-right: 5px;
     float: left;
     background-color: white;
+
+
+
 }
 
 .card-text {
@@ -88,12 +122,17 @@ a {
     font-size: 1.5em;
     font-weight: bold;
     padding: 0;
+
+
+
 }
 
 .card-img {
     text-align: center;
     margin: 0;
     font-size: 2em;
+
+
 }
 
 .red {
@@ -109,6 +148,8 @@ a {
     position: fixed;
     left: 10px;
     top: 5px;
+
+
 }
 
 button:disabled {
@@ -117,6 +158,10 @@ button:disabled {
     background-color: #cccccc;
     color: #666666;
     cursor:default;
+    resize: both;
+    overflow: auto;
+    position:relative;
+
 }
 
 
@@ -132,6 +177,10 @@ button {
     vertical-align: middle;
     font: normal normal bold 15px trebuchet ms;
     color: #ffffff;
+    resize: both;
+    overflow: auto;
+    position: relative;
+
 }
 
 #myCard{
@@ -139,7 +188,7 @@ button {
     animation-timing-function: linear;
     animation-duration: 3s;
     animation-fill-mode: forwards;
-    position: fixed;
+
 
 
 }
@@ -149,6 +198,8 @@ body{
 
     background-image: url("../../common/images/roomBackground (4).jpg");
     background-size:100%;
+
+
 }
 
 h2{
@@ -163,6 +214,7 @@ h3{
     font-size: 15px;
     color: black;
     font-family: arial black;
+
 }
 
 
