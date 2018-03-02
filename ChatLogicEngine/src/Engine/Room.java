@@ -14,6 +14,7 @@ public class Room {
     private String roomName;
     private GameManager gameManager;
     private Map<String,String> usersInGame;
+    private Map<String,String> viewerInGame;
 
     public Room (String name, PokerGameDescriptor gameDescriptorForGame)
     {
@@ -21,6 +22,15 @@ public class Room {
         gameManager=new GameManager();
         gameManager.setGameDescriptor(gameDescriptorForGame);
         usersInGame = new HashMap<>();
+        viewerInGame=new HashMap<>();
+    }
+
+    public void addViewerToRoom(String userName, String type) {
+        viewerInGame.put(userName,type);
+    }
+
+    public void removeViewerFromRoom(String userName) {
+        viewerInGame.remove(userName);
     }
 
     public void addUserToRoom(String userName, String type) {
@@ -118,4 +128,5 @@ public class Room {
         return gameManager.getGameDescriptor().getStatus();
     }
 
+    public Map<String,String> getViewers() { return viewerInGame; }
 }

@@ -2,7 +2,6 @@ package Engine;
 
 import Engine.GameDescriptor.PokerGameDescriptor;
 
-import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -63,5 +62,12 @@ public class Lobby {
          String roomName=getRoomNameByPlayerName(username);
          removeUserFromRoom(roomName,username);
      }
+    }
+
+    public void addViewerToRoom(String roomName, String username, String playerType) {
+
+        rooms.get(roomName).addViewerToRoom(username,playerType);
+        users.put(username,roomName);
+
     }
 }

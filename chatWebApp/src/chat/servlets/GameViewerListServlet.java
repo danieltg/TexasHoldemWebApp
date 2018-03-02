@@ -15,26 +15,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/gameuserlist")
-public class GameUsersListServlet extends HttpServlet {
+@WebServlet("/gameViewers")
+public class GameViewerListServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //returning JSON objects, not HTML
         response.setContentType("application/json");
 
-        String usernameFromSession = SessionUtils.getUsername(request);
         Lobby lobby=ServletUtils.getLobby(getServletContext());
+        String username = SessionUtils.getUsername(request);
 
-        String roomName= lobby.getRoomNameByPlayerName(usernameFromSession);
-        Map<String,String> users= lobby.getRoomByName(roomName).getUsersInGame();
-
-        Info foo = new Info(usernameFromSession,users);
+        String roomName= lobby.getRoomNameByPlayerName(username);
+        Map<String,String> viewers= lobby.getRoomByName(roomName).getViewers();
+        Gson gson = new Gson();
 
         try (PrintWriter out = response.getWriter()) {
-
-            Gson gson = new Gson();
-            String json = gson.toJson(foo);
+            String json = gson.toJson(viewers);
             out.println(json);
             out.flush();
         }

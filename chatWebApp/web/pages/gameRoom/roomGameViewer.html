@@ -7,10 +7,10 @@
         
         <title>Texas Holdem Poker Room</title>
         <link rel="stylesheet" href="../../common/CSS/roomCss.css">
-        <link rel='stylesheet' media='screen and (min-width: 630px)' href='css/medium.css' />
+        <!--<link rel='stylesheet' media='screen and (min-width: 630px)' href='css/medium.css' />-->
 		<script type="text/javascript" src="../jquery-2.0.3.min.js"></script></head>
 	<script src="../../common/context-path-helper.js"></script>
-	<script src="../../common/JS/room.js"></script>
+	<script src="../../common/JS/viewer.js"></script>
 	</head>
 <body>
 <h1 id="gameTitle">My poker game</h1><!--need to replace with the real name of the game-->
@@ -60,8 +60,8 @@
                         <h4>Chat</h4>
                         <div id="chatarea" class="span6"></div>
                         <form id="chatform" method="POST" action="sendChat">
-                            <input type="text" id="userstring" name="userstring"/>
-                            <input type="submit" value="Send"/>
+                            <input type="text" id="userstring" name="userstring" disabled/>
+                            <input type="submit" value="Send" disabled/>
                         </form>
                     </div>
                 </div>
@@ -76,13 +76,13 @@
                             <!--כאן יכול להיכנס שחקן-->
                             <div id="seat1" class="card" valign="top">
                                 <h3 style=text-align:center></h3>
-                                <p class="type" ><b>type:</b> H</p> <!--here the user type-->
-								<p class="state"><b>state:</b> D</p><!--here the user state-->
-								<p class="chips"><b>chips:</b> 250</p><!--here the user chips-->
-								<p class="buys"><b>buys:</b> 3</p><!--here the user buys-->
-								<p class="Hand_Won"><b>Hand_Won:</b> 5/10</p><!--here the user Hand_Won-->
-								<img id='player1_crad1' src="../../common/images/back.png" Height="50.0" Width="40.0" class="myCards">
-								<img id='player1_crad2' src="../../common/images/back.png" Height="50.0" Width="40.0" class="myCards">
+                                <p ><b></b></p> <!--here the user type-->
+                                <p ><b></b></p><!--here the user state-->
+                                <p ><b></b></p><!--here the user chips-->
+                                <p><b></b> </p><!--here the user buys-->
+                                <p ><b></b> </p><!--here the user Hand_Won-->
+								<img id='seat1_crad1' src="../../common/images/back.png" Height="50.0" Width="40.0" class="myCards" >
+								<img id='seat1_crad2' src="../../common/images/back.png" Height="50.0" Width="40.0" class="myCards" >
                             </div>
                         </td>
 
@@ -91,18 +91,13 @@
                             <!--כאן יכול להיכנס שחקן-->
                             <div id="seat2" class="card"   valign="top">
                                 <h3 style=text-align:center></h3>
-                                <!--p ><b></b></p--> <!--here the user type-->
-                                <!--p ><b></b></p--><!--here the user state-->
-                                <!--p ><b></b></p--><!--here the user chips-->
-                                <!--p ><b></b></p--><!--here the user buys-->
-                                <!--p ><b></b></p--><!--here the user Hand_Won-->
-								<p class="type" ><b>type:</b> H</p> <!--here the user type-->
-								<p class="state"><b>state:</b> D</p><!--here the user state-->
-								<p class="chips"><b>chips:</b> 250</p><!--here the user chips-->
-								<p class="buys"><b>buys:</b> 3</p><!--here the user buys-->
-								<p class="Hand_Won"><b>Hand_Won:</b> 5/10</p><!--here the user Hand_Won-->
-								<img id='player2_crad1' src="../../common/images/back.png" Height="50.0" Width="40.0" class="myCards">
-								<img id='player2_crad2' src="../../common/images/back.png" Height="50.0" Width="40.0" class="myCards">
+                                <p ><b></b></p> <!--here the user type-->
+                                <p ><b></b></p><!--here the user state-->
+                                <p ><b></b></p><!--here the user chips-->
+                                <p><b></b> </p><!--here the user buys-->
+                                <p ><b></b> </p><!--here the user Hand_Won-->
+								<img id='seat2_crad1' src="../../common/images/back.png" Height="50.0" Width="40.0" class="myCards" >
+								<img id='seat2_crad2' src="../../common/images/back.png" Height="50.0" Width="40.0" class="myCards" >
 
                             </div>
 
@@ -112,18 +107,13 @@
                             <!--כאן יכול להיכנס שחקן-->
                             <div id="seat3" class="card"   valign="top">
                                 <h3 style=text-align:center></h3>
-                                 <!--p ><b></b></p--> <!--here the user type-->
-                                <!--p ><b></b></p--><!--here the user state-->
-                                <!--p ><b></b></p--><!--here the user chips-->
-                                <!--p ><b></b></p--><!--here the user buys-->
-                                <!--p ><b></b></p--><!--here the user Hand_Won-->
-								<p class="type" ><b>type:</b> H</p> <!--here the user type-->
-								<p class="state"><b>state:</b> D</p><!--here the user state-->
-								<p class="chips"><b>chips:</b> 250</p><!--here the user chips-->
-								<p class="buys"><b>buys:</b> 3</p><!--here the user buys-->
-								<p class="Hand_Won"><b>Hand_Won:</b> 5/10</p><!--here the user Hand_Won-->
-								<img id='player3_crad1' src="../../common/images/back.png" Height="50.0" Width="40.0" class="myCards">
-								<img id='player3_crad2' src="../../common/images/back.png" Height="50.0" Width="40.0" class="myCards">
+                                <p ><b></b></p> <!--here the user type-->
+                                <p ><b></b></p><!--here the user state-->
+                                <p ><b></b></p><!--here the user chips-->
+                                <p><b></b> </p><!--here the user buys-->
+                                <p ><b></b> </p><!--here the user Hand_Won-->
+								<img id='seat3_crad1' src="../../common/images/back.png" Height="50.0" Width="40.0" class="myCards" >
+								<img id='seat3_crad2' src="../../common/images/back.png" Height="50.0" Width="40.0" class="myCards" >
 
                             </div>
 
@@ -137,18 +127,13 @@
                             <!--כאן יכול להיכנס שחקן-->
                             <div id="seat4" class="card" valign="top" >
                                 <h3 style=text-align:center></h3>
-                                 <!--p ><b></b></p--> <!--here the user type-->
-                                <!--p ><b></b></p--><!--here the user state-->
-                                <!--p ><b></b></p--><!--here the user chips-->
-                                <!--p ><b></b></p--><!--here the user buys-->
-                                <!--p ><b></b></p--><!--here the user Hand_Won-->
-								<p class="type" ><b>type:</b> H</p> <!--here the user type-->
-								<p class="state"><b>state:</b> D</p><!--here the user state-->
-								<p class="chips"><b>chips:</b> 250</p><!--here the user chips-->
-								<p class="buys"><b>buys:</b> 3</p><!--here the user buys-->
-								<p class="Hand_Won"><b>Hand_Won:</b> 5/10</p><!--here the user Hand_Won-->
-								<img id='player4_crad1' src="../../common/images/back.png" Height="50.0" Width="40.0" class="myCards">
-								<img id='player4_crad2' src="../../common/images/back.png" Height="50.0" Width="40.0" class="myCards">
+                                <p ><b></b></p> <!--here the user type-->
+                                <p ><b></b></p><!--here the user state-->
+                                <p ><b></b></p><!--here the user chips-->
+                                <p><b></b> </p><!--here the user buys-->
+                                <p ><b></b> </p><!--here the user Hand_Won-->
+								<img id='seat4_crad1' src="../../common/images/back.png" Height="50.0" Width="40.0" class="myCards" >
+								<img id='seat4_crad2' src="../../common/images/back.png" Height="50.0" Width="40.0" class="myCards" >
 
 
                             </div>
@@ -188,18 +173,13 @@
                             <!--כאן יכול להיכנס שחקן-->
                             <div id="seat5" class="card"   valign="top">
                                 <h3 style=text-align:center></h3>
-                                <!--p ><b></b></p--> <!--here the user type-->
-                                <!--p ><b></b></p--><!--here the user state-->
-                                <!--p ><b></b></p--><!--here the user chips-->
-                                <!--p ><b></b></p--><!--here the user buys-->
-                                <!--p ><b></b></p--><!--here the user Hand_Won-->
-								<p class="type" ><b>type:</b> H</p> <!--here the user type-->
-								<p class="state"><b>state:</b> D</p><!--here the user state-->
-								<p class="chips"><b>chips:</b> 250</p><!--here the user chips-->
-								<p class="buys"><b>buys:</b> 3</p><!--here the user buys-->
-								<p class="Hand_Won"><b>Hand_Won:</b> 5/10</p><!--here the user Hand_Won-->
-								<img id='player5_crad1' src="../../common/images/back.png" Height="50.0" Width="40.0" class="myCards">
-								<img id='player5_crad2' src="../../common/images/back.png" Height="50.0" Width="40.0" class="myCards">
+                                <p ><b></b></p> <!--here the user type-->
+                                <p ><b></b></p><!--here the user state-->
+                                <p ><b></b></p><!--here the user chips-->
+                                <p><b></b> </p><!--here the user buys-->
+                                <p ><b></b> </p><!--here the user Hand_Won-->
+								<img id='seat5_crad1' src="../../common/images/back.png" Height="50.0" Width="40.0" class="myCards" >
+								<img id='seat5_crad2' src="../../common/images/back.png" Height="50.0" Width="40.0" class="myCards" >
 
                             </div>
 
@@ -215,18 +195,13 @@
                             <!--כאן יכול להיכנס שחקן-->
                             <div id="seat6" class="card"   valign="top">
                                 <h3 style=text-align:center></h3>
-                                <!--p ><b></b></p--> <!--here the user type-->
-                                <!--p ><b></b></p--><!--here the user state-->
-                                <!--p ><b></b></p--><!--here the user chips-->
-                                <!--p ><b></b></p--><!--here the user buys-->
-                                <!--p ><b></b></p--><!--here the user Hand_Won-->
-								<p class="type" ><b>type:</b> H</p> <!--here the user type-->
-								<p class="state"><b>state:</b> D</p><!--here the user state-->
-								<p class="chips"><b>chips:</b> 250</p><!--here the user chips-->
-								<p class="buys"><b>buys:</b> 3</p><!--here the user buys-->
-								<p class="Hand_Won"><b>Hand_Won:</b> 5/10</p><!--here the user Hand_Won-->
-								<img id='player6_crad1' src="../../common/images/back.png" Height="50.0" Width="40.0" class="myCards">
-								<img id='player6_crad2' src="../../common/images/back.png" Height="50.0" Width="40.0" class="myCards">
+                                <p ><b></b></p> <!--here the user type-->
+                                <p ><b></b></p><!--here the user state-->
+                                <p ><b></b></p><!--here the user chips-->
+                                <p><b></b> </p><!--here the user buys-->
+                                <p ><b></b> </p><!--here the user Hand_Won-->
+								<img id='seat6_crad1' src="../../common/images/back.png" Height="50.0" Width="40.0" class="myCards" >
+								<img id='seat6_crad2' src="../../common/images/back.png" Height="50.0" Width="40.0" class="myCards" >
 
                             </div>
 
@@ -276,7 +251,7 @@
 				</table>
                 <br><br>
                 <h3>Viewers:</h3>
-				<ul id="Viewers" class ="Viewers" align="center-right">
+				<ul id="viewers" class ="Viewers" align="center-right">
 
 						<li>avital</li>
 						<br>

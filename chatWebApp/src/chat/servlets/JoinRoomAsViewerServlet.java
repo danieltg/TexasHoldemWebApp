@@ -1,43 +1,38 @@
 package chat.servlets;
 
 import Engine.Lobby;
-import Engine.users.Info;
+import Engine.users.UserManager;
 import chat.utils.ServletUtils;
 import chat.utils.SessionUtils;
-import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/gameuserlist")
-public class GameUsersListServlet extends HttpServlet {
+import static chat.constants.Constants.GAME_TITLE;
+
+@WebServlet("/joinRoomAsViewer")
+public class JoinRoomAsViewerServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //returning JSON objects, not HTML
-        response.setContentType("application/json");
+        response.setContentType("text/html;charset=UTF-8");
 
-        String usernameFromSession = SessionUtils.getUsername(request);
         Lobby lobby=ServletUtils.getLobby(getServletContext());
+        String username = SessionUtils.getUsername(request);
+        UserManager userManager = ServletUtils.getUserManager(getServletContext());
+        String roomName = request.getParameter(GAME_TITLE);
 
-        String roomName= lobby.getRoomNameByPlayerName(usernameFromSession);
-        Map<String,String> users= lobby.getRoomByName(roomName).getUsersInGame();
+        String playerType=userManager.getUsers().get(username);
+        lobby.addViewerToRoom(roomName,username,playerType);
+        System.out.println("User: "+ username +" joined room: "+roomName + " as viewer");
+        PrintWriter out = response.getWriter();
+        out.print(roomName);
 
-        Info foo = new Info(usernameFromSession,users);
-
-        try (PrintWriter out = response.getWriter()) {
-
-            Gson gson = new Gson();
-            String json = gson.toJson(foo);
-            out.println(json);
-            out.flush();
-        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -79,4 +74,3 @@ public class GameUsersListServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 }
-

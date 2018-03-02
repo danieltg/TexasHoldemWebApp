@@ -67,6 +67,7 @@ function refreshGamesList(games) {
         "<th align=center><b>Buy</b></th>" +
         "<th align=center><b>Fixed Blindes</b></th>" +
         "<th align=center><b>Join Game</b></th>" +
+        "<th align=center><b>Join as Viewer</b></th>" +
     "</tr>")
         .appendTo('#games_table');
 
@@ -92,7 +93,8 @@ function refreshGamesList(games) {
             "<td align=center>" + games.structure.blindes.small + "</td>" +
             "<td align=center>" + games.structure.buy + "</td>"+
             "<td align=center>" + games.structure.blindes.fixed +"</td>"+
-            "<td align=center><button class='joinGame' onclick='joinGame(this.value)' id='"+games.gameTitle+"' value='"+games.gameTitle+"'>Join Game</button></td>")
+            "<td align=center><button class='joinGame' onclick='joinGame(this.value)' id='"+games.gameTitle+"' value='"+games.gameTitle+"'>Join Game</button></td>"+
+            "<td align=center><button class='joinGameAsViewer' onclick='joinGameAsViewer(this.value)' id='v_"+games.gameTitle+"' value='"+games.gameTitle+"'>Join Game As Viewer</button></td>")
             .appendTo('#games_table');
 
         if (games.registeredPlayers== games.numberOfPlayers || (games.status).toLowerCase()=="running") {
@@ -132,6 +134,21 @@ function joinGame(val){
     });
 }
 
+
+function joinGameAsViewer(val){
+    $.ajax({
+        data: "gameTitle=" + val,
+        url: '/joinRoomAsViewer',
+        timeout: 7000,
+        error: function(){
+            console.log("Failed to send ajax");
+        },
+        success: function(response) {
+            console.info(response);
+            window.location.href = '/pages/gameRoom/roomGameViewer.html';
+        }
+    });
+}
 
 //users = a list of usernames, essentially an array of javascript strings:
 // ["moshe","nachum","nachche"...]

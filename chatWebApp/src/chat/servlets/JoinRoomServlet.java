@@ -18,8 +18,6 @@ import static chat.constants.Constants.GAME_TITLE;
 @WebServlet("/joinRoom")
 public class JoinRoomServlet extends HttpServlet {
 
-    private final String LOBBY_ROOM_URL = "../pages/gameRoom/room.html";
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
