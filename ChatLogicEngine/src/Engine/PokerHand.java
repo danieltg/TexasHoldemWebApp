@@ -765,7 +765,7 @@ public class PokerHand {
     private void check(PokerPlayer player) {
         if (getLastRaise() == null)
             setLastRaise(player);
-
+        setCurrentBet(0);
         player.setBet(0);
         setLastAction("K");
         setLastActionInfo(0);
@@ -891,10 +891,12 @@ public class PokerHand {
             {
                 options.add("F");
                 options.add("K");
+
                 if (currentBet==0)
                 {
                     options.add("B");
                 }
+
 
             }
         }
