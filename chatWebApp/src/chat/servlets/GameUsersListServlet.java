@@ -25,18 +25,19 @@ public class GameUsersListServlet extends HttpServlet {
 
         String usernameFromSession = SessionUtils.getUsername(request);
         Lobby lobby=ServletUtils.getLobby(getServletContext());
+        if (usernameFromSession!=null) {
+            String roomName = lobby.getRoomNameByPlayerName(usernameFromSession);
+            Map<String, String> users = lobby.getRoomByName(roomName).getUsersInGame();
 
-        String roomName= lobby.getRoomNameByPlayerName(usernameFromSession);
-        Map<String,String> users= lobby.getRoomByName(roomName).getUsersInGame();
+            Info foo = new Info(usernameFromSession, users);
 
-        Info foo = new Info(usernameFromSession,users);
+            try (PrintWriter out = response.getWriter()) {
 
-        try (PrintWriter out = response.getWriter()) {
-
-            Gson gson = new Gson();
-            String json = gson.toJson(foo);
-            out.println(json);
-            out.flush();
+                Gson gson = new Gson();
+                String json = gson.toJson(foo);
+                out.println(json);
+                out.flush();
+            }
         }
     }
 

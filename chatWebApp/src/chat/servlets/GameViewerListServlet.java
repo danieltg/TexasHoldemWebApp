@@ -24,15 +24,18 @@ public class GameViewerListServlet extends HttpServlet {
 
         Lobby lobby=ServletUtils.getLobby(getServletContext());
         String username = SessionUtils.getUsername(request);
+        if (username!=null) {
 
-        String roomName= lobby.getRoomNameByPlayerName(username);
-        Map<String,String> viewers= lobby.getRoomByName(roomName).getViewers();
-        Gson gson = new Gson();
 
-        try (PrintWriter out = response.getWriter()) {
-            String json = gson.toJson(viewers);
-            out.println(json);
-            out.flush();
+            String roomName = lobby.getRoomNameByPlayerName(username);
+            Map<String, String> viewers = lobby.getRoomByName(roomName).getViewers();
+            Gson gson = new Gson();
+
+            try (PrintWriter out = response.getWriter()) {
+                String json = gson.toJson(viewers);
+                out.println(json);
+                out.flush();
+            }
         }
     }
 

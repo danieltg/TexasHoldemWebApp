@@ -26,15 +26,29 @@ public class GameManagerSettingsServlet extends HttpServlet {
         {
             Lobby lobby= ServletUtils.getLobby(getServletContext());
             String usernameFromSession = SessionUtils.getUsername(request);
+            if (usernameFromSession!=null)
+            {
+                String roomName= lobby.getRoomNameByPlayerName(usernameFromSession);
+                if (roomName==null)
+                    System.out.println("roomName is null");
+                Room roomToDisplay=lobby.getRoomByName(roomName);
+                if (roomToDisplay==null)
+                    System.out.println("roomToDisplay is null");
+                GameManager gameManager= roomToDisplay.getGameManager();
+                if (gameManager==null)
+                    System.out.println("gameManager is null");
 
-            String roomName= lobby.getRoomNameByPlayerName(usernameFromSession);
-            Room roomToDisplay=lobby.getRoomByName(roomName);
-            GameManager gameManager= roomToDisplay.getGameManager();
+                Gson gson = new Gson();
+                String json = gson.toJson(gameManager);
+                out.println(json);
+                out.flush();
+            }
 
-            Gson gson = new Gson();
-            String json = gson.toJson(gameManager);
-            out.println(json);
-            out.flush();
+        }
+
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
         }
     }
 

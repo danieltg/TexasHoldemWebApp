@@ -1,6 +1,7 @@
 package chat.servlets;
 
 import Engine.GameDescriptor.PokerGameDescriptor;
+import Engine.GameManager;
 import Engine.Lobby;
 import Engine.PokerHand;
 import Engine.Room;
@@ -24,21 +25,30 @@ public class PokerHandServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("application/json");
-        try (PrintWriter out = response.getWriter())
-        {
-            Lobby lobby=ServletUtils.getLobby(getServletContext());
+        try (PrintWriter out = response.getWriter()) {
+            Lobby lobby = ServletUtils.getLobby(getServletContext());
             String userName = SessionUtils.getUsername(request);
-            String roomName= lobby.getRoomNameByPlayerName(userName);
+            if (userName != null) {
+                String roomName = lobby.getRoomNameByPlayerName(userName);
 
-            Room roomToDisplay=lobby.getRoomByName(roomName);
-            if (roomToDisplay.getRoomState()== RoomState.RUNNING)
-            {
-                PokerHand currHand= roomToDisplay.getGameManager().getCurrHand();
-                Gson gson = new Gson();
-                String json = gson.toJson(currHand);
-                out.println(json);
-                out.flush();
+                if (roomName == null)
+                    System.out.println("roomName is null");
+
+                Room roomToDisplay = lobby.getRoomByName(roomName);
+                if (roomToDisplay == null)
+                    System.out.println("roomToDisplay is null");
+                if (roomToDisplay.getRoomState() == RoomState.RUNNING) {
+                    PokerHand currHand = roomToDisplay.getGameManager().getCurrHand();
+                    Gson gson = new Gson();
+                    String json = gson.toJson(currHand);
+                    out.println(json);
+                    out.flush();
+                }
             }
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
         }
     }
 

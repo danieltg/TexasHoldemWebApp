@@ -26,15 +26,16 @@ public class GameSettingsServlet extends HttpServlet {
         {
             String usernameFromSession = SessionUtils.getUsername(request);
             Lobby lobby=ServletUtils.getLobby(getServletContext());
+            if (usernameFromSession!=null) {
+                String roomName = lobby.getRoomNameByPlayerName(usernameFromSession);
+                Room roomToDisplay = lobby.getRoomByName(roomName);
+                PokerGameDescriptor gameDescriptor = roomToDisplay.getGameManager().getGameDescriptor();
 
-            String roomName= lobby.getRoomNameByPlayerName(usernameFromSession);
-            Room roomToDisplay=lobby.getRoomByName(roomName);
-            PokerGameDescriptor gameDescriptor= roomToDisplay.getGameManager().getGameDescriptor();
-
-            Gson gson = new Gson();
-            String json = gson.toJson(gameDescriptor);
-            out.println(json);
-            out.flush();
+                Gson gson = new Gson();
+                String json = gson.toJson(gameDescriptor);
+                out.println(json);
+                out.flush();
+            }
         }
     }
 

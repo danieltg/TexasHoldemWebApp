@@ -21,25 +21,40 @@ public class MessageToDisplayServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        String username = SessionUtils.getUsername(request);
-        Lobby lobby=ServletUtils.getLobby(getServletContext());
+        try {
+            String username = SessionUtils.getUsername(request);
+            Lobby lobby=ServletUtils.getLobby(getServletContext());
 
-        String roomName= lobby.getRoomNameByPlayerName(username);
-        Room room=lobby.getRoomByName(roomName);
-        String message= room.getGameManager().getMessageToDisplay();
-        PrintWriter out = response.getWriter();
+            if (username!=null) {
+                String roomName = lobby.getRoomNameByPlayerName(username);
+                if (roomName == null)
+                    System.out.println("roomName is null");
 
-        if (message== null || room.getGameManager().getPlayerByName(username).didGotMessage())
-        {
-            //user already got the message so we don't want to show it again
-            response.setStatus(400);
-            out.flush();
+                Room room = lobby.getRoomByName(roomName);
+                if (room == null)
+                    System.out.println("room is null");
+
+                String message = room.getGameManager().getMessageToDisplay();
+                if (message == null)
+                    System.out.println("message is null");
+
+                PrintWriter out = response.getWriter();
+
+                if (message == null || room.getGameManager().getPlayerByName(username).didGotMessage()) {
+                    //user already got the message so we don't want to show it again
+                    response.setStatus(400);
+                    out.flush();
+                } else {
+                    room.getGameManager().userGotMessage(username);
+                    out.print("Hey " + username + "&&&" + message);
+                }
+            }
         }
-        else
+        catch (Exception e)
         {
-            room.getGameManager().userGotMessage(username);
-            out.print("Hey "+username +"&&&"+message);
+            System.out.println(e.getMessage());
         }
+
 
     }
 
