@@ -287,6 +287,27 @@ function updatePageWithHandEnd()
 
 }
 
+
+
+function ajaxViewerList() {
+    $.ajax({
+        url: '/gameViewers',
+        success: function(info) {
+            refreshViewerList(info);
+        }
+    });
+}
+
+function refreshViewerList(users) {
+
+    $("#viewers").empty();
+
+    $.each(users || [], function(username, playerType) {
+        $('<li>' + username+ ' ('+playerType + ')'+'</li>').appendTo($("#viewers"));
+    });
+
+}
+
 function clearCards()
 {
     var loc="../../common/images/back.png";
@@ -387,6 +408,7 @@ function refreshGameSettings(games) {
     document.getElementById("statusValue").innerText= games.status;
     document.getElementById("handsCount").innerText=games.structure.handsCount;
 
+    ajaxViewerList();
     var status=games.status.toLowerCase();
 
     if (status.toLowerCase()=="waiting")

@@ -80,7 +80,8 @@ public class Room {
     }
     public void removeUserFromRoom(String userName) {
 
-        try {
+        if (usersInGame.containsKey(userName))
+        {
             usersInGame.remove(userName);
             updateRegisteredPlayersOnRemove();
             if (getRoomState()==RoomState.RUNNING)
@@ -90,7 +91,7 @@ public class Room {
                 getGameManager().getPlayerByName(userName).setLeave(true);
             }
         }
-        catch (Exception e)
+        else
         {
             viewerInGame.remove(userName);
         }
