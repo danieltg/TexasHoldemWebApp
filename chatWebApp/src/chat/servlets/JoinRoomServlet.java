@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import static chat.constants.Constants.GAME_TITLE;
 
-@WebServlet("/joinRoom")
+//@WebServlet("/joinRoom")
 public class JoinRoomServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

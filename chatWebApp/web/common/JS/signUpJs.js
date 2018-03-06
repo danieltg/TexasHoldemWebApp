@@ -5,7 +5,8 @@ $(function() {
 
         $.ajax({
             data: parameters,
-            url: this.action,
+            url: buildUrlWithContextPath("login"),
+            //url: this.action,
 
             error: function(jqXHR) {
                 console.error("Failed to submit");
@@ -13,7 +14,11 @@ $(function() {
             },
 
             success: function(r) {
-                window.location.href = '/pages/PokerLobby/lobby.html';
+                var s= buildUrlWithContextPath("lobby");
+                console.info(s);
+
+                window.location.href=s+".html";
+
             }
         });
 

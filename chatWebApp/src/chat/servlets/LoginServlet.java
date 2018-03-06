@@ -7,7 +7,6 @@ import Engine.users.UserManager;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,12 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 import static chat.constants.Constants.USERNAME;
 import static chat.constants.Constants.PLAYER_TYPE;
 
-@WebServlet("/login")
+//@WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 
-    private final String LOBBY_ROOM_URL = "../pages/PokerLobby/lobby.html";
+    private final String LOBBY_ROOM_URL = "../lobby.html";
     private final String SIGN_UP_URL = "../signup/singup.html";
-    private final String LOGIN_ERROR_URL = "/pages/loginerror/login_attempt_after_error.jsp";  // must start with '/' since will be used in request dispatcher...
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -31,6 +29,7 @@ public class LoginServlet extends HttpServlet {
             //user is not logged in yet
             String usernameFromParameter = request.getParameter(USERNAME);
             String playerTypeFromParameter=request.getParameter(PLAYER_TYPE);
+            PrintWriter out = response.getWriter();
 
             if (usernameFromParameter == null) {
                 //no username in session and no username in parameter - redirect back to the index page
@@ -47,7 +46,7 @@ public class LoginServlet extends HttpServlet {
                     // and is relative to the web app root
                     // see this link for more details:
                     // http://timjansen.github.io/jarfiller/guide/servlet25/requestdispatcher.xhtml
-                    PrintWriter out = response.getWriter();
+
                     response.setStatus(400);
                     out.print(errorMessage);
 
@@ -61,12 +60,14 @@ public class LoginServlet extends HttpServlet {
 
                     //redirect the request to the lobby room - in order to actually change the URL
                     System.out.println("On login, request URI is: " + request.getRequestURI());
-                    response.sendRedirect(LOBBY_ROOM_URL);
+                    //response.sendRedirect(LOBBY_ROOM_URL);
+                    out.println("ok");
                 }
             }
         } else {
             //user is already logged in
-            response.sendRedirect(LOBBY_ROOM_URL);
+            response.setStatus(HttpServletResponse.SC_OK);
+            //response.sendRedirect(LOBBY_ROOM_URL);
         }
     }
 

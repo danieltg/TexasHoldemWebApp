@@ -12,7 +12,7 @@ $(function() {
         $.ajax({
             method:'POST',
             data: formData,
-            url: this.action,
+            url: buildUrlWithContextPath("upload"),
             processData: false, // Don't process the files
             contentType: false, // Set content type to false as jQuery will tell the server its a query string request
             timeout: 4000,
@@ -34,7 +34,7 @@ $(function() {
 
 function ajaxUsersList() {
     $.ajax({
-        url: '/userlist',
+        url: buildUrlWithContextPath("userlist"),
         success: function(info) {
             refreshUsersList(info);
         }
@@ -43,7 +43,7 @@ function ajaxUsersList() {
 
 function ajaxGamesList() {
     $.ajax({
-        url: '/gamesList',
+        url: buildUrlWithContextPath("gamesList"),
         success: function(games) {
             refreshGamesList(games);
         }
@@ -107,14 +107,16 @@ function refreshGamesList(games) {
 function Logout()
 {
     $.ajax({
-        url: '/logout',
+        url:buildUrlWithContextPath("logout"),
         timeout: 7000,
         error: function(){
             console.log("Failed to send ajax");
         },
         success: function(response) {
             console.info(response);
-            window.location.href = '/pages/signup/signUpPage.html';
+            var s= buildUrlWithContextPath("signup");
+            console.info(s);
+            window.location.href=s+".html"
         }
     });
 }
@@ -122,14 +124,17 @@ function Logout()
 function joinGame(val){
     $.ajax({
         data: "gameTitle=" + val,
-        url: '/joinRoom',
+        url: buildUrlWithContextPath("joinRoom"),
         timeout: 7000,
         error: function(){
             console.log("Failed to send ajax");
         },
         success: function(response) {
             console.info(response);
-            window.location.href = '/pages/gameRoom/room.html';
+            var s= buildUrlWithContextPath("room");
+            console.info(s);
+            window.location.href=s+".html";
+
         }
     });
 }
@@ -138,14 +143,16 @@ function joinGame(val){
 function joinGameAsViewer(val){
     $.ajax({
         data: "gameTitle=" + val,
-        url: '/joinRoomAsViewer',
+        url: buildUrlWithContextPath("joinRoomAsViewer"),
         timeout: 7000,
         error: function(){
             console.log("Failed to send ajax");
         },
         success: function(response) {
             console.info(response);
-            window.location.href = '/pages/gameRoom/roomGameViewer.html';
+            var s= buildUrlWithContextPath("roomGameViewer");
+            console.info(s);
+            window.location.href=s+".html";
         }
     });
 }

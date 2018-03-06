@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name=viewport content="width=device-width, initial-scale=1, user-scalable=yes">
+    <title>Texas Holdem Poker Game</title>
+    <link rel="stylesheet" href="common/CSS/signUpCss.css">
+
+    <script type="text/javascript" src="jquery-2.0.3.min.js"></script></head>
+    <script src="common/context-path-helper.js"></script>
+    <script src="common/JS/signUpJs.js"></script>
+
+</head>
+<body>
+<table align=center  >
+    <tr>
+        <td valign="top" align="center">
+            <img src="common/images/TexasHoldemHomePage.jpg" height=250>
+            <div align="center">
+                <br>
+                <h1> Texas Holdem Poker Game </h1></div>
+        </td>
+    </tr>
+</table>
+
+
+<form id= "addUser" name="form1" method="GET" action="/login">
+    <div class="container">
+        <table width="350" align=center  >
+            <tr>
+                <td height="43" width="90%" align=center>
+                    <label><b>Name:</font></b></label>
+                    <input  height="44" width="54%" required type="text" name="username" placeholder="Enter name" class="signup" size=13>
+                </td>
+
+            </tr>
+
+            <tr>
+                <td height="43" width="90%" align=center>
+                    <label><b>Type of player:</font></b></label>
+                    <SELECT  height="44" width="54%"required name="playerType">
+                        <OPTION VALUE=""> Please select </OPTION>
+                        <OPTION VALUE="HUMAN">HUMAN </OPTION>
+                        <OPTION VALUE="COMPUTER">COMPUTER</OPTION>
+                    </SELECT>
+                    <br>
+               </td>
+
+            </tr>
+        </table>
+           <br>
+           <br>
+        <table width="400" align=center  >
+            <tr >
+                            <td height="27" >
+                    <div align="center">
+
+                        <button   onclick=go()> Sign Up </button>
+
+                    </div>
+                </td>
+            </tr>
+
+        </table>
+
+        <div id="result"></div>
+    </div>
+</form>
+</body>
+</html>

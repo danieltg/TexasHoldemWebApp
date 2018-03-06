@@ -1,7 +1,6 @@
 package chat.servlets;
 
 import Engine.Lobby;
-import Engine.users.Info;
 import chat.utils.ServletUtils;
 import chat.utils.SessionUtils;
 import com.google.gson.Gson;
@@ -10,12 +9,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Map;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/gameViewers")
+//@WebServlet("/gameViewers")
 public class GameViewerListServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

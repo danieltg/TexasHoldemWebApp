@@ -9,20 +9,22 @@ var showButtons=true;
 function LeaveRoom()
 {
     $.ajax({
-        url: '/LeaveRoom',
+        url: buildUrlWithContextPath("LeaveRoom"),
         timeout: 7000,
         error: function(){
             console.log("Failed to send ajax");
         },
         success: function(response) {
-            window.location.href = '/pages/PokerLobby/lobby.html'
+            var s= buildUrlWithContextPath("lobby");
+            console.info(s);
+            window.location.href=s+".html";
         }
     });
 }
 
 function ajaxUsersList() {
     $.ajax({
-        url: '/gameuserlist',
+        url: buildUrlWithContextPath("gameuserlist"),
         success: function(info) {
             refreshUsersList(info);
         }
@@ -31,7 +33,7 @@ function ajaxUsersList() {
 
 function ajaxGameSettings() {
     $.ajax({
-        url: '/gameSettings',
+        url: buildUrlWithContextPath("gameSettings"),
         success: function(games) {
             refreshGameSettings(games);
         }
@@ -40,7 +42,7 @@ function ajaxGameSettings() {
 
 function ajaxGameManagerSettings() {
     $.ajax({
-        url: '/gameManagerSettings',
+        url: buildUrlWithContextPath("gameManagerSettings"),
         success: function(games) {
             refreshGameManagerSettings(games);
         }
@@ -49,7 +51,7 @@ function ajaxGameManagerSettings() {
 
 function ajaxPokerHand() {
     $.ajax({
-        url: '/getPokerHand',
+        url: buildUrlWithContextPath("getPokerHand"),
         success: function(pokerHand) {
             refreshPokerHandSettings(pokerHand);
         }
@@ -58,7 +60,7 @@ function ajaxPokerHand() {
 
 function ajaxPlayerInfo() {
     $.ajax({
-        url: '/getPlayerInfo',
+        url: buildUrlWithContextPath("getPlayerInfo"),
         success: function(player) {
             if (player!=null)
             {
@@ -80,7 +82,10 @@ function refreshPlayerInfo(player)
     $.each(cards || [], function(index,value) {
         if (value!='??' && showCards)
         {
-            var loc="../../common/images/cards/"+value+".png";
+            //var loc=buildUrlWithContextPath("../../common/images/cards")+value+".png";
+            var loc= buildUrlWithContextPath("common/images/cards/");
+            loc= loc +value+".png";
+            //var loc="../../common/images/cards/"+value+".png";
             document.getElementById("player_crad"+(index+1)).src=loc;
         }
     });
@@ -134,7 +139,8 @@ function refreshPokerHandSettings(pokerHand) {
         $.each(cards || [], function(index,value) {
             if (value!='??')
             {
-                var loc="../../common/images/cards/"+value+".png";
+                var loc=buildUrlWithContextPath("common/images/cards/")+value+".png";
+                //var loc="../../common/images/cards/"+value+".png";
                 document.getElementById("crad"+(index+1)).src=loc;
             }
         });
@@ -182,7 +188,10 @@ function refreshPokerHandSettings(pokerHand) {
     else if (state.toLowerCase()=="gameover")
     {
         updatePageWithGameOver();
-        window.location.href = '/pages/gameRoom/room.html';
+
+        var s= buildUrlWithContextPath("room");
+        console.info(s);
+        window.location.href=s+".html";
     }
 }
 
@@ -190,7 +199,7 @@ function refreshPokerHandSettings(pokerHand) {
 function updatePageWithGameOver()
 {
     $.ajax({
-        url: '/getMessageToDisplay',
+        url: buildUrlWithContextPath("getMessageToDisplay"),
         timeout: 7000,
         error: function(){
             console.log("User already got this message");
@@ -238,7 +247,7 @@ function clearPlayersCard()
 
 function buy() {
     $.ajax({
-        url: '/buy',
+        url: buildUrlWithContextPath("buy"),
         timeout: 2000,
 
         success: function(response) {
@@ -251,7 +260,7 @@ function buy() {
 function updatePageWithHandEnd()
 {
     $.ajax({
-        url: '/getMessageToDisplay',
+        url: buildUrlWithContextPath("getMessageToDisplay"),
         timeout: 7000,
         error: function(){
             console.log("User already got this message");
@@ -291,7 +300,7 @@ function updatePageWithHandEnd()
 
 function ajaxViewerList() {
     $.ajax({
-        url: '/gameViewers',
+        url: buildUrlWithContextPath("gameViewers"),
         success: function(info) {
             refreshViewerList(info);
         }
@@ -310,7 +319,9 @@ function refreshViewerList(users) {
 
 function clearCards()
 {
-    var loc="../../common/images/back.png";
+    var loc=buildUrlWithContextPath("common/images/back.png");
+
+    //var loc="../../common/images/back.png";
     document.getElementById("player_crad1").src=loc;
     document.getElementById("player_crad2").src=loc;
 
@@ -324,7 +335,7 @@ function clearCards()
 function startNewHand()
 {
     $.ajax({
-        url: '/startNewHand',
+        url: buildUrlWithContextPath("startNewHand"),
         timeout: 7000,
         error: function(){
             console.log("Failed to send ajax");
@@ -347,7 +358,7 @@ function updateSelection(action, info)
     console.info("Selection is: "+action +" ,info: "+info);
 
     $.ajax({
-        url: '/updatePlayerSelection',
+        url: buildUrlWithContextPath("updatePlayerSelection"),
         data:
             {
                 actionToDo: action,
@@ -466,7 +477,7 @@ function triggerAjaxChatContent() {
 
 function ajaxChatContent() {
     $.ajax({
-        url: "/chat",
+        url: buildUrlWithContextPath("chat"),
         data: "chatversion=" + chatVersion,
         dataType: 'json',
         success: function(data) {
@@ -512,7 +523,7 @@ $(function() {
     $("#chatform").submit(function() {
         $.ajax({
             data: $(this).serialize(),
-            url: this.action,
+            url: buildUrlWithContextPath("sendChat"),
             timeout: 2000,
             error: function() {
                 console.error("Failed to submit");

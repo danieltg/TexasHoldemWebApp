@@ -9,20 +9,22 @@ var showButtons=true;
 function LeaveRoom()
 {
     $.ajax({
-        url: '/LeaveRoom',
+        url: buildUrlWithContextPath("LeaveRoom"),
         timeout: 7000,
         error: function(){
             console.log("Failed to send ajax");
         },
         success: function(response) {
-            window.location.href = '/pages/PokerLobby/lobby.html'
+            var s= buildUrlWithContextPath("lobby");
+            console.info(s);
+            window.location.href=s+".html";
         }
     });
 }
 
 function ajaxUsersList() {
     $.ajax({
-        url: '/gameuserlist',
+        url: buildUrlWithContextPath("gameuserlist"),
         success: function(info) {
             refreshUsersList(info);
         }
@@ -31,7 +33,7 @@ function ajaxUsersList() {
 
 function ajaxViewerList() {
     $.ajax({
-        url: '/gameViewers',
+        url: buildUrlWithContextPath("gameViewers"),
         success: function(info) {
             refreshViewerList(info);
         }
@@ -40,7 +42,7 @@ function ajaxViewerList() {
 
 function ajaxGameSettings() {
     $.ajax({
-        url: '/gameSettings',
+        url: buildUrlWithContextPath("gameSettings"),
         success: function(games) {
             refreshGameSettings(games);
         }
@@ -49,7 +51,7 @@ function ajaxGameSettings() {
 
 function ajaxGameManagerSettings() {
     $.ajax({
-        url: '/gameManagerSettings',
+        url: buildUrlWithContextPath("gameManagerSettings"),
         success: function(games) {
             refreshGameManagerSettings(games);
         }
@@ -58,7 +60,7 @@ function ajaxGameManagerSettings() {
 
 function ajaxPokerHand() {
     $.ajax({
-        url: '/getPokerHand',
+        url: buildUrlWithContextPath("getPokerHand"),
         success: function(pokerHand) {
             refreshPokerHandSettings(pokerHand);
         }
@@ -67,7 +69,7 @@ function ajaxPokerHand() {
 
 function ajaxPlayerInfo() {
     $.ajax({
-        url: '/getPlayerInfo',
+        url: buildUrlWithContextPath("getPlayerInfo"),
         success: function(player) {
             if (player!=null)
             {
@@ -201,7 +203,9 @@ function refreshPokerHandSettings(pokerHand) {
     else if (state.toLowerCase()=="gameover")
     {
         updatePageWithGameOver();
-        window.location.href = '/pages/gameRoom/room.html';
+        var s= buildUrlWithContextPath("roomGameViewer");
+        console.info(s);
+        window.location.href=s+".html";
     }
 }
 
@@ -209,7 +213,7 @@ function refreshPokerHandSettings(pokerHand) {
 function updatePageWithGameOver()
 {
     $.ajax({
-        url: '/getMessageToDisplay',
+        url: buildUrlWithContextPath("getMessageToDisplay"),
         timeout: 7000,
         error: function(){
             console.log("User already got this message");
@@ -257,7 +261,7 @@ function clearPlayersCard()
 
 function buy() {
     $.ajax({
-        url: '/buy',
+        url: buildUrlWithContextPath("buy"),
         timeout: 2000,
 
         success: function(response) {
@@ -270,7 +274,7 @@ function buy() {
 function updatePageWithHandEnd()
 {
     $.ajax({
-        url: '/getMessageToDisplay',
+        url: buildUrlWithContextPath("getMessageToDisplay"),
         timeout: 7000,
         error: function(){
             console.log("User already got this message");
@@ -294,7 +298,7 @@ function updatePageWithHandEnd()
             }
 
             var closePopUp = document.createElement("button");
-            closePopUp.id="closePop"
+            closePopUp.id="closePop";
             closePopUp.innerHTML = "Close";
             closePopUp.onclick = closePopUP;
 
@@ -322,7 +326,7 @@ function clearCards()
 function startNewHand()
 {
     $.ajax({
-        url: '/startNewHand',
+        url: buildUrlWithContextPath("startNewHand"),
         timeout: 7000,
         error: function(){
             console.log("Failed to send ajax");
@@ -345,7 +349,7 @@ function updateSelection(action, info)
     console.info("Selection is: "+action +" ,info: "+info);
 
     $.ajax({
-        url: '/updatePlayerSelection',
+        url: buildUrlWithContextPath("updatePlayerSelection"),
         data:
             {
                 actionToDo: action,
@@ -476,7 +480,7 @@ function triggerAjaxChatContent() {
 
 function ajaxChatContent() {
     $.ajax({
-        url: "/chat",
+        url: buildUrlWithContextPath("chat"),
         data: "chatversion=" + chatVersion,
         dataType: 'json',
         success: function(data) {
@@ -522,7 +526,7 @@ $(function() {
     $("#chatform").submit(function() {
         $.ajax({
             data: $(this).serialize(),
-            url: this.action,
+            url: buildUrlWithContextPath("sendChat"),
             timeout: 2000,
             error: function() {
                 console.error("Failed to submit");

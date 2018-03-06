@@ -1,20 +1,18 @@
 package chat.servlets;
 
-import Engine.GameDescriptor.PokerGameDescriptor;
 import Engine.Lobby;
 import Engine.Room;
 import chat.utils.ServletUtils;
 import chat.utils.SessionUtils;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet("/getMessageToDisplay")
+//@WebServlet("/getMessageToDisplay")
 public class MessageToDisplayServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

@@ -3,16 +3,14 @@ package chat.servlets;
 import Engine.Lobby;
 import chat.utils.ServletUtils;
 import chat.utils.SessionUtils;
-import Engine.users.UserManager;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/LeaveRoom")
+//@WebServlet("/LeaveRoom")
 public class LeaveRoomServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
