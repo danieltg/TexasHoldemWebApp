@@ -475,14 +475,13 @@ public class GameManager implements Serializable {
 
             case END:
             {
-                System.out.println("END..."+currHand.getWinnersToDisplay());
+                System.out.println("END... We have some winners");
                 messageToDisplay="We have some winners!\n"+
                         currHand.getWinnersToDisplay();
 
                 saveHandReplayToFile("handReplay.txt");
                 setMoneyFromLastHand(currHand.getPot()%currHand.getNumberOfWinners());
 
-                //alert.setContentText("We are going to clear the game table... You can use the Replay feature to see the previous hand");
                 break;
             }
         }
