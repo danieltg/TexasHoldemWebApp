@@ -195,6 +195,16 @@ function refreshPokerHandSettings(pokerHand) {
     document.getElementById("handNumber").innerText=pokerHand.handNumber;
     document.getElementById("Pot").innerText=pokerHand.pot;
 
+    if (pokerHand.lastAction=='R' || pokerHand.lastAction=='B')
+    {
+        var num= pokerHand.lastActionInfo;
+        var toStr=pokerHand.lastAction+ " ("+num+")";
+        document.getElementById("lastAction").innerText=toStr;
+    }
+    else
+    {
+        document.getElementById("lastAction").innerText=pokerHand.lastAction;
+    }
 
     var state=pokerHand.state;
 
@@ -226,7 +236,6 @@ function updatePageWithGameOver()
             if (answer)
             {
                 console.log("User confirmed the answer");
-                startNewHand();
             }
         }
     });
@@ -240,7 +249,6 @@ function closePopUP()
     popup.classList.toggle("show");
 
     clearCards();
-    startNewHand();
     clearPlayersCard();
 }
 
@@ -291,14 +299,6 @@ function updatePageWithHandEnd()
 
             var popup = document.getElementById("myPopup");
             popup.innerHTML=message;
-            if (showLeaveAndBuy)
-            {
-                var button = document.createElement("button");
-                button.innerHTML = "Buy$$$";
-                button.onclick =buy;
-
-                popup.appendChild(button);
-            }
 
             var closePopUp = document.createElement("button");
             closePopUp.id="closePop";
@@ -329,19 +329,7 @@ function clearCards()
     showCards=false;
 }
 
-function startNewHand()
-{
-    $.ajax({
-        url: buildUrlWithContextPath("startNewHand"),
-        timeout: 7000,
-        error: function(){
-            console.log("Failed to send ajax");
-        },
-        success: function() {
-            console.info("We started a new game");
-        }
-    });
-}
+
 
 function refreshGameManagerSettings(games)
 {
