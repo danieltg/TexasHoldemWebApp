@@ -76,6 +76,11 @@ public class Room {
             gameManager.getPlayers().get(1).setState(PlayerState.SMALL);
             gameManager.getPlayers().get(2).setState(PlayerState.BIG);
         }
+        else
+        {
+            gameManager.getPlayers().get(0).setState(PlayerState.BIG);
+            gameManager.getPlayers().get(1).setState(PlayerState.SMALL);
+        }
 
     }
     public void removeUserFromRoom(String userName) {
@@ -89,6 +94,11 @@ public class Room {
                 getGameManager().getPlayerByName(userName).setAction("F");
                 getGameManager().getPlayerByName(userName).setAdditionalActionInfo(0);
                 getGameManager().getPlayerByName(userName).setLeave(true);
+
+                if (getGameManager().getPlayerByName(userName).isMyTurn())
+                {
+                    getGameManager().playBettingRounds();
+                }
             }
         }
         else

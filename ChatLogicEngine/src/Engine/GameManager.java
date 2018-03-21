@@ -10,6 +10,7 @@ import java.io.Serializable;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
+import static Engine.HandState.END;
 import static Engine.HandState.GameOver;
 import static Engine.Players.PlayerType.Computer;
 import static Engine.Utils.EngineUtils.saveListToFile;
@@ -425,7 +426,7 @@ public class GameManager implements Serializable {
 
     }
 
-    private void playBettingRounds()
+    public void playBettingRounds()
     {
         HandState state= currHand.getHandState();
 
@@ -474,7 +475,7 @@ public class GameManager implements Serializable {
 
             case END:
             {
-
+                System.out.println("END..."+currHand.getWinnersToDisplay());
                 messageToDisplay="We have some winners!\n"+
                         currHand.getWinnersToDisplay();
 
@@ -494,9 +495,21 @@ public class GameManager implements Serializable {
         //check if all user got the message
         if (didAllUserGotTheMessage() && didAllUserConfirmed())
         {
+            System.out.println("All users got the message and confirmed");
+
             if (currHand.getHandState()==HandState.END) {
-                startNewHand();
-                RunOneHand();
+                System.out.println("HandState is END");
+
+                if (doWeHaveMoreThanTwoActivePlayersAtTheStartNewHand()) {
+                    startNewHand();
+                    RunOneHand();
+                }
+                else
+                {
+                    System.out.println("Game over- we have only one player in the game -2");
+                    currHand.setHandState(GameOver);
+                    gameDescriptor.roomEnded();
+                }
             }
             else
             {
@@ -509,17 +522,26 @@ public class GameManager implements Serializable {
     private void removeLeavedPlayers() {
         for (PokerPlayer p: players)
         {
-            if (p.didLeave())
-                players.remove(p);
+            if (p.didLeave()) {
+                System.out.println("Remove "+p.getName() +" from the room.");
+                //players.remove(p);
+            }
+            else
+            {
+                System.out.println("Player "+p.getName()+": GotMessage? "+p.didGotMessage()+" , Confirmed? "+p.didConfirmed());
+            }
         }
     }
 
     private boolean didAllUserConfirmed() {
         for(PokerPlayer p: players)
         {
-            if (!p.didConfirmed())
+            if (!p.didLeave() && !p.didConfirmed()) {
+                System.out.println(p.getName()+" did not confirm yet");
                 return false;
+            }
         }
+        System.out.println("All users confirmed");
         return true;
     }
 
@@ -527,9 +549,12 @@ public class GameManager implements Serializable {
 
         for(PokerPlayer p: players)
         {
-            if (!p.didGotMessage())
+            if (!p.didLeave() && !p.didGotMessage()) {
+                System.out.println(p.getName()+" did not get the message yet");
                 return false;
+            }
         }
+        System.out.println("All users got the message");
         return true;
     }
 
@@ -568,6 +593,12 @@ public class GameManager implements Serializable {
             currPlayer.setAdditionalActionInfo(randomNum);
             currHand.bettingRoundForAPlayer(false);
             addStepToHandReplay();
+
+            if (!doWeHaveMoreThanTwoActivePlayersInTheGame())
+            {
+                System.out.println("Game over- we have only one player in the game -1");
+                currHand.setHandState(HandState.END);
+            }
             playBettingRounds();
         }
         else
@@ -577,7 +608,6 @@ public class GameManager implements Serializable {
                 currHand.bettingRoundForAPlayer(false);
                 addStepToHandReplay();
                 playBettingRounds();
-
             }
             else
             {
@@ -604,6 +634,32 @@ public class GameManager implements Serializable {
 
         System.out.println(username+" got the message");
         getPlayerByName(username).gotMessage(true);
+    }
+
+    public boolean doWeHaveMoreThanTwoActivePlayersInTheGame()
+    {
+        int count=0;
+
+        for (PokerPlayer p: players)
+        {
+            if (!p.didLeave() && !p.isFolded())
+                count++;
+        }
+
+        return (count>1);
+    }
+
+    public boolean doWeHaveMoreThanTwoActivePlayersAtTheStartNewHand()
+    {
+        int count=0;
+
+        for (PokerPlayer p: players)
+        {
+            if (!p.didLeave())
+                count++;
+        }
+
+        return (count>1);
     }
 
 }

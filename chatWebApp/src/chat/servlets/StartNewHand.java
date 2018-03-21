@@ -23,6 +23,7 @@ public class StartNewHand extends HttpServlet {
 
         String roomName= lobby.getRoomNameByPlayerName(username);
         Room room=lobby.getRoomByName(roomName);
+        System.out.println("We are going to start a new hand. Room name: "+roomName);
         room.getGameManager().getPlayerByName(username).setConfirmed(true);
         room.getGameManager().runNewHand();
     }

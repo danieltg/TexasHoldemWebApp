@@ -501,7 +501,7 @@ public class PokerHand {
             {
                 if (!doWeHaveMoreThanTwoActivePlayersInTheGame())
                 {
-                    System.out.println("Game over- we have only one player in the game");
+                    System.out.println("Game over- we have only one player in the game -3");
                     state=END;
                 }
 
@@ -521,7 +521,7 @@ public class PokerHand {
 
                 if (!doWeHaveMoreThanTwoActivePlayersInTheGame())
                 {
-                    System.out.println("Game over- we have only one player in the game");
+                    System.out.println("Game over- we have only one player in the game -4");
                     state=END;
                 }
 
@@ -541,7 +541,7 @@ public class PokerHand {
             {
                 if (!doWeHaveMoreThanTwoActivePlayersInTheGame())
                 {
-                    System.out.println("Game over- we have only one player in the game");
+                    System.out.println("Game over- we have only one player in the game -5");
                     state=END;
                 }
 

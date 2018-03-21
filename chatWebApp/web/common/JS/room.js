@@ -31,6 +31,30 @@ function ajaxUsersList() {
     });
 }
 
+
+function ajaxUsersListForButton() {
+    $.ajax({
+        url: buildUrlWithContextPath("gameuserlist"),
+        success: function(info) {
+            refreshUsersListWhileRunning(info);
+        }
+    });
+}
+
+function refreshUsersListWhileRunning(info) {
+
+    var users=info.users;
+    var active=info.active;
+
+    $.each(users || [], function(username, playerType) {
+        if (active==username && playerType.toLowerCase()=="computer")
+        {
+            showLeaveAndBuy=false;
+            $("#leaveButton").hide();
+        }
+    });
+}
+
 function ajaxGameSettings() {
     $.ajax({
         url: buildUrlWithContextPath("gameSettings"),
@@ -53,6 +77,7 @@ function ajaxPokerHand() {
     $.ajax({
         url: buildUrlWithContextPath("getPokerHand"),
         success: function(pokerHand) {
+            ajaxUsersListForButton();
             refreshPokerHandSettings(pokerHand);
         }
     });
@@ -149,6 +174,7 @@ function refreshPokerHandSettings(pokerHand) {
     var players=pokerHand.players;
 
     $("#userslist").empty();
+
     $.each(players||[], function (index,value){
 
         if (value.isMyTurn)
@@ -466,9 +492,6 @@ function refreshUsersList(info) {
 
         $('<li>' + username+ ' ('+playerType + ')'+'</li>').appendTo($("#userslist"));
     });
-
-
-
 }
 
 function triggerAjaxChatContent() {

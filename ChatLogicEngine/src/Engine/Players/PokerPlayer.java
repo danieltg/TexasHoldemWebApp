@@ -79,6 +79,10 @@ public abstract class PokerPlayer implements Serializable,Cloneable {
             holeCards[i]=new Card();
     }
 
+    public boolean isMyTurn() {
+        return isMyTurn;
+    }
+
     public int getWinnigPrice()
     {
         return winnigPrice;
