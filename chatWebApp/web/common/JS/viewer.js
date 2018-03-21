@@ -91,7 +91,9 @@ function refreshPlayerInfo(player)
     $.each(cards || [], function(index,value) {
         if (value!='??' && showCards)
         {
-            var loc="../../common/images/cards/"+value+".png";
+            //var loc="../../common/images/cards/"+value+".png";
+            var loc= buildUrlWithContextPath("common/images/cards/");
+            loc= loc +value+".png";
             document.getElementById("player_crad"+(index+1)).src=loc;
         }
     });
@@ -145,7 +147,7 @@ function refreshPokerHandSettings(pokerHand) {
         $.each(cards || [], function(index,value) {
             if (value!='??')
             {
-                var loc="../../common/images/cards/"+value+".png";
+                var loc=buildUrlWithContextPath("common/images/cards/")+value+".png";
                 document.getElementById("crad"+(index+1)).src=loc;
             }
         });
@@ -182,7 +184,8 @@ function refreshPokerHandSettings(pokerHand) {
         $.each(cards || [], function(index,value) {
             if (value!='??' && showCards)
             {
-                var loc="../../common/images/cards/"+value+".png";
+                //var loc="../../common/images/cards/"+value+".png";
+                var loc=buildUrlWithContextPath("common/images/cards/")+value+".png";
                 document.getElementById(seatID+"_crad"+(index+1)).src=loc;
                 document.getElementById(seatID+"_crad"+(index+1)).style.visibility = "visible";
             }
@@ -312,7 +315,9 @@ function updatePageWithHandEnd()
 
 function clearCards()
 {
-    var loc="../../common/images/back.png";
+    var loc=buildUrlWithContextPath("common/images/back.png");
+
+    //var loc="../../common/images/back.png";
     document.getElementById("player_crad1").src=loc;
     document.getElementById("player_crad2").src=loc;
 
@@ -323,6 +328,7 @@ function clearCards()
     document.getElementById("crad5").src=loc;
     showCards=false;
 }
+
 function startNewHand()
 {
     $.ajax({
