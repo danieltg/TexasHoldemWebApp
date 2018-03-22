@@ -318,8 +318,23 @@ function clearCards()
     var loc=buildUrlWithContextPath("common/images/back.png");
 
     //var loc="../../common/images/back.png";
-    document.getElementById("player_crad1").src=loc;
-    document.getElementById("player_crad2").src=loc;
+    document.getElementById("seat1_crad1").src=loc;
+    document.getElementById("seat1_crad2").src=loc;
+
+    document.getElementById("seat2_crad1").src=loc;
+    document.getElementById("seat2_crad2").src=loc;
+
+    document.getElementById("seat3_crad1").src=loc;
+    document.getElementById("seat3_crad2").src=loc;
+
+    document.getElementById("seat4_crad1").src=loc;
+    document.getElementById("seat4_crad2").src=loc;
+
+    document.getElementById("seat5_crad1").src=loc;
+    document.getElementById("seat5_crad2").src=loc;
+
+    document.getElementById("seat6_crad1").src=loc;
+    document.getElementById("seat6_crad2").src=loc;
 
     document.getElementById("crad1").src=loc;
     document.getElementById("crad2").src=loc;
@@ -409,9 +424,11 @@ function refreshGameSettings(games) {
 
     if (status.toLowerCase()=="waiting")
     {
+        clearCards();
+        clearPlayersCard();
         ajaxUsersList();
     }
-    else if (status.toLowerCase()=="ended" && flag)
+    else if ((status.toLowerCase()=="ended" && flag )|| (status.toLowerCase()=="running" && games.registeredPlayers<2 ))
     {
         flag=false;
 

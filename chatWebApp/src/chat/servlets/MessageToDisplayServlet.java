@@ -38,13 +38,27 @@ public class MessageToDisplayServlet extends HttpServlet {
 
                 PrintWriter out = response.getWriter();
 
-                if (message == null || room.getGameManager().getPlayerByName(username).didGotMessage()) {
-                    //user already got the message so we don't want to show it again
-                    response.setStatus(400);
-                    out.flush();
-                } else {
-                    room.getGameManager().userGotMessage(username);
-                    out.print("Hey " + username + "&&&" + message);
+                if (room.getGameManager().getPlayerByName(username)==null)
+                {
+                    //user is not a player... he is a viewer
+                    if (message == null) {
+                        response.setStatus(400);
+                        out.flush();
+                    } else {
+                        out.print("Hey " + username + "&&&" + message);
+                    }
+                }
+
+                else
+                {
+                    if (message == null || room.getGameManager().getPlayerByName(username).didGotMessage()) {
+                        //user already got the message so we don't want to show it again
+                        response.setStatus(400);
+                        out.flush();
+                    } else {
+                        room.getGameManager().userGotMessage(username);
+                        out.print("Hey " + username + "&&&" + message);
+                    }
                 }
             }
         }
